@@ -415,6 +415,27 @@ const NAME={pass:'Matched',flag:'Flagged',fail:'Mismatched'};
 const esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const shortIrn=i=>i?esc(i.slice(0,10)+'…'+i.slice(-6)):'—';
 function fmtDate(d){if(!d)return'—';const t=new Date(d);return isNaN(t)?esc(d):t.toLocaleString(undefined,{month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'});}
+// Builds the "Why" block. When the API returns an explicit reason we show it
+// verbatim. When it's null the message is derived from the actual result instead
+// of always blaming non-pairing: a clean pass, a missing SAP document (the real
+// "didn't pair" case, detected via sap_document_number), or a flag/fail that
+// genuinely carried no reason text.
+function whyHtml(r){
+  if(r.reason) return `<div class="reason"><span class="lbl">Why</span>${esc(r.reason)}</div>`;
+  let msg, muted=false;
+  if(!r.sap_document_number){
+    msg='No SAP G/L document matched this IRN, so there was nothing to validate against.';
+  }else if(r.verdict==='pass'){
+    msg='Matched the SAP posting on all checked fields — no issues flagged.';
+  }else if(r.verdict==='flag'){
+    msg='Flagged for review — no specific reason text was recorded for this invoice.';muted=true;
+  }else if(r.verdict==='fail'){
+    msg='Marked as mismatched — no specific reason text was recorded for this invoice.';muted=true;
+  }else{
+    msg='No reason recorded for this result.';muted=true;
+  }
+  return `<div class="reason${muted?' empty':''}"><span class="lbl">Why</span>${msg}</div>`;
+}
 
 function renderBatchCard(job,id,data){
   const counts={pass:0,flag:0,fail:0};
@@ -520,9 +541,7 @@ function render(){
   grid.innerHTML=view.map((r,i)=>{
     const v=r.verdict;
     const itc=r.overall_itc_eligibility;
-    const reason=r.reason
-      ? `<div class="reason"><span class="lbl">Why</span>${esc(r.reason)}</div>`
-      : `<div class="reason empty"><span class="lbl">Why</span>No reason recorded — typically the line items didn’t pair, so the judgment didn’t run.</div>`;
+    const reason=whyHtml(r);
     return `
     <div class="row-wrap ${v}" style="animation-delay:${Math.min(i*18,360)}ms">
       <div class="row">
