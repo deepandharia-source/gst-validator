@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Batch Results — GST Validator</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#f4f6f3;
+    --bg-2:#e9ede9;
+    --surface:#ffffff;
+    --surface-2:#f0f2ee;
+    --line:#dde2dc;
+    --line-soft:#e8ebe6;
+    --text:#1c2024;
+    --muted:#5e656d;
+    --faint:#9aa1a8;
+    --accent:#0a9d64;
+    --accent-dim:#86d9b6;
+    --matched:#0a9d64;
+    --flag:#bb8705;
+    --mismatch:#dc4b46;
+    --glow:rgba(10,157,100,.10);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    font-family:'Bricolage Grotesque',sans-serif;
+    background:var(--bg);color:var(--text);min-height:100vh;line-height:1.45;
+    background-image:
+      radial-gradient(900px 500px at 78% -8%, var(--glow), transparent 60%),
+      radial-gradient(700px 400px at 5% 8%, rgba(70,110,240,.05), transparent 55%);
+    background-attachment:fixed;
+  }
+  .wrap{max-width:1200px;margin:0 auto;padding:36px 22px 90px}
+  ::selection{background:var(--accent);color:#06281d}
+
+  /* Top bar / brand */
+  .topbar{display:flex;align-items:center;justify-content:flex-start;margin-bottom:18px}
+  .topbar .brand{display:inline-flex;align-items:center;height:40px}
+  .topbar .brand img{height:32px;width:auto;display:block;opacity:.95}
+  @media (max-width:520px){.topbar .brand img{height:26px}}
+
+  /* Hero / search */
+  .hero{margin-bottom:30px}
+  .eyebrow{font-family:'JetBrains Mono',monospace;font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;color:var(--accent);margin-bottom:12px}
+  h1{font-size:clamp(2.1rem,5vw,3.3rem);font-weight:700;letter-spacing:-.025em;line-height:1.02}
+  h1 .thin{color:var(--muted);font-weight:500}
+  .sub{color:var(--muted);margin-top:12px;max-width:54ch;font-size:1.02rem}
+
+  .searchbar{
+    margin-top:26px;display:flex;gap:12px;flex-wrap:wrap;align-items:stretch;
+    background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:14px;
+    box-shadow:0 24px 60px -30px rgba(28,38,32,.14);
+  }
+  .id-field{flex:1;min-width:280px;display:flex;align-items:center;gap:12px;background:var(--bg-2);border:1px solid var(--line);border-radius:11px;padding:0 14px}
+  .id-field svg{color:var(--faint);flex-shrink:0}
+  .id-field input{flex:1;background:transparent;border:0;outline:none;color:var(--text);font-family:'JetBrains Mono',monospace;font-size:.95rem;padding:15px 0;letter-spacing:.01em}
+  .id-field input::placeholder{color:var(--faint)}
+  .go{
+    font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:1rem;
+    background:var(--accent);color:#06281d;border:0;border-radius:11px;padding:0 28px;cursor:pointer;
+    display:flex;align-items:center;gap:9px;transition:.16s;white-space:nowrap;
+  }
+  .go:hover{filter:brightness(1.07);box-shadow:0 0 0 4px var(--glow)}
+  .go:active{transform:scale(.98)}
+  .go svg{transition:transform .2s}
+  .go:hover svg{transform:translateX(3px)}
+
+  .underbar{display:flex;gap:18px;flex-wrap:wrap;align-items:center;margin-top:12px;font-size:.82rem}
+  .underbar .api{display:flex;align-items:center;gap:8px;color:var(--muted)}
+  .underbar .api input{background:transparent;border:0;border-bottom:1px dashed var(--line);color:var(--muted);font-family:'JetBrains Mono',monospace;font-size:.82rem;padding:2px 0;outline:none;width:200px}
+  .underbar .api input:focus{border-bottom-color:var(--accent);color:var(--text)}
+  .linkbtn{background:none;border:0;color:var(--accent);cursor:pointer;font-family:'JetBrains Mono',monospace;font-size:.78rem;letter-spacing:.04em;text-transform:uppercase}
+  .linkbtn:hover{text-decoration:underline}
+
+  .msg{margin-top:16px;font-size:.9rem;padding:13px 16px;border-radius:11px;display:none;align-items:flex-start;gap:10px}
+  .msg.show{display:flex}
+  .msg.err{background:rgba(220,75,70,.1);color:#b3322e;border:1px solid rgba(220,75,70,.25)}
+  .msg.ok{background:rgba(10,157,100,.1);color:var(--accent);border:1px solid rgba(10,157,100,.25)}
+
+  .paste-zone{display:none;margin-top:16px}
+  .paste-zone.show{display:block}
+  .paste-zone textarea{width:100%;min-height:120px;background:var(--bg-2);border:1px solid var(--line);border-radius:12px;color:var(--text);font-family:'JetBrains Mono',monospace;font-size:.8rem;padding:14px;resize:vertical;outline:none}
+  .paste-zone textarea:focus{border-color:var(--accent)}
+  .paste-zone .row{margin-top:10px;display:flex;gap:10px}
+  .mini{font-family:'Bricolage Grotesque',sans-serif;font-weight:600;font-size:.86rem;padding:9px 16px;border-radius:9px;cursor:pointer;border:1px solid var(--line);background:var(--surface-2);color:var(--text)}
+  .mini.solid{background:var(--accent);color:#06281d;border-color:var(--accent)}
+
+  /* Batch summary */
+  .batchcard{margin:34px 0 24px;background:linear-gradient(180deg,var(--surface),var(--bg-2));border:1px solid var(--line);border-radius:18px;padding:22px 24px;display:none}
+  .batchcard.show{display:block;animation:fade .4s both}
+  .batch-top{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap}
+  .batch-id{font-family:'JetBrains Mono',monospace;font-size:.95rem;color:var(--text);word-break:break-all}
+  .batch-id .lbl{display:block;font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;color:var(--faint);margin-bottom:5px;font-family:'JetBrains Mono',monospace}
+  .status-pill{font-family:'JetBrains Mono',monospace;font-size:.74rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;padding:7px 13px;border-radius:999px;white-space:nowrap}
+  .st-completed{background:rgba(10,157,100,.14);color:var(--accent)}
+  .st-running{background:rgba(187,135,5,.14);color:var(--flag)}
+  .st-failed{background:rgba(220,75,70,.14);color:var(--mismatch)}
+  .st-queued{background:var(--surface-2);color:var(--muted)}
+
+  .metrics{display:flex;gap:26px;flex-wrap:wrap;margin-top:20px}
+  .metric .n{font-size:1.9rem;font-weight:700;letter-spacing:-.02em;line-height:1}
+  .metric .k{font-size:.74rem;text-transform:uppercase;letter-spacing:.1em;color:var(--faint);margin-top:6px}
+  .metric.m .n{color:var(--matched)} .metric.f .n{color:var(--flag)} .metric.x .n{color:var(--mismatch)}
+
+  .distbar{margin-top:20px;height:10px;border-radius:6px;overflow:hidden;display:flex;background:var(--bg-2);border:1px solid var(--line-soft)}
+  .distbar span{display:block;height:100%;transition:width .6s cubic-bezier(.4,0,.2,1)}
+  .seg-pass{background:var(--matched)} .seg-flag{background:var(--flag)} .seg-fail{background:var(--mismatch)}
+
+  /* Controls */
+  .controls{display:none;gap:16px 22px;flex-wrap:wrap;align-items:flex-start;justify-content:space-between;margin:6px 0 18px}
+  .controls.show{display:flex}
+  .filtersets{display:flex;flex-direction:column;gap:10px}
+  .chipset{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  .chipset .lab{font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.13em;text-transform:uppercase;color:var(--faint);width:52px;flex-shrink:0}
+  .chips{display:flex;gap:8px;flex-wrap:wrap}
+  .chips button{font-family:'Bricolage Grotesque',sans-serif;font-size:.84rem;font-weight:600;background:var(--surface);border:1px solid var(--line);color:var(--muted);padding:8px 15px;border-radius:999px;cursor:pointer;transition:.15s;display:flex;align-items:center;gap:8px}
+  .chips button .d{width:8px;height:8px;border-radius:50%}
+  .chips button .ct{font-family:'JetBrains Mono',monospace;font-size:.76rem;opacity:.8}
+  .chips button.on{color:var(--text);border-color:var(--accent);background:var(--surface-2);box-shadow:0 0 0 1px var(--accent-dim)}
+  .findbox{position:relative}
+  .findbox input{background:var(--surface);border:1px solid var(--line);border-radius:999px;color:var(--text);font-family:'Bricolage Grotesque',sans-serif;font-size:.88rem;padding:9px 16px 9px 36px;width:250px;outline:none}
+  .findbox input:focus{border-color:var(--accent)}
+  .findbox svg{position:absolute;left:13px;top:50%;transform:translateY(-50%);color:var(--faint)}
+
+  /* ITC summary in batch card */
+  .itc-block{margin-top:22px;padding-top:18px;border-top:1px dashed var(--line)}
+  .itc-block .hd{font-family:'JetBrains Mono',monospace;font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);margin-bottom:12px}
+  .itc-counts{display:flex;gap:22px;flex-wrap:wrap;margin-bottom:14px}
+  .itc-counts .it{display:flex;align-items:baseline;gap:8px}
+  .itc-counts .it .dot{width:9px;height:9px;border-radius:50%;align-self:center}
+  .itc-counts .it .n{font-size:1.35rem;font-weight:700;letter-spacing:-.02em}
+  .itc-counts .it .k{font-size:.78rem;color:var(--muted)}
+
+  @keyframes rise{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+  @keyframes fade{from{opacity:0}to{opacity:1}}
+
+  /* List / table view */
+  .list{
+    --cols:106px minmax(140px,1.4fr) minmax(150px,1.1fr) minmax(120px,.95fr) minmax(140px,1fr) 138px 96px 34px;
+    display:none;background:var(--surface);border:1px solid var(--line);border-radius:16px;overflow:hidden;
+    box-shadow:0 24px 60px -38px rgba(28,38,32,.16);
+  }
+  .list-head{
+    display:grid;grid-template-columns:var(--cols);gap:14px;align-items:center;
+    padding:12px 18px;position:sticky;top:0;z-index:5;
+    background:var(--surface-2);border-bottom:1px solid var(--line);
+    font-family:'JetBrains Mono',monospace;font-size:.63rem;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);
+  }
+  .list-head .r{text-align:right}
+
+  .row-wrap{position:relative;border-bottom:1px solid var(--line-soft);animation:rise .4s both}
+  .row-wrap:last-child{border-bottom:0}
+  .row-wrap::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px}
+  .row-wrap.pass::before{background:var(--matched)}
+  .row-wrap.flag::before{background:var(--flag)}
+  .row-wrap.fail::before{background:var(--mismatch)}
+  .row-wrap:hover{background:var(--surface-2)}
+  .row-wrap.open{background:var(--surface-2)}
+
+  .row{display:grid;grid-template-columns:var(--cols);gap:14px;align-items:center;padding:13px 18px;cursor:pointer;font-size:.82rem}
+  .row .c{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .row .mono{font-family:'JetBrains Mono',monospace;font-size:.76rem;color:var(--text)}
+  .row .inv{display:block;font-weight:700;font-size:.95rem;letter-spacing:-.01em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .row .sub2{display:none;font-family:'JetBrains Mono',monospace;font-size:.66rem;color:var(--faint);margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .row .date{font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--faint);text-align:right}
+  .chev{justify-self:center;color:var(--faint);display:flex;transition:transform .2s}
+  .row-wrap.open .chev{transform:rotate(90deg);color:var(--accent)}
+
+  .badge{font-family:'JetBrains Mono',monospace;font-size:.6rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;padding:5px 9px;border-radius:7px;white-space:nowrap;display:inline-block}
+  .badge.pass{background:rgba(10,157,100,.14);color:var(--matched)}
+  .badge.flag{background:rgba(187,135,5,.14);color:var(--flag)}
+  .badge.fail{background:rgba(220,75,70,.14);color:var(--mismatch)}
+
+  .tag{font-family:'JetBrains Mono',monospace;font-size:.6rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;padding:4px 8px;border-radius:7px;white-space:nowrap;display:inline-block;max-width:100%;overflow:hidden;text-overflow:ellipsis}
+  .itc-eligible{background:rgba(10,157,100,.14);color:var(--matched)}
+  .itc-ineligible{background:rgba(220,75,70,.14);color:var(--mismatch)}
+  .itc-review,.itc-partially_eligible{background:rgba(187,135,5,.14);color:var(--flag)}
+  .itc-none{background:var(--surface-2);color:var(--muted)}
+
+  /* expandable detail */
+  .row-detail{display:none;padding:0 18px 16px 18px}
+  .row-wrap.open .row-detail{display:block;animation:fade .25s both}
+  .detail-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:start}
+  .reason{font-size:.85rem;background:var(--bg-2);border:1px solid var(--line-soft);border-radius:10px;padding:11px 13px;color:var(--text)}
+  .reason.empty{color:var(--muted)}
+  .reason .lbl,.dkv .lbl{display:block;font-family:'JetBrains Mono',monospace;font-size:.62rem;text-transform:uppercase;letter-spacing:.1em;color:var(--faint);margin-bottom:5px}
+  .dkv{background:var(--bg-2);border:1px solid var(--line-soft);border-radius:10px;padding:11px 13px;font-size:.8rem}
+  .dkv .irnrow{display:flex;align-items:center;gap:10px;justify-content:space-between}
+  .dkv .v{font-family:'JetBrains Mono',monospace;font-size:.74rem;word-break:break-all;color:var(--text)}
+  .itc-remark{margin-top:9px;font-size:.8rem;color:var(--muted)}
+  .copy{cursor:pointer;border:1px solid var(--line);background:var(--surface);color:var(--accent);font-family:'JetBrains Mono',monospace;font-size:.64rem;text-transform:uppercase;letter-spacing:.05em;padding:5px 9px;border-radius:7px;white-space:nowrap;flex-shrink:0}
+  .copy:hover{border-color:var(--accent)}
+
+  /* responsive: collapse columns into a compact single-line row */
+  @media(max-width:760px){
+    .list-head{display:none}
+    .row{display:flex;align-items:center;gap:12px;padding:14px 16px}
+    .row .c-gstin,.row .c-sap,.row .c-irn,.row .c-date,.row .c-itc{display:none}
+    .row .c-inv{flex:1;min-width:0}
+    .row .sub2{display:block}
+    .chev{margin-left:auto}
+    .detail-grid{grid-template-columns:1fr}
+  }
+
+  /* States */
+  .state{text-align:center;padding:80px 20px;color:var(--muted);display:none}
+  .state.show{display:block}
+  .state .big{font-size:1.55rem;font-weight:700;color:var(--text);margin-bottom:8px;letter-spacing:-.01em}
+  .spinner{width:38px;height:38px;border:3px solid var(--line);border-top-color:var(--accent);border-radius:50%;margin:0 auto 18px;animation:spin .8s linear infinite}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  .skeleton{display:flex;flex-direction:column;border:1px solid var(--line);border-radius:16px;overflow:hidden}
+  .sk{height:53px;border-bottom:1px solid var(--line-soft);background:linear-gradient(100deg,var(--surface) 30%,var(--surface-2) 50%,var(--surface) 70%);background-size:200% 100%;animation:sh 1.3s infinite}
+  .sk:last-child{border-bottom:0}
+  @keyframes sh{to{background-position:-200% 0}}
+  footer{margin-top:46px;text-align:center;font-size:.74rem;color:var(--faint);font-family:'JetBrains Mono',monospace}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="topbar">
+    <a class="brand" href="https://www.mastersindia.co" target="_blank" rel="noopener" aria-label="Masters India">
+      <img src="data:image/webp;base64,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" alt="Masters India">
+    </a>
+  </div>
+
+  <div class="hero">
+    <div class="eyebrow">GST · IRN ↔ SAP G/L</div>
+    <h1>GST Validation <span class="thin">Rule Engine</span></h1>
+    <p class="sub">Enter a batch job id and the page loads its <code>&lt;batch_id&gt;.json</code> file from this folder — every invoice it validated, matched, flagged and mismatched, with ITC eligibility for each.</p>
+
+    <div class="searchbar">
+      <div class="id-field">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+        <input type="text" id="batchId" placeholder="batch_job_id  e.g. 15187a5f-2e16-4881-a9eb-20794ef2f153" spellcheck="false">
+      </div>
+      <button class="go" onclick="run()">
+        Fetch results
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </button>
+    </div>
+
+    <div class="underbar">
+      <span class="api">Folder <input type="text" id="dataFolder" value="" placeholder="(same folder as this page)" spellcheck="false"></span>
+      <button class="linkbtn" onclick="togglePaste()">or paste JSON</button>
+      <button class="linkbtn" onclick="demo()">try sample data</button>
+    </div>
+
+    <div class="paste-zone" id="pasteZone">
+      <textarea id="pasteBox" placeholder='{ "count": 2, "results": [ ... ] }'></textarea>
+      <div class="row"><button class="mini solid" onclick="loadPasted()">Render</button><button class="mini" onclick="togglePaste()">Close</button></div>
+    </div>
+
+    <div class="msg" id="msg"></div>
+  </div>
+
+  <!-- Batch summary -->
+  <div class="batchcard" id="batchcard">
+    <div class="batch-top">
+      <div class="batch-id"><span class="lbl">Batch job</span><span id="bId">—</span></div>
+      <span class="status-pill st-queued" id="bStatus">—</span>
+    </div>
+    <div class="metrics" id="bMetrics"></div>
+    <div class="distbar" id="bDist"></div>
+    <div class="itc-block" id="bItcBlock" style="display:none">
+      <div class="hd">ITC eligibility</div>
+      <div class="itc-counts" id="bItcCounts"></div>
+      <div class="distbar" id="bItcDist"></div>
+    </div>
+  </div>
+
+  <!-- Controls -->
+  <div class="controls" id="controls">
+    <div class="filtersets">
+      <div class="chipset">
+        <span class="lab">Verdict</span>
+        <div class="chips" id="chips">
+          <button class="on" data-f="all">All <span class="ct" id="c-all">0</span></button>
+          <button data-f="pass"><span class="d" style="background:var(--matched)"></span>Matched <span class="ct" id="c-pass">0</span></button>
+          <button data-f="flag"><span class="d" style="background:var(--flag)"></span>Flagged <span class="ct" id="c-flag">0</span></button>
+          <button data-f="fail"><span class="d" style="background:var(--mismatch)"></span>Mismatched <span class="ct" id="c-fail">0</span></button>
+        </div>
+      </div>
+      <div class="chipset">
+        <span class="lab">ITC</span>
+        <div class="chips" id="itcChips"></div>
+      </div>
+    </div>
+    <div class="findbox">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.5" y2="16.5"/></svg>
+      <input type="text" id="search" placeholder="Search invoice, GSTIN, doc…">
+    </div>
+  </div>
+
+  <!-- States -->
+  <div class="state show" id="welcome"><div class="big">Awaiting a batch id</div>Enter one above and hit Fetch — it loads <code>&lt;batch_id&gt;.json</code> from this folder. Or try the sample to see how it looks.</div>
+  <div class="state" id="loading"><div class="spinner"></div>Pulling results…<div class="skeleton" style="margin-top:30px"><div class="sk"></div><div class="sk"></div><div class="sk"></div><div class="sk"></div><div class="sk"></div><div class="sk"></div></div></div>
+  <div class="state" id="noresults"><div class="big">No records for this batch</div>The batch ran but returned no validated invoices, or your filter hid them all.</div>
+
+  <!-- Results -->
+  <div class="list" id="list">
+    <div class="list-head">
+      <div>Status</div>
+      <div>Invoice</div>
+      <div class="h-gstin">Supplier GSTIN</div>
+      <div class="h-sap">SAP doc · FY</div>
+      <div class="h-irn">IRN</div>
+      <div>ITC</div>
+      <div class="r">Validated</div>
+      <div></div>
+    </div>
+    <div id="grid"></div>
+  </div>
+
+  <footer>pass → matched&nbsp;&nbsp;·&nbsp;&nbsp;flag → review&nbsp;&nbsp;·&nbsp;&nbsp;fail → mismatched</footer>
+</div>
+
+<script>
+const SAMPLE_RESULTS = {
+  "count": 8,
+  "results": [
+    {"invoice_number":"DEL252611407","supplier_gstin":"07ACTFS7010H1ZV","irn":"72dd91a0b279e91c9ce58ec0bd433c101a5d958b2e6db2346ac6b4be3a8ff16f","sap_document_number":"1900002371","sap_fiscal_year":2025,"verdict":"flag","reason":null,"overall_itc_eligibility":null,"overall_itc_remark":null,"validated_at":"2026-06-03T10:03:04.575877"},
+    {"invoice_number":"2025-26/703","supplier_gstin":"06AAQFR1662K1ZS","irn":"f862ca9d2fee000f2d70b8c9f6e2811ce15b0e37955c9575d38de1dc39d29197","sap_document_number":"1900002252","sap_fiscal_year":2025,"verdict":"flag","reason":null,"overall_itc_eligibility":null,"overall_itc_remark":null,"validated_at":"2026-06-03T10:03:04.695092"},
+    {"invoice_number":"INV-2025-0091","supplier_gstin":"24AABCT1332L1ZT","irn":"a91c3f7d0b2e44c8915af6e7c1d2b3045e6f7089a1b2c3d4e5f60718293a4b5c","sap_document_number":"1900002410","sap_fiscal_year":2025,"verdict":"pass","reason":"IRN matched the SAP G/L entry on supplier, taxable value and tax components.","overall_itc_eligibility":"eligible","overall_itc_remark":"All line items map to eligible expense G/Ls.","validated_at":"2026-06-03T10:05:11.120000"},
+    {"invoice_number":"MH/24-25/5582","supplier_gstin":"27AAACI1681G1Z9","irn":"b1d2e3f405162738495a6b7c8d9e0f1122334455667788990aabbccddeeff001","sap_document_number":"1900002433","sap_fiscal_year":2025,"verdict":"pass","reason":"Exact match against posted document.","overall_itc_eligibility":"partially_eligible","overall_itc_remark":"One line flagged as blocked credit u/s 17(5); rest eligible.","validated_at":"2026-06-03T10:06:02.300000"},
+    {"invoice_number":"BLR-7741","supplier_gstin":"29AAGCB2207E1ZP","irn":"c2e3f4051627384950617283a4b5c6d7e8f90112233445566778899aabbccdd0","sap_document_number":"1900002455","sap_fiscal_year":2025,"verdict":"fail","reason":"Taxable value on IRN (₹1,84,200) does not match SAP document (₹1,48,200).","overall_itc_eligibility":"ineligible","overall_itc_remark":"Mismatch unresolved — credit withheld pending correction.","validated_at":"2026-06-03T10:06:48.900000"},
+    {"invoice_number":"GJ/INV/0312","supplier_gstin":"24AAFCD5862R1ZK","irn":"d3f405162738495061728394a5b6c7d8e9f0011223344556677889900aabbcc1","sap_document_number":"1900002478","sap_fiscal_year":2025,"verdict":"flag","reason":"Supplier GSTIN active but invoice date precedes registration effective date.","overall_itc_eligibility":"review","overall_itc_remark":"Manual review suggested for period eligibility.","validated_at":"2026-06-03T10:07:33.450000"},
+    {"invoice_number":"TN-2025-1188","supplier_gstin":"33AABCT8888M1ZA","irn":"e405162738495061728394a5b6c7d8e9f00112233445566778899aabbccddee2","sap_document_number":"1900002501","sap_fiscal_year":2025,"verdict":"pass","reason":"Match confirmed across all checked fields.","overall_itc_eligibility":"eligible","overall_itc_remark":null,"validated_at":"2026-06-03T10:08:09.010000"},
+    {"invoice_number":"UP/9920/25","supplier_gstin":"09AACCU4410P1ZH","irn":"f5162738495061728394a5b6c7d8e9f001122334455667788990aabbccddeeff3","sap_document_number":"1900002524","sap_fiscal_year":2025,"verdict":"fail","reason":"No SAP G/L document found for this IRN.","overall_itc_eligibility":null,"overall_itc_remark":null,"validated_at":"2026-06-03T10:08:51.700000"}
+  ],
+  "filter":{"batch_job_id":"e5621cfc-b007-48c0-9253-fc8a24a06ff8"}
+};
+const SAMPLE_JOB = {"id":"e5621cfc-b007-48c0-9253-fc8a24a06ff8","status":"completed","total_candidates":8,"validated":8,"skipped_missing_gl":0,"errored":0,"verdict_counts":{"pass":3,"flag":3,"fail":2}};
+
+let records=[], activeFilter='all', activeItc='all', searchTerm='';
+const $=id=>document.getElementById(id);
+// Folder where the <batch_id>.json files live, relative to this page. Empty = same folder.
+const folder=()=>{const f=$('dataFolder').value.trim().replace(/^\/+|\/+$/g,'');return f?f+'/':'';};
+
+$('batchId').addEventListener('keydown',e=>{if(e.key==='Enter')run();});
+document.querySelectorAll('#chips button').forEach(b=>b.onclick=()=>{
+  document.querySelectorAll('#chips button').forEach(x=>x.classList.remove('on'));
+  b.classList.add('on');activeFilter=b.dataset.f;render();
+});
+$('search').addEventListener('input',e=>{searchTerm=e.target.value.toLowerCase();render();});
+
+// Auto-load: ?batch=<id> (also accepts ?batch_id= / ?id=) or a bare #<id> in the URL.
+(function(){
+  const p=new URLSearchParams(location.search);
+  let id=p.get('batch')||p.get('batch_id')||p.get('id')||decodeURIComponent((location.hash||'').replace(/^#/,''));
+  const folderParam=p.get('folder');
+  if(folderParam) $('dataFolder').value=folderParam;
+  if(id && id.trim()){ $('batchId').value=id.trim(); run(); }
+})();
+$('grid').addEventListener('click',e=>{
+  if(e.target.closest('.copy'))return;            // let the copy button do its own thing
+  const w=e.target.closest('.row-wrap');
+  if(w) w.classList.toggle('open');
+});
+
+function showMsg(t,k){const m=$('msg');m.innerHTML=t;m.className='msg show '+k;if(k==='ok')setTimeout(()=>m.classList.remove('show'),3000);}
+function setState(s){['welcome','loading','noresults'].forEach(x=>$(x).classList.toggle('show',x===s));}
+function togglePaste(){$('pasteZone').classList.toggle('show');}
+
+async function run(){
+  let id=$('batchId').value.trim();
+  if(!id){showMsg('Enter a batch job id first.','err');return;}
+  // tolerate someone pasting the filename or a trailing .json
+  id=id.replace(/\.json$/i,'');
+  $('batchId').value=id;
+  $('msg').classList.remove('show');
+  setState('loading');$('grid').innerHTML='';$('list').style.display='none';$('batchcard').classList.remove('show');$('controls').classList.remove('show');
+
+  const url=`${folder()}${encodeURIComponent(id)}.json`;
+  try{
+    const r=await fetch(url,{headers:{'Accept':'application/json'},cache:'no-store'});
+    if(!r.ok){
+      setState('welcome');
+      if(r.status===404){
+        showMsg(`No file named <b>${esc(id)}.json</b> in this folder. Make sure it’s committed next to this page${$('dataFolder').value.trim()?` (folder “${esc($('dataFolder').value.trim())}”)`:''}.`,'err');
+      }else{
+        showMsg(`Couldn’t load <b>${esc(url)}</b> — server returned <b>${r.status}</b>.`,'err');
+      }
+      return;
+    }
+    let data;
+    try{ data=await r.json(); }
+    catch(e){ setState('welcome'); showMsg(`<b>${esc(id)}.json</b> isn’t valid JSON.`,'err'); return; }
+    // No separate job-meta file in static mode; the batch card derives everything from the results.
+    ingest(data, null, id);
+    showMsg(`Loaded ${records.length} record(s) for this batch.`,'ok');
+  }catch(e){
+    setState('welcome');
+    showMsg('Couldn’t read the file. If you opened this page directly from disk (file://), browsers block local fetches — serve it over GitHub Pages / a local server, or use <b>paste JSON</b>.','err');
+  }
+}
+
+function demo(){ $('batchId').value=SAMPLE_JOB.id; ingest(SAMPLE_RESULTS, SAMPLE_JOB, SAMPLE_JOB.id); showMsg('Showing sample data.','ok'); }
+function loadPasted(){
+  try{ const d=JSON.parse($('pasteBox').value); ingest(d,null,(d.filter&&d.filter.batch_job_id)||''); showMsg(`Rendered ${records.length} record(s).`,'ok'); togglePaste(); }
+  catch(e){ showMsg('That isn’t valid JSON.','err'); }
+}
+
+function ingest(data, job, id){
+  records = Array.isArray(data) ? data : (data.results||[]);
+  renderBatchCard(job, id, data);
+  render();
+}
+
+const NAME={pass:'Matched',flag:'Flagged',fail:'Mismatched'};
+const esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const shortIrn=i=>i?esc(i.slice(0,10)+'…'+i.slice(-6)):'—';
+function fmtDate(d){if(!d)return'—';const t=new Date(d);return isNaN(t)?esc(d):t.toLocaleString(undefined,{month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'});}
+
+function renderBatchCard(job,id,data){
+  const counts={pass:0,flag:0,fail:0};
+  records.forEach(r=>counts[r.verdict]=(counts[r.verdict]||0)+1);
+  const total=records.length;
+  $('bId').textContent=id||(data&&data.filter&&data.filter.batch_job_id)||'—';
+
+  const st=$('bStatus');
+  if(job&&job.status){st.textContent=job.status;st.className='status-pill st-'+job.status;}
+  else{st.textContent='results';st.className='status-pill st-completed';}
+
+  const m=[
+    ['total',total,'Records'],
+    ['m',counts.pass,'Matched'],
+    ['f',counts.flag,'Flagged'],
+    ['x',counts.fail,'Mismatched'],
+  ];
+  if(job){
+    if(job.validated!=null) m.push(['','','']);
+    if(job.skipped_missing_gl!=null) m.push(['skip',job.skipped_missing_gl,'Skipped (no G/L)']);
+    if(job.errored!=null) m.push(['err',job.errored,'Errored']);
+  }
+  $('bMetrics').innerHTML=m.filter(x=>x[2]).map(([c,n,k])=>`<div class="metric ${c}"><div class="n">${n}</div><div class="k">${k}</div></div>`).join('');
+
+  const pct=v=>total?(v/total*100):0;
+  $('bDist').innerHTML=`<span class="seg-pass" style="width:${pct(counts.pass)}%"></span><span class="seg-flag" style="width:${pct(counts.flag)}%"></span><span class="seg-fail" style="width:${pct(counts.fail)}%"></span>`;
+
+  // ITC eligibility breakdown
+  const itc={};
+  records.forEach(r=>{const k=itcKey(r.overall_itc_eligibility);itc[k]=(itc[k]||0)+1;});
+  const ikeys=itcOrdered(Object.keys(itc));
+  const blk=$('bItcBlock');
+  if(ikeys.length){
+    blk.style.display='block';
+    $('bItcCounts').innerHTML=ikeys.map(k=>
+      `<div class="it"><span class="dot" style="background:${itcColor(k)}"></span><span class="n">${itc[k]}</span><span class="k">${esc(itcChipLabel(k))}</span></div>`
+    ).join('');
+    $('bItcDist').innerHTML=ikeys.map(k=>
+      `<span style="width:${pct(itc[k])}%;background:${itcColor(k)}"></span>`
+    ).join('');
+  }else{blk.style.display='none';}
+
+  $('batchcard').classList.add('show');
+}
+
+function itcClass(v){return 'itc-'+(v||'none');}
+function itcLabel(v){return v?('ITC: '+v.replace(/_/g,' ')):'ITC: not assessed';}
+// ── ITC eligibility: filtering + summary helpers ──
+const itcKey=v=>v?String(v):'not_assessed';
+const ITC_ORDER=['eligible','partially_eligible','review','ineligible','not_assessed'];
+function itcChipLabel(k){
+  if(k==='not_assessed')return 'Not assessed';
+  return k.replace(/_/g,' ').replace(/^\w/,c=>c.toUpperCase());
+}
+function itcColor(k){
+  return ({eligible:'var(--matched)',partially_eligible:'var(--flag)',review:'var(--flag)',ineligible:'var(--mismatch)'})[k]||'var(--faint)';
+}
+function itcOrdered(keys){
+  return [...keys].sort((a,b)=>{
+    const ia=ITC_ORDER.indexOf(a),ib=ITC_ORDER.indexOf(b);
+    return (ia<0?99:ia)-(ib<0?99:ib) || a.localeCompare(b);
+  });
+}
+
+// Build the ITC filter chips from whatever ITC values are present in the
+// verdict-filtered set, so counts reflect what you'd actually see.
+function buildItcChips(base){
+  const counts={};
+  base.forEach(r=>{const k=itcKey(r.overall_itc_eligibility);counts[k]=(counts[k]||0)+1;});
+  const keys=itcOrdered(Object.keys(counts));
+  // if the active ITC filter no longer exists in this set, drop back to All
+  if(activeItc!=='all' && !keys.includes(activeItc)) activeItc='all';
+
+  let html=`<button class="${activeItc==='all'?'on':''}" data-itc="all">All <span class="ct">${base.length}</span></button>`;
+  html+=keys.map(k=>
+    `<button class="${activeItc===k?'on':''}" data-itc="${esc(k)}"><span class="d" style="background:${itcColor(k)}"></span>${esc(itcChipLabel(k))} <span class="ct">${counts[k]}</span></button>`
+  ).join('');
+  const box=$('itcChips');
+  box.innerHTML=html;
+  box.querySelectorAll('button').forEach(b=>b.onclick=()=>{activeItc=b.dataset.itc;render();});
+}
+
+function render(){
+  // verdict counts (over all records)
+  const counts={all:records.length,pass:0,flag:0,fail:0};
+  records.forEach(r=>counts[r.verdict]=(counts[r.verdict]||0)+1);
+  ['all','pass','flag','fail'].forEach(k=>{const e=$('c-'+k);if(e)e.textContent=counts[k]||0;});
+
+  // apply verdict filter first, then build ITC chips off that subset
+  let base=records.filter(r=>activeFilter==='all'||r.verdict===activeFilter);
+  buildItcChips(base);
+
+  // apply ITC filter, then search
+  let view=base.filter(r=>activeItc==='all'||itcKey(r.overall_itc_eligibility)===activeItc);
+  if(searchTerm) view=view.filter(r=>[r.invoice_number,r.supplier_gstin,r.sap_document_number,r.irn].join(' ').toLowerCase().includes(searchTerm));
+
+  const grid=$('grid');
+  if(!records.length){grid.innerHTML='';$('list').style.display='none';$('controls').classList.remove('show');if(!$('loading').classList.contains('show'))setState('welcome');return;}
+  $('controls').classList.add('show');setState(null);
+  if(!view.length){grid.innerHTML='';$('list').style.display='none';setState('noresults');return;}
+  $('list').style.display='block';
+
+  grid.innerHTML=view.map((r,i)=>{
+    const v=r.verdict;
+    const itc=r.overall_itc_eligibility;
+    const reason=r.reason
+      ? `<div class="reason"><span class="lbl">Why</span>${esc(r.reason)}</div>`
+      : `<div class="reason empty"><span class="lbl">Why</span>No reason recorded — typically the line items didn’t pair, so the judgment didn’t run.</div>`;
+    return `
+    <div class="row-wrap ${v}" style="animation-delay:${Math.min(i*18,360)}ms">
+      <div class="row">
+        <div class="c"><span class="badge ${v}">${NAME[v]||esc(v)}</span></div>
+        <div class="c c-inv"><span class="inv">${esc(r.invoice_number)}</span><span class="sub2">${esc(r.supplier_gstin)}</span></div>
+        <div class="c c-gstin mono">${esc(r.supplier_gstin)}</div>
+        <div class="c c-sap mono">${esc(r.sap_document_number||'—')} · FY${esc(r.sap_fiscal_year||'—')}</div>
+        <div class="c c-irn mono" title="${esc(r.irn)}">${shortIrn(r.irn)}</div>
+        <div class="c c-itc"><span class="tag ${itcClass(itc)}">${esc(itcLabel(itc))}</span></div>
+        <div class="c c-date date">${fmtDate(r.validated_at)}</div>
+        <div class="c chev"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M9 6l6 6-6 6"/></svg></div>
+      </div>
+      <div class="row-detail">
+        <div class="detail-grid">
+          ${reason}
+          <div class="dkv">
+            <span class="lbl">ITC eligibility Remarks</span>
+            ${r.overall_itc_remark?`<div class="itc-remark">${esc(r.overall_itc_remark)}</div>`:''}
+          </div>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+}
+</script>
+</body>
+</html>
