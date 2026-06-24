@@ -66,7 +66,7 @@
       "final_decision": "flag",
       "gl_fit_reason": null,
       "gl_fit_reason_plain": null,
-      "overall_itc_remark_plain": "2 of 5 line(s) need a closer look before you can claim — the bill doesn't make the use clear enough to be sure the credit is allowed: “FIRE BRICKS” (line 1): Needs review: “FIRE BRICKS” may fall under the rule on goods or services used to construct immovable property on your own account (Section 17(5)(d)); the bill doesn't establish the actual use, so confirm before claiming — this falls under the rule on goods or services used to construct immovable property on your own account (Section 17(5)(d)). “END SKEW BLOCK” (line 4): Needs review: “END SKEW BLOCK” may fall under the rule on goods or services used to construct immovable property on your own account (Section 17(5)(d)); the bill doesn't establish the actual use, so confirm before claiming — this falls under the rule on goods or services used to construct immovable property on your own account (Section 17(5)(d)).",
+      "overall_itc_remark_plain": "2 of 5 line(s) need a closer look before you can claim — the bill doesn't make the use clear enough to be sure the credit is allowed.",
       "tags": [
         {
           "code": "ITC_REVIEW",
@@ -2721,7 +2721,7 @@
       "final_decision": "flag",
       "gl_fit_reason": null,
       "gl_fit_reason_plain": null,
-      "overall_itc_remark_plain": "1 of 2 line(s) need a closer look before you can claim — the bill doesn't make the use clear enough to be sure the credit is allowed: “TILES(300X300)” (line 1): Needs review: “TILES(300X300)” may fall under the rule on goods or services used to construct immovable property on your own account (Section 17(5)(d)); the bill doesn't establish the actual use, so confirm before claiming — this falls under the rule on goods or services used to construct immovable property on your own account (Section 17(5)(d)).",
+      "overall_itc_remark_plain": "1 of 2 line(s) need a closer look before you can claim — the bill doesn't make the use clear enough to be sure the credit is allowed.",
       "tags": [
         {
           "code": "ITC_REVIEW",
@@ -2746,7 +2746,7 @@
       "final_decision": "flag",
       "gl_fit_reason": null,
       "gl_fit_reason_plain": null,
-      "overall_itc_remark_plain": "1 of 2 line(s) need a closer look before you can claim — the bill doesn't make the use clear enough to be sure the credit is allowed: “GLOSSY (12X12)” (line 1): Needs review: “GLOSSY (12X12)” may fall under the rule on goods or services used to construct immovable property on your own account (Section 17(5)(d)); the bill doesn't establish the actual use, so confirm before claiming — this falls under the rule on goods or services used to construct immovable property on your own account (Section 17(5)(d)).",
+      "overall_itc_remark_plain": "1 of 2 line(s) need a closer look before you can claim — the bill doesn't make the use clear enough to be sure the credit is allowed.",
       "tags": [
         {
           "code": "ITC_REVIEW",
@@ -4621,7 +4621,7 @@
       "final_decision": "flag",
       "gl_fit_reason": "G/L-fit (fail): Goods posted to a packing material account; should be a goods/purchases/inventory/material/asset account.",
       "gl_fit_reason_plain": "The expense account this bill was posted to doesn't match the kind of thing that was billed (goods posted to a services account, or the other way round). This is a book-keeping check on where the cost was posted — it does not block your input tax credit on its own, but the posting should be reviewed and corrected.",
-      "overall_itc_remark_plain": "1 of 5 line(s) need a closer look before you can claim — the bill doesn't make the use clear enough to be sure the credit is allowed: “FREIGHT CHARGES” (line 5): Needs review: “FREIGHT CHARGES” may fall under the rule on food & drink, club/health/fitness memberships, and certain employee benefits (Section 17(5)(b)(i)); the bill doesn't establish the actual use, so confirm before claiming — this falls under the rule on food & drink, club/health/fitness memberships, and certain employee benefits (Section 17(5)(b)(i)).",
+      "overall_itc_remark_plain": "1 of 5 line(s) need a closer look before you can claim — the bill doesn't make the use clear enough to be sure the credit is allowed.",
       "tags": [
         {
           "code": "GL_POSTING",
@@ -4651,7 +4651,7 @@
       "final_decision": "flag",
       "gl_fit_reason": "G/L-fit (fail): Goods posted to a packing material account; should be a goods/purchases/inventory/material/asset account.",
       "gl_fit_reason_plain": "The expense account this bill was posted to doesn't match the kind of thing that was billed (goods posted to a services account, or the other way round). This is a book-keeping check on where the cost was posted — it does not block your input tax credit on its own, but the posting should be reviewed and corrected.",
-      "overall_itc_remark_plain": "1 of 6 line(s) need a closer look before you can claim — the bill doesn't make the use clear enough to be sure the credit is allowed: “FREIGHT CHARGES” (line 6): Needs review: “FREIGHT CHARGES” may fall under the rule on food & drink, club/health/fitness memberships, and certain employee benefits (Section 17(5)(b)(i)); the bill doesn't establish the actual use, so confirm before claiming — this falls under the rule on food & drink, club/health/fitness memberships, and certain employee benefits (Section 17(5)(b)(i)).",
+      "overall_itc_remark_plain": "1 of 6 line(s) need a closer look before you can claim — the bill doesn't make the use clear enough to be sure the credit is allowed.",
       "tags": [
         {
           "code": "GL_POSTING",
@@ -4681,7 +4681,7 @@
       "final_decision": "flag",
       "gl_fit_reason": "G/L-fit (flag): Goods posted to a packing material account, and services posted to an other services account.; G/L-fit (flag): Goods posted to a packing material account, and services posted to an other services account.",
       "gl_fit_reason_plain": "The expense account this bill was posted to doesn't match the kind of thing that was billed (goods posted to a services account, or the other way round). This is a book-keeping check on where the cost was posted — it does not block your input tax credit on its own, but the posting should be reviewed and corrected.",
-      "overall_itc_remark_plain": "1 of 2 line(s) need a closer look before you can claim — the bill doesn't make the use clear enough to be sure the credit is allowed: “FREIGHT CHARGES” (line 2): Needs review: “FREIGHT CHARGES” may fall under the rule on food & drink, club/health/fitness memberships, and certain employee benefits (Section 17(5)(b)(i)); the bill doesn't establish the actual use, so confirm before claiming — this falls under the rule on food & drink, club/health/fitness memberships, and certain employee benefits (Section 17(5)(b)(i)).",
+      "overall_itc_remark_plain": "1 of 2 line(s) need a closer look before you can claim — the bill doesn't make the use clear enough to be sure the credit is allowed.",
       "tags": [
         {
           "code": "GL_POSTING",
@@ -4711,7 +4711,7 @@
       "final_decision": "flag",
       "gl_fit_reason": "G/L-fit (fail): Goods posted to a packing-material account, which is for services.",
       "gl_fit_reason_plain": "The expense account this bill was posted to doesn't match the kind of thing that was billed (goods posted to a services account, or the other way round). This is a book-keeping check on where the cost was posted — it does not block your input tax credit on its own, but the posting should be reviewed and corrected.",
-      "overall_itc_remark_plain": "1 of 13 line(s) need a closer look before you can claim — the bill doesn't make the use clear enough to be sure the credit is allowed: “FREIGHT CHARGES” (line 13): Needs review: “FREIGHT CHARGES” may fall under the rule on food & drink, club/health/fitness memberships, and certain employee benefits (Section 17(5)(b)(i)); the bill doesn't establish the actual use, so confirm before claiming — this falls under the rule on food & drink, club/health/fitness memberships, and certain employee benefits (Section 17(5)(b)(i)).",
+      "overall_itc_remark_plain": "1 of 13 line(s) need a closer look before you can claim — the bill doesn't make the use clear enough to be sure the credit is allowed.",
       "tags": [
         {
           "code": "GL_POSTING",
@@ -4741,7 +4741,7 @@
       "final_decision": "flag",
       "gl_fit_reason": "G/L-fit (fail): Goods posted to a packing material account, which is typically for services.",
       "gl_fit_reason_plain": "The expense account this bill was posted to doesn't match the kind of thing that was billed (goods posted to a services account, or the other way round). This is a book-keeping check on where the cost was posted — it does not block your input tax credit on its own, but the posting should be reviewed and corrected.",
-      "overall_itc_remark_plain": "1 of 11 line(s) need a closer look before you can claim — the bill doesn't make the use clear enough to be sure the credit is allowed: “FREIGHT CHARGES” (line 11): Needs review: “FREIGHT CHARGES” may fall under the rule on food & drink, club/health/fitness memberships, and certain employee benefits (Section 17(5)(b)(i)); the bill doesn't establish the actual use, so confirm before claiming — this falls under the rule on food & drink, club/health/fitness memberships, and certain employee benefits (Section 17(5)(b)(i)).",
+      "overall_itc_remark_plain": "1 of 11 line(s) need a closer look before you can claim — the bill doesn't make the use clear enough to be sure the credit is allowed.",
       "tags": [
         {
           "code": "GL_POSTING",
@@ -4796,7 +4796,7 @@
       "final_decision": "flag",
       "gl_fit_reason": "G/L-fit (flag): Invoice mixes goods and services into a single account whose nature cannot cover both.; G/L-fit (flag): Invoice mixes goods and services into a single account whose nature cannot cover both.",
       "gl_fit_reason_plain": "The expense account this bill was posted to doesn't match the kind of thing that was billed (goods posted to a services account, or the other way round). This is a book-keeping check on where the cost was posted — it does not block your input tax credit on its own, but the posting should be reviewed and corrected.",
-      "overall_itc_remark_plain": "1 of 2 line(s) need a closer look before you can claim — the bill doesn't make the use clear enough to be sure the credit is allowed: “FREIGHT CHARGES” (line 2): Needs review: “FREIGHT CHARGES” may fall under the rule on food & drink, club/health/fitness memberships, and certain employee benefits (Section 17(5)(b)(i)); the bill doesn't establish the actual use, so confirm before claiming — this falls under the rule on food & drink, club/health/fitness memberships, and certain employee benefits (Section 17(5)(b)(i)).",
+      "overall_itc_remark_plain": "1 of 2 line(s) need a closer look before you can claim — the bill doesn't make the use clear enough to be sure the credit is allowed.",
       "tags": [
         {
           "code": "GL_POSTING",
@@ -4826,7 +4826,7 @@
       "final_decision": "flag",
       "gl_fit_reason": "G/L-fit (fail): Goods posted to a packing material account; should be a goods/purchases/inventory/material/asset account.",
       "gl_fit_reason_plain": "The expense account this bill was posted to doesn't match the kind of thing that was billed (goods posted to a services account, or the other way round). This is a book-keeping check on where the cost was posted — it does not block your input tax credit on its own, but the posting should be reviewed and corrected.",
-      "overall_itc_remark_plain": "1 of 5 line(s) need a closer look before you can claim — the bill doesn't make the use clear enough to be sure the credit is allowed: “FREIGHT CHARGES” (line 5): Needs review: “FREIGHT CHARGES” may fall under the rule on food & drink, club/health/fitness memberships, and certain employee benefits (Section 17(5)(b)(i)); the bill doesn't establish the actual use, so confirm before claiming — this falls under the rule on food & drink, club/health/fitness memberships, and certain employee benefits (Section 17(5)(b)(i)).",
+      "overall_itc_remark_plain": "1 of 5 line(s) need a closer look before you can claim — the bill doesn't make the use clear enough to be sure the credit is allowed.",
       "tags": [
         {
           "code": "GL_POSTING",
@@ -4856,7 +4856,7 @@
       "final_decision": "flag",
       "gl_fit_reason": "G/L-fit (flag): Invoice mixes goods and services into a single account whose nature cannot cover both.; G/L-fit (flag): Invoice mixes goods and services into a single account whose nature cannot cover both.",
       "gl_fit_reason_plain": "The expense account this bill was posted to doesn't match the kind of thing that was billed (goods posted to a services account, or the other way round). This is a book-keeping check on where the cost was posted — it does not block your input tax credit on its own, but the posting should be reviewed and corrected.",
-      "overall_itc_remark_plain": "1 of 2 line(s) need a closer look before you can claim — the bill doesn't make the use clear enough to be sure the credit is allowed: “FREIGHT CHARGES” (line 2): Needs review: “FREIGHT CHARGES” may fall under the rule on food & drink, club/health/fitness memberships, and certain employee benefits (Section 17(5)(b)(i)); the bill doesn't establish the actual use, so confirm before claiming — this falls under the rule on food & drink, club/health/fitness memberships, and certain employee benefits (Section 17(5)(b)(i)).",
+      "overall_itc_remark_plain": "1 of 2 line(s) need a closer look before you can claim — the bill doesn't make the use clear enough to be sure the credit is allowed.",
       "tags": [
         {
           "code": "GL_POSTING",
@@ -4886,7 +4886,7 @@
       "final_decision": "flag",
       "gl_fit_reason": "G/L-fit (fail): Goods posted to a packing material account; should be a goods/purchases/inventory/material/asset account.",
       "gl_fit_reason_plain": "The expense account this bill was posted to doesn't match the kind of thing that was billed (goods posted to a services account, or the other way round). This is a book-keeping check on where the cost was posted — it does not block your input tax credit on its own, but the posting should be reviewed and corrected.",
-      "overall_itc_remark_plain": "1 of 7 line(s) need a closer look before you can claim — the bill doesn't make the use clear enough to be sure the credit is allowed: “FREIGHT CHARGES” (line 7): Needs review: “FREIGHT CHARGES” may fall under the rule on food & drink, club/health/fitness memberships, and certain employee benefits (Section 17(5)(b)(i)); the bill doesn't establish the actual use, so confirm before claiming — this falls under the rule on food & drink, club/health/fitness memberships, and certain employee benefits (Section 17(5)(b)(i)).",
+      "overall_itc_remark_plain": "1 of 7 line(s) need a closer look before you can claim — the bill doesn't make the use clear enough to be sure the credit is allowed.",
       "tags": [
         {
           "code": "GL_POSTING",
@@ -4916,7 +4916,7 @@
       "final_decision": "flag",
       "gl_fit_reason": "G/L-fit (flag): Invoice mixes goods and services into a single account whose nature cannot cover both.; G/L-fit (flag): Invoice mixes goods and services into a single account whose nature cannot cover both.",
       "gl_fit_reason_plain": "The expense account this bill was posted to doesn't match the kind of thing that was billed (goods posted to a services account, or the other way round). This is a book-keeping check on where the cost was posted — it does not block your input tax credit on its own, but the posting should be reviewed and corrected.",
-      "overall_itc_remark_plain": "1 of 2 line(s) need a closer look before you can claim — the bill doesn't make the use clear enough to be sure the credit is allowed: “FREIGHT CHARGES” (line 2): Needs review: “FREIGHT CHARGES” may fall under the rule on food & drink, club/health/fitness memberships, and certain employee benefits (Section 17(5)(b)(i)); the bill doesn't establish the actual use, so confirm before claiming — this falls under the rule on food & drink, club/health/fitness memberships, and certain employee benefits (Section 17(5)(b)(i)).",
+      "overall_itc_remark_plain": "1 of 2 line(s) need a closer look before you can claim — the bill doesn't make the use clear enough to be sure the credit is allowed.",
       "tags": [
         {
           "code": "GL_POSTING",
@@ -7676,7 +7676,7 @@
       "final_decision": "flag",
       "gl_fit_reason": null,
       "gl_fit_reason_plain": null,
-      "overall_itc_remark_plain": "2 of 3 line(s) need a closer look before you can claim — the bill doesn't make the use clear enough to be sure the credit is allowed: “M S Angles 50x50x5 Mm” (line 1): Needs review: “M S Angles 50x50x5 Mm” may fall under the rule on goods or services used to construct immovable property on your own account (Section 17(5)(d)); the bill doesn't establish the actual use, so confirm before claiming — this falls under the rule on goods or services used to construct immovable property on your own account (Section 17(5)(d)). “M S Bars 32x4 Mm” (line 2): Needs review: “M S Bars 32x4 Mm” may fall under the rule on goods or services used to construct immovable property on your own account (Section 17(5)(d)); the bill doesn't establish the actual use, so confirm before claiming — this falls under the rule on goods or services used to construct immovable property on your own account (Section 17(5)(d)).",
+      "overall_itc_remark_plain": "2 of 3 line(s) need a closer look before you can claim — the bill doesn't make the use clear enough to be sure the credit is allowed.",
       "tags": [
         {
           "code": "ITC_REVIEW",
@@ -7726,7 +7726,7 @@
       "final_decision": "flag",
       "gl_fit_reason": null,
       "gl_fit_reason_plain": null,
-      "overall_itc_remark_plain": "4 of 5 line(s) need a closer look before you can claim — the bill doesn't make the use clear enough to be sure the credit is allowed: “M S Angles 50x50x6 Mm” (line 2): Needs review: “M S Angles 50x50x6 Mm” may fall under the rule on goods or services used to construct immovable property on your own account (Section 17(5)(d)); the bill doesn't establish the actual use, so confirm before claiming — this falls under the rule on goods or services used to construct immovable property on your own account (Section 17(5)(d)). “M S Square 20 Mm” (line 3): Needs review: “M S Square 20 Mm” may fall under the rule on goods or services used to construct immovable property on your own account (Section 17(5)(d)); the bill doesn't establish the actual use, so confirm before claiming — this falls under the rule on goods or services used to construct immovable property on your own account (Section 17(5)(d)). “Rounds E N 8 110 Mm” (line 4): Needs review: “Rounds E N 8 110 Mm” may fall under the rule on goods or services used to construct immovable property on your own account (Section 17(5)(d)); the bill doesn't establish the actual use, so confirm before claiming — this falls under the rule on goods or services used to construct immovable property on your own account (Section 17(5)(d)). “M S Channel 100x50x5.8mm” (line 5): Needs review: “M S Channel 100x50x5.8mm” may fall under the rule on goods or services used to construct immovable property on your own account (Section 17(5)(d)); the bill doesn't establish the actual use, so confirm before claiming — this falls under the rule on goods or services used to construct immovable property on your own account (Section 17(5)(d)).",
+      "overall_itc_remark_plain": "4 of 5 line(s) need a closer look before you can claim — the bill doesn't make the use clear enough to be sure the credit is allowed.",
       "tags": [
         {
           "code": "ITC_REVIEW",
@@ -20291,7 +20291,7 @@
       "final_decision": "flag",
       "gl_fit_reason": null,
       "gl_fit_reason_plain": null,
-      "overall_itc_remark_plain": "1 of 1 line(s) need a closer look before you can claim — the bill doesn't make the use clear enough to be sure the credit is allowed: “CEMENT” (line 1): Needs review: “CEMENT” may fall under the rule on goods or services used to construct immovable property on your own account (Section 17(5)(d)); the bill doesn't establish the actual use, so confirm before claiming — this falls under the rule on goods or services used to construct immovable property on your own account (Section 17(5)(d)).",
+      "overall_itc_remark_plain": "1 of 1 line(s) need a closer look before you can claim — the bill doesn't make the use clear enough to be sure the credit is allowed.",
       "tags": [
         {
           "code": "ITC_REVIEW",
@@ -20316,7 +20316,7 @@
       "final_decision": "flag",
       "gl_fit_reason": null,
       "gl_fit_reason_plain": null,
-      "overall_itc_remark_plain": "1 of 1 line(s) need a closer look before you can claim — the bill doesn't make the use clear enough to be sure the credit is allowed: “CEMENT” (line 1): Needs review: “CEMENT” may fall under the rule on goods or services used to construct immovable property on your own account (Section 17(5)(d)); the bill doesn't establish the actual use, so confirm before claiming — this falls under the rule on goods or services used to construct immovable property on your own account (Section 17(5)(d)).",
+      "overall_itc_remark_plain": "1 of 1 line(s) need a closer look before you can claim — the bill doesn't make the use clear enough to be sure the credit is allowed.",
       "tags": [
         {
           "code": "ITC_REVIEW",
@@ -20341,7 +20341,7 @@
       "final_decision": "flag",
       "gl_fit_reason": null,
       "gl_fit_reason_plain": null,
-      "overall_itc_remark_plain": "1 of 1 line(s) need a closer look before you can claim — the bill doesn't make the use clear enough to be sure the credit is allowed: “CEMENT” (line 1): Needs review: “CEMENT” may fall under the rule on goods or services used to construct immovable property on your own account (Section 17(5)(d)); the bill doesn't establish the actual use, so confirm before claiming — this falls under the rule on goods or services used to construct immovable property on your own account (Section 17(5)(d)).",
+      "overall_itc_remark_plain": "1 of 1 line(s) need a closer look before you can claim — the bill doesn't make the use clear enough to be sure the credit is allowed.",
       "tags": [
         {
           "code": "ITC_REVIEW",
