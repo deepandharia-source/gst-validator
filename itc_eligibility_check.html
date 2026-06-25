@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>ITC Review | Masters India</title>
+<style>
+  :root{
+    --brand:#2b2f8f; --brand-deep:#20245f; --brand-soft:#ecedf7;
+    --sidebar:#272e60; --sidebar-2:#333b78; --sidebar-ink:#c5cae0; --accent:#f08a00;
+    --page:#eef1f7; --card:#ffffff; --ink:#1f2433; --muted:#6b7280;
+    --line:#e6e8f0; --head:#f5f6fa; --avatar:#6d5fd5;
+    --green:#1a8a52; --green-bg:#e7f6ee; --green-line:#bfe6cf;
+    --amber:#9a6700; --amber-bg:#fdf3df; --amber-line:#f0ddae;
+    --red:#b42318; --red-bg:#fdeceb; --red-line:#f4c9c5;
+    --slate:#475467; --slate-bg:#eef1f6;
+    --shadow:0 1px 2px rgba(16,24,40,.05),0 6px 20px rgba(16,24,40,.05);
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--page);color:var(--ink);
+    font-family:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    font-size:14px;line-height:1.5;-webkit-font-smoothing:antialiased}
+
+  .app{display:flex;min-height:100vh}
+
+  /* ---------- sidebar ---------- */
+  aside{width:240px;background:var(--sidebar);color:var(--sidebar-ink);flex-shrink:0;
+    display:flex;flex-direction:column;position:sticky;top:0;height:100vh}
+  .brand{display:flex;align-items:center;gap:11px;padding:18px 20px;color:#fff;font-weight:700;font-size:17px;
+    border-bottom:1px solid rgba(255,255,255,.08)}
+  .brand .m{width:34px;height:34px;border-radius:50%;background:#1b2042;display:grid;place-items:center;
+    font-weight:800;font-size:15px}
+  .brand .m b{color:#fff}.brand .m i{color:#5b8def;font-style:normal}
+  nav{padding:12px 12px;flex:1;overflow:auto}
+  .nav-item{display:flex;align-items:center;gap:12px;padding:11px 14px;border-radius:9px;color:var(--sidebar-ink);
+    font-weight:500;cursor:pointer;margin-bottom:3px;position:relative;font-size:14px}
+  .nav-item svg{width:19px;height:19px;flex-shrink:0;opacity:.92}
+  .nav-item:hover{background:rgba(255,255,255,.06);color:#fff}
+  .nav-item.active{background:var(--sidebar-2);color:#fff;font-weight:600}
+  .nav-item.active::before{content:"";position:absolute;left:-12px;top:6px;bottom:6px;width:4px;
+    background:var(--accent);border-radius:0 4px 4px 0}
+  .nav-item .badge{margin-left:auto;background:#e23d3d;color:#fff;font-size:11px;font-weight:700;
+    border-radius:10px;padding:1px 7px}
+  .nav-foot{padding:12px;border-top:1px solid rgba(255,255,255,.08)}
+
+  /* ---------- main ---------- */
+  main{flex:1;min-width:0;display:flex;flex-direction:column}
+  .topbar{background:var(--card);border-bottom:1px solid var(--line);display:flex;align-items:center;
+    gap:16px;padding:12px 24px;position:sticky;top:0;z-index:20}
+  .burger{color:var(--muted);cursor:pointer;font-size:20px;line-height:1}
+  .title h1{font-size:19px;margin:0;font-weight:700}
+  .crumb{font-size:12px;color:var(--muted);margin-top:1px}
+  .crumb b{color:var(--brand);font-weight:600}
+  .tb-spacer{flex:1}
+  .chip-ctrl{display:flex;align-items:center;gap:8px;border:1px solid var(--line);border-radius:9px;
+    padding:8px 12px;font-size:13px;font-weight:600;color:var(--ink);background:#fff;cursor:pointer}
+  .chip-ctrl small{display:block;font-weight:500;color:var(--muted);font-size:11px}
+  .ic{width:38px;height:38px;border-radius:9px;display:grid;place-items:center;color:var(--muted);cursor:pointer}
+  .ic:hover{background:var(--head)}
+  .avatar{width:34px;height:34px;border-radius:50%;background:var(--avatar);color:#fff;display:grid;
+    place-items:center;font-weight:700;font-size:13px}
+  .me{display:flex;align-items:center;gap:9px;cursor:pointer;font-weight:600;font-size:13px}
+
+  .content{padding:22px 24px 60px}
+
+  /* ---------- card ---------- */
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);overflow:hidden}
+  .panel-head{display:flex;align-items:center;gap:24px;padding:14px 20px 0;border-bottom:1px solid var(--line);
+    flex-wrap:wrap}
+  .tabs{display:flex;gap:24px}
+  .tab{padding:0 2px 14px;font-weight:600;color:var(--muted);cursor:pointer;border-bottom:2.5px solid transparent;
+    margin-bottom:-1px}
+  .tab.active{color:var(--brand);border-color:var(--brand)}
+  .seg{margin-left:auto;margin-bottom:10px;display:flex;border:1px solid var(--brand);border-radius:9px;overflow:hidden}
+  .seg div{padding:7px 16px;font-size:13px;font-weight:600;color:var(--brand);cursor:pointer;background:#fff}
+  .seg div.on{background:var(--brand);color:#fff}
+
+  .panel-body{padding:18px 20px 20px}
+
+  /* dashboard cards */
+  .cards{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
+  .scard{border:1px solid var(--line);border-radius:12px;padding:14px 16px;cursor:pointer;background:#fff;
+    transition:border-color .12s,box-shadow .12s}
+  .scard:hover{border-color:#c3c7e6}
+  .scard.active{border-color:var(--brand);box-shadow:0 0 0 2px var(--brand-soft)}
+  .scard .n{font-size:25px;font-weight:800;letter-spacing:-.5px}
+  .scard .l{font-size:12px;color:var(--muted);font-weight:600;margin-top:2px}
+  .scard .pct{font-size:11px;color:var(--muted);margin-top:6px}
+  .dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:7px;vertical-align:1px}
+  .d-all{background:var(--brand)} .d-green{background:var(--green)} .d-amber{background:var(--amber)}
+  .d-red{background:var(--red)} .d-slate{background:var(--slate)}
+  .barrow{display:flex;height:8px;border-radius:6px;overflow:hidden;margin:16px 0 4px;background:#e7eaf2}
+  .barrow span{height:100%}
+  .seg-green{background:var(--green)}.seg-amber{background:var(--amber)}.seg-red{background:var(--red)}
+
+  /* toolbar */
+  .toolbar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:20px 0 14px}
+  .search{flex:1;min-width:220px;display:flex;align-items:center;gap:8px;background:#fff;
+    border:1px solid var(--line);border-radius:9px;padding:9px 12px}
+  .search input{border:none;outline:none;font:inherit;flex:1;background:transparent}
+  .pill{border:1px solid var(--line);background:#fff;border-radius:999px;padding:7px 13px;
+    font-size:12.5px;font-weight:600;color:var(--muted);cursor:pointer}
+  .pill.on{background:var(--brand);border-color:var(--brand);color:#fff}
+  .tagsel{border:1px solid var(--line);background:#fff;border-radius:999px;padding:7px 13px;font:inherit;
+    font-size:12.5px;font-weight:600;color:var(--muted);cursor:pointer;max-width:280px}
+  .tagsel:focus{outline:none;border-color:var(--brand)}
+  .tagsel.on{background:var(--brand);border-color:var(--brand);color:#fff}
+  .btn{display:inline-flex;align-items:center;gap:8px;background:var(--brand);color:#fff;border:none;
+    font:inherit;font-weight:600;padding:9px 16px;border-radius:9px;cursor:pointer;font-size:13px}
+  .btn:hover{background:var(--brand-deep)}
+  .btn.ghost{background:#fff;color:var(--brand);border:1px solid var(--brand)}
+  .batchbar{display:flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--line);
+    border-radius:9px;padding:6px 6px 6px 12px}
+  .batchbar label{font-size:11px;color:var(--muted);font-weight:600}
+  .batchbar input{border:none;outline:none;font:inherit;width:280px;background:transparent}
+
+  /* table */
+  table{width:100%;border-collapse:collapse;border:1px solid var(--line);border-radius:12px;overflow:hidden}
+  thead th{font-size:11.5px;text-transform:uppercase;letter-spacing:.4px;color:#3b4250;
+    text-align:left;padding:13px 16px;border-bottom:1px solid var(--line);font-weight:700;background:var(--head)}
+  thead th .fn{opacity:.45;margin-left:5px}
+  tbody tr.row{border-bottom:1px solid var(--line);cursor:pointer}
+  tbody tr.row:hover{background:#f8f9fe}
+  tbody td{padding:13px 16px;vertical-align:top}
+  .inv{font-weight:700}
+  .gstin{font-size:12px;color:var(--muted);font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
+  .meaning{color:var(--ink);max-width:430px}
+  .chip{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:700;
+    padding:4px 10px;border-radius:999px;white-space:nowrap}
+  .chip .cd{width:7px;height:7px;border-radius:50%}
+  .c-green{background:var(--green-bg);color:var(--green);border:1px solid var(--green-line)}.c-green .cd{background:var(--green)}
+  .c-amber{background:var(--amber-bg);color:var(--amber);border:1px solid var(--amber-line)}.c-amber .cd{background:var(--amber)}
+  .c-red{background:var(--red-bg);color:var(--red);border:1px solid var(--red-line)}.c-red .cd{background:var(--red)}
+  .c-slate{background:var(--slate-bg);color:var(--slate);border:1px solid var(--line)}.c-slate .cd{background:var(--slate)}
+  .itc-tag{font-weight:700}
+  .itc-pending{color:var(--green)}.itc-no{color:var(--red)}.itc-review{color:var(--amber)}
+  .warn{display:inline-block;margin-top:5px;font-size:11px;font-weight:700;color:var(--amber);
+    background:var(--amber-bg);border:1px solid var(--amber-line);border-radius:6px;padding:2px 7px}
+  .caret{color:var(--muted);transition:transform .15s;display:inline-block}
+  tr.open .caret{transform:rotate(90deg)}
+  tr.detail td{padding:0;border-bottom:1px solid var(--line);background:#f7f9ff}
+  .detail-inner{padding:4px 16px 20px;display:none}
+  tr.detail.show .detail-inner{display:block}
+  .det-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:8px}
+  .block{background:#fff;border:1px solid var(--line);border-radius:10px;padding:14px}
+  .block h4{margin:0 0 6px;font-size:12px;text-transform:uppercase;letter-spacing:.4px;color:var(--muted)}
+  .block p{margin:0}.action{border-left:3px solid var(--brand)}
+  .block ul.steps{margin:0;padding-left:18px}
+  .block ul.steps li{margin:3px 0}
+  .block ul.steps li:first-child{margin-top:0}
+  .kv{display:grid;grid-template-columns:auto 1fr;gap:4px 16px;font-size:12.5px;margin-top:6px}
+  .kv dt{color:var(--muted);font-weight:600}
+  .kv dd{margin:0;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;word-break:break-all}
+  details.tech{margin-top:12px}
+  details.tech summary{cursor:pointer;color:var(--muted);font-size:12px;font-weight:600}
+  details.tech pre{background:#1b2042;color:#cdd9ec;border-radius:8px;padding:12px;overflow:auto;
+    font-size:11.5px;margin-top:8px;white-space:pre-wrap;word-break:break-word}
+
+  .empty,.loading{padding:46px;text-align:center;color:var(--muted)}
+  .footrow{display:flex;align-items:center;justify-content:space-between;margin-top:14px;color:var(--muted);font-size:12.5px}
+
+  .tags{display:flex;flex-wrap:wrap;gap:4px;margin-top:7px}
+  .tg{font-size:10px;font-weight:700;letter-spacing:.03em;padding:2px 7px;border-radius:999px;
+    text-transform:uppercase;border:1px solid;cursor:pointer;user-select:none;line-height:1.55;white-space:nowrap}
+  .tg-critical{background:var(--red-bg);color:var(--red);border-color:var(--red-line)}
+  .tg-warning{background:var(--amber-bg);color:var(--amber);border-color:var(--amber-line)}
+  .tg-info{background:var(--slate-bg);color:var(--slate);border-color:#dde3ee}
+  .tg.on{outline:2px solid currentColor;outline-offset:1px}
+
+  @media(max-width:980px){aside{display:none}.cards{grid-template-columns:repeat(2,1fr)}
+    .det-grid{grid-template-columns:1fr}.hide-sm{display:none}.batchbar input{width:150px}}
+</style>
+</head>
+<body>
+<div class="app">
+  <!-- SIDEBAR -->
+  <aside>
+    <div class="brand"><div class="m"><b>m</b><i>i</i></div>Masters India</div>
+    <nav>
+      <div class="nav-item">⬡<span>Dashboard</span></div>
+      <div class="nav-item">▦<span>Data Import</span></div>
+      <div class="nav-item">▤<span>GST Return</span></div>
+      <div class="nav-item">▥<span>IMS</span></div>
+      <div class="nav-item active">✔<span>GST Reconciliation</span></div>
+      <div class="nav-item">₹<span>Challans &amp; Payment</span></div>
+      <div class="nav-item">▣<span>Notices &amp; Orders</span><span class="badge">131</span></div>
+      <div class="nav-item">📈<span>Reports</span></div>
+      <div class="nav-item">⚙<span>Configurations</span></div>
+      <div class="nav-item">☷<span>Follow-up Agent</span></div>
+    </nav>
+    <div class="nav-foot">
+      <div class="nav-item">⊞<span>Try MI Products</span></div>
+      <div class="nav-item">?<span>Help</span></div>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <main>
+    <div class="topbar">
+      <span class="burger">☰</span>
+      <div class="title">
+        <h1>ITC Review</h1>
+        <div class="crumb">GST Reconciliation <span>›</span> <b>ITC Review</b></div>
+      </div>
+      <div class="tb-spacer"></div>
+      <div class="chip-ctrl">📅 May 2026-27</div>
+      <div class="chip-ctrl">🏢 <div><div>Business Name A</div><small>06AAACF0522B1ZK</small></div> ▾</div>
+      <div class="ic">🔔</div>
+      <div class="ic">▦</div>
+      <div class="ic">🌙</div>
+      <div class="me"><div class="avatar">AS</div>Anshit Sandbox Two ▾</div>
+    </div>
+
+    <div class="content">
+      <div class="panel">
+        <div class="panel-head">
+          <div class="tabs">
+            <div class="tab active">Batch Results</div>
+          </div>
+        </div>
+        <div class="panel-body">
+          <p id="subtitle" style="margin:0 0 16px;color:var(--muted)">Loading your batch…</p>
+
+          <div class="cards" id="cards"></div>
+          <div class="barrow" id="bar" style="display:none"></div>
+
+          <div class="toolbar">
+            <div class="search"><span>🔍</span>
+              <input id="q" placeholder="Search invoice no. or supplier GSTIN…" /></div>
+            <div class="pill on" data-itc="all">All ITC</div>
+            <div class="pill" data-itc="claim">Can claim</div>
+            <div class="pill" data-itc="review">Needs review</div>
+            <div class="pill" data-itc="no">Not claimable</div>
+            <div class="pill" data-itc="amount">⚠ Amount unverified</div>
+            <select id="tagsel" class="tagsel" title="Filter by tag"><option value="">All tags</option></select>
+            <button class="btn ghost" id="reload">↻ Refresh</button>
+            <button class="btn" id="export">⤓ Export</button>
+          </div>
+
+          <div class="batchbar" style="margin-bottom:14px">
+            <label for="bid">Batch ID</label>
+            <input id="bid" value="748831d6-4e5f-4069-a612-a014617dc3bd" spellcheck="false" />
+            <button class="btn" id="load" style="padding:7px 14px">Load</button>
+          </div>
+
+          <table>
+            <thead><tr>
+              <th style="width:175px">Status</th>
+              <th>Invoice &amp; supplier <span class="fn">⟱</span></th>
+              <th class="hide-sm">In plain English</th>
+              <th style="width:185px">Can I claim ITC? <span class="fn">⟱</span></th>
+              <th style="width:30px"></th>
+            </tr></thead>
+            <tbody id="rows"><tr><td colspan="5" class="loading">Pulling results…</td></tr></tbody>
+          </table>
+
+          <div class="footrow">
+            <span id="foot"></span>
+            <span style="display:flex;align-items:center;gap:6px">
+              <span class="dot d-green"></span>Matched
+              <span class="dot d-amber" style="margin-left:10px"></span>Needs review
+              <span class="dot d-red" style="margin-left:10px"></span>ITC not claimable
+              <span class="dot d-slate" style="margin-left:10px"></span>Doesn't match books
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<script>
+const BASE="https://deepandharia-source.github.io/gst-validator/";
+let DATA=[], filterStatus="all", filterItc="all", filterTag="", query="", rendered=[];
+
+/* Headline = server-computed final_decision (Job A G/L-fit ⊕ Job B ITC).
+   Falls back to verdict for older dumps written before the field existed. */
+function finalOf(r){ return r.final_decision || r.verdict || "—"; }
+function statusInfo(r){
+  const v=finalOf(r);
+  if(v==="pass")       return{key:"pass",       cls:"c-green", dot:"green", label:"Matched"};
+  if(v==="flag")       return{key:"flag",       cls:"c-amber", dot:"amber", label:"Needs review"};
+  if(v==="ineligible") return{key:"ineligible", cls:"c-red",   dot:"red",   label:"ITC not claimable"};
+  if(v==="fail")       return{key:"fail",       cls:"c-slate", dot:"slate", label:"Doesn't match books"};
+  return{key:"other",cls:"c-slate",dot:"slate",label:v||"—"};
+}
+function itcInfo(r){
+  const e=r.overall_itc_eligibility||"";
+  if(e==="ineligible")          return{cls:"itc-no",     label:"No — not claimable"};
+  if(e==="eligible_pending_16"||e==="eligible") return{cls:"itc-pending",label:"Likely yes — pending checks"};
+  if(e==="partially_eligible")  return{cls:"itc-review", label:"Partly claimable"};
+  if(e==="review")              return{cls:"itc-review", label:"Needs review"};
+  if(!e)                        return{cls:"itc-review", label:"—"};
+  return{cls:"itc-review",label:e.replace(/_/g," ")};
+}
+
+/* Plain English now comes straight from the engine — no client-side parsing.
+   gl_fit_reason_plain = Job A (posting), overall_itc_remark_plain = Job B (ITC). */
+function plainParts(r){
+  const parts=[];
+  if(r.gl_fit_reason_plain)      parts.push(r.gl_fit_reason_plain);
+  if(r.overall_itc_remark_plain) parts.push(r.overall_itc_remark_plain);
+  if(r.value_unreliable)         parts.push("The amount couldn't be confirmed against SAP, so the credit stands but the figure needs verifying before you rely on it.");
+  return parts;
+}
+function fullPlain(r){
+  const p=plainParts(r);
+  return p.length ? p.join(" ")
+    : "This invoice matches your SAP books and clears the blocked-credit rules — nothing needs your attention.";
+}
+/* One-line summary for the table cell (the full text lives in the detail panel). */
+function shortSummary(r){
+  const v=finalOf(r), e=r.overall_itc_eligibility||"";
+  if(v==="pass")        return "Matches your SAP books and clears the blocked-credit rules — no action needed.";
+  if(v==="ineligible")  return "Credit can't be claimed — blocked under the Section 17(5) rules.";
+  if(r.gl_fit_reason_plain && (e===""||e==="eligible_pending_16"||e==="eligible"))
+                        return "Posted to an account that may not fit what was billed — a book-keeping flag; ITC itself is unaffected.";
+  if(e==="review")              return "Some lines need a closer look before you can claim.";
+  if(e==="partially_eligible")  return "Part of this bill is claimable; some lines are blocked under Section 17(5).";
+  if(r.value_unreliable)        return "The invoice amount doesn't tie to SAP — credit stands but the figure needs checking.";
+  if(v==="fail")        return "Doesn't match your books — correct it before relying on this line.";
+  return fullPlain(r);
+}
+function actionFor(r){
+  const v=finalOf(r), e=r.overall_itc_eligibility||"";
+  if(v==="pass")                          return "No action needed. ITC carries on to the Section 16 checks (2B match, supplier paid, 180-day payment, time limit).";
+  if(e==="ineligible")                    return "Don't claim ITC on this invoice. Confirm the blocked-credit reason below and take it up with the vendor / books team.";
+  if(e==="review"||e==="partially_eligible") return "Check how each flagged line was actually used (resale, plant & machinery, business use) before claiming the credit.";
+  if(r.gl_fit_reason_plain)               return "Ask the books team to confirm the right expense / G-L account. ITC eligibility is unaffected — this is a posting-accuracy flag.";
+  if(r.value_unreliable)                  return "Reconcile the SAP posting against the invoice; the credit may be valid but the claimable amount can't be trusted until the values agree.";
+  return "Review the flagged detail before relying on this line.";
+}
+function itcPlain(r){ return r.overall_itc_remark_plain || r.overall_itc_remark || "—"; }
+/* "What to do next" now comes straight from the engine (overall_itc_next_steps).
+   Single step -> a sentence; multiple -> bullets. Falls back to the older
+   client-side actionFor() for dumps written before the field existed. */
+function nextStepsHtml(r){
+  const steps=Array.isArray(r.overall_itc_next_steps)?r.overall_itc_next_steps.filter(Boolean):[];
+  if(steps.length===0) return `<p>${esc(actionFor(r))}</p>`;
+  if(steps.length===1) return `<p>${esc(steps[0])}</p>`;
+  return `<ul class="steps">`+steps.map(s=>`<li>${esc(s)}</li>`).join("")+`</ul>`;
+}
+function esc(s){return(s==null?"":String(s)).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));}
+function tagChips(r){
+  const t=r.tags||[]; if(!t.length)return"";
+  return `<div class="tags">`+t.map(x=>
+    `<span class="tg tg-${x.severity} ${filterTag===x.code?'on':''}" data-tag="${esc(x.code)}" title="${esc(x.label)}">${esc(x.code)}</span>`
+  ).join("")+`</div>`;
+}
+function passTag(r){ return !filterTag || (r.tags||[]).some(t=>t.code===filterTag); }
+
+/* Distinct tags present in the loaded batch, severity-first then alphabetical,
+   each with its label + count — used to populate the Tag filter dropdown. */
+function tagOptions(){
+  const m=new Map();
+  DATA.forEach(r=>(r.tags||[]).forEach(t=>{
+    const e=m.get(t.code)||{label:t.label,severity:t.severity,count:0};
+    e.count++; m.set(t.code,e);
+  }));
+  const sev={critical:0,warning:1,info:2};
+  return [...m.entries()].sort((a,b)=>((sev[a[1].severity]??9)-(sev[b[1].severity]??9))||a[0].localeCompare(b[0]));
+}
+function renderTagFilter(){
+  const sel=document.getElementById("tagsel");
+  if(!sel)return;
+  sel.innerHTML=`<option value="">All tags</option>`+tagOptions().map(([code,e])=>
+    `<option value="${esc(code)}">${esc(code)} — ${esc(e.label)} (${e.count.toLocaleString()})</option>`).join("");
+  sel.value=filterTag;
+  sel.classList.toggle("on",!!filterTag);
+}
+
+function renderCards(){
+  const n=DATA.length, c={pass:0,flag:0,ineligible:0,fail:0,amount:0};
+  DATA.forEach(r=>{const k=statusInfo(r).key; if(c[k]!==undefined)c[k]++;
+    if(r.value_unreliable)c.amount++;});
+  const pct=x=>n?Math.round(x/n*100):0;
+  const card=(key,cls,num,label,sub)=>`<div class="scard ${filterStatus===key?'active':''}" data-status="${key}">
+    <div class="n"><span class="dot d-${cls}"></span>${num.toLocaleString()}</div>
+    <div class="l">${label}</div><div class="pct">${sub}</div></div>`;
+  document.getElementById("cards").innerHTML=
+    card("all","all",n,"Invoices in batch","100% processed")+
+    card("pass","green",c.pass,"Matched & clean",pct(c.pass)+"% ready to claim")+
+    card("flag","amber",c.flag,"Needs review",pct(c.flag)+"% to eyeball")+
+    card("ineligible","red",c.ineligible,"ITC not claimable",pct(c.ineligible)+"% blocked credit")+
+    card("fail","slate",c.fail,"Doesn't match books",c.amount+" w/ unverified amount");
+  const bar=document.getElementById("bar"); bar.style.display="flex";
+  bar.innerHTML=`<span class="seg-green" style="width:${pct(c.pass)}%"></span>`+
+    `<span class="seg-amber" style="width:${pct(c.flag)}%"></span>`+
+    `<span class="seg-red" style="width:${pct(c.ineligible)}%"></span>`;
+  document.querySelectorAll(".scard").forEach(el=>el.onclick=()=>{filterStatus=el.dataset.status;renderCards();renderRows();});
+}
+function passItc(r){
+  const e=r.overall_itc_eligibility;
+  if(filterItc==="all")return true;
+  if(filterItc==="amount")return !!r.value_unreliable;
+  if(filterItc==="no")return e==="ineligible";
+  if(filterItc==="claim")return e==="eligible_pending_16"||e==="eligible";
+  if(filterItc==="review")return e==="review"||e==="partially_eligible";
+  return true;
+}
+function passStatus(r){ return filterStatus==="all" ? true : statusInfo(r).key===filterStatus; }
+function passQuery(r){if(!query)return true;const q=query.toLowerCase();
+  return (r.invoice_number||"").toLowerCase().includes(q)||(r.supplier_gstin||"").toLowerCase().includes(q);}
+
+/* Detail panel for one invoice — built lazily the first time a row is opened,
+   so a 1000+ invoice batch renders fast (only the summary rows are drawn up
+   front; each heavy detail panel, with its <pre>, is created on first expand). */
+function detailHtml(r){
+  const itc=itcInfo(r);
+  const glBlock=(r.gl_fit_verdict==="flag"&&r.gl_fit_reason_plain)
+    ?`<div class="block" style="margin-top:14px"><h4>Posting check (G/L-fit)</h4><p>${esc(r.gl_fit_reason_plain)}</p></div>`:"";
+  return `<div class="detail-inner">
+      <div class="det-grid">
+        <div class="block"><h4>What this means</h4><p>${esc(fullPlain(r))}</p></div>
+        <div class="block action"><h4>What to do next</h4>${nextStepsHtml(r)}</div></div>
+      <div class="block" style="margin-top:14px"><h4>Input Tax Credit — ${esc(itc.label)}</h4><p>${esc(itcPlain(r))}</p></div>
+      ${glBlock}
+      <dl class="kv">
+        <dt>Final decision</dt><dd>${esc(finalOf(r))}</dd>
+        <dt>Invoice no.</dt><dd>${esc(r.invoice_number)}</dd>
+        <dt>Supplier GSTIN</dt><dd>${esc(r.supplier_gstin)}</dd>
+        <dt>SAP document</dt><dd>${esc(r.sap_document_number)} · FY ${esc(r.sap_fiscal_year)}</dd>
+        <dt>IRN</dt><dd>${esc(r.irn)}</dd>
+        <dt>Validated</dt><dd>${esc((r.validated_at||"").replace("T"," ").slice(0,19))}</dd></dl>
+      <details class="tech"><summary>Show technical detail (engine output)</summary>
+        <pre>final_decision:            ${esc(r.final_decision)}
+verdict (engine roll-up):  ${esc(r.verdict)}
+gl_fit_verdict (Job A):    ${esc(r.gl_fit_verdict)}
+gl_fit_reason:             ${esc(r.gl_fit_reason)||"—"}
+overall_itc_eligibility:   ${esc(r.overall_itc_eligibility)}
+overall_itc_remark:        ${esc(r.overall_itc_remark)}
+overall_itc_remark_plain:  ${esc(r.overall_itc_remark_plain)}
+overall_itc_next_steps:    ${esc((r.overall_itc_next_steps||[]).join(" | "))||"—"}
+value_unreliable:          ${esc(r.value_unreliable)}
+tags:                      ${esc((r.tags||[]).map(t=>t.code).join(", "))||"—"}
+reason (legacy combined):  ${esc(r.reason)||"—"}</pre></details>
+    </div>`;
+}
+
+function renderRows(){
+  const rows=DATA.filter(r=>passStatus(r)&&passItc(r)&&passTag(r)&&passQuery(r));
+  rendered=rows;
+  const tsel=document.getElementById("tagsel"); if(tsel){tsel.value=filterTag; tsel.classList.toggle("on",!!filterTag);}
+  const tb=document.getElementById("rows");
+  document.getElementById("foot").textContent=`Showing ${rows.length.toLocaleString()} of ${DATA.length.toLocaleString()} invoices`+(filterTag?` · filtered by tag ${filterTag} (click the chip again to clear)`:"");
+  if(rows.length===0){tb.innerHTML=`<tr><td colspan="5" class="empty">No invoices match these filters.</td></tr>`;return;}
+  tb.innerHTML=rows.map((r,i)=>{
+    const s=statusInfo(r),itc=itcInfo(r);
+    const warn=r.value_unreliable?`<div class="warn">⚠ Amount unverified</div>`:"";
+    return `<tr class="row" data-i="${i}">
+      <td><span class="chip ${s.cls}"><span class="cd"></span>${s.label}</span>${warn}${tagChips(r)}</td>
+      <td><div class="inv">${esc(r.invoice_number)}</div><div class="gstin">${esc(r.supplier_gstin)}</div></td>
+      <td class="hide-sm meaning">${esc(shortSummary(r))}</td>
+      <td><span class="itc-tag ${itc.cls}">${itc.label}</span></td>
+      <td><span class="caret">▸</span></td></tr>
+    <tr class="detail" data-d="${i}"><td colspan="5"></td></tr>`;}).join("");
+  tb.querySelectorAll("tr.row").forEach(tr=>tr.onclick=()=>{
+    const i=tr.dataset.i,d=tb.querySelector(`tr.detail[data-d="${i}"]`);
+    if(d&&!d.dataset.built){d.firstElementChild.innerHTML=detailHtml(rendered[i]);d.dataset.built="1";}
+    tr.classList.toggle("open");d.classList.toggle("show");});
+  tb.querySelectorAll(".tg[data-tag]").forEach(el=>el.addEventListener("click",ev=>{
+    ev.stopPropagation(); const c=el.dataset.tag; filterTag=(filterTag===c?"":c); renderCards(); renderRows();}));
+}
+
+function exportCsv(){
+  const rows=DATA.filter(r=>passStatus(r)&&passItc(r)&&passTag(r)&&passQuery(r));
+  if(!rows.length){return;}
+  const cols=["invoice_number","supplier_gstin","irn","sap_document_number","sap_fiscal_year",
+    "final_decision","verdict","gl_fit_verdict","gl_fit_reason","overall_itc_eligibility",
+    "overall_itc_remark","overall_itc_remark_plain","value_unreliable","tags","validated_at"];
+  const q=v=>`"${String(v==null?"":v).replace(/"/g,'""')}"`;
+  const tagStr=r=>(r.tags||[]).map(t=>t.code).join("|");
+  const csv=[cols.join(",")].concat(rows.map(r=>cols.map(c=>q(c==="tags"?tagStr(r):r[c])).join(","))).join("\r\n");
+  const a=document.createElement("a");
+  a.href=URL.createObjectURL(new Blob([csv],{type:"text/csv"}));
+  a.download="itc_review_export.csv"; a.click(); URL.revokeObjectURL(a.href);
+}
+
+async function load(){
+  const id=document.getElementById("bid").value.trim();
+  document.getElementById("subtitle").textContent="Loading your batch…";
+  document.getElementById("rows").innerHTML=`<tr><td colspan="5" class="loading">Pulling results…</td></tr>`;
+  try{
+    const res=await fetch(BASE+id+".json",{cache:"no-store"});
+    if(!res.ok)throw new Error(res.status);
+    const j=await res.json(); DATA=j.results||[];
+    document.getElementById("subtitle").innerHTML=
+      `Batch <code>${esc(id).slice(0,8)}…</code> · <b>${(j.count||DATA.length).toLocaleString()}</b> purchase invoices validated against SAP G/L. Each row's headline is the combined decision (posting + ITC); the cards below surface only what's worth your time.`;
+    renderCards();renderTagFilter();renderRows();
+  }catch(e){
+    document.getElementById("subtitle").textContent="Couldn't load that batch (open this file in a browser with internet access, or check the batch id).";
+    document.getElementById("rows").innerHTML=`<tr><td colspan="5" class="empty">No data loaded — error: ${esc(e.message)}</td></tr>`;}
+}
+document.getElementById("load").onclick=load;
+document.getElementById("reload").onclick=load;
+document.getElementById("export").onclick=exportCsv;
+document.getElementById("bid").addEventListener("keydown",e=>{if(e.key==="Enter")load();});
+document.getElementById("q").addEventListener("input",e=>{query=e.target.value;renderRows();});
+document.getElementById("tagsel").addEventListener("change",e=>{filterTag=e.target.value;renderRows();});
+document.querySelectorAll(".pill").forEach(p=>p.onclick=()=>{
+  document.querySelectorAll(".pill").forEach(x=>x.classList.remove("on"));
+  p.classList.add("on");filterItc=p.dataset.itc;renderRows();});
+document.querySelectorAll(".tab").forEach(t=>t.onclick=()=>{
+  document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));t.classList.add("active");});
+document.querySelectorAll(".seg div").forEach(s=>s.onclick=()=>{
+  document.querySelectorAll(".seg div").forEach(x=>x.classList.remove("on"));s.classList.add("on");});
+load();
+</script>
+</body>
+</html>
