@@ -485,7 +485,7 @@ async function load(){
     if(!res.ok)throw new Error(res.status);
     const j=await res.json(); DATA=j.results||[];
     document.getElementById("subtitle").innerHTML=
-      `Batch <code>${esc(id).slice(0,8)}…</code> · <b>${(j.count||DATA.length).toLocaleString()}</b> purchase invoices validated against SAP G/L. Each row's headline is the combined decision (posting + ITC); the cards below surface only what's worth your time.`;
+      `<b>${(j.count||DATA.length).toLocaleString()}</b> purchase invoices validated against SAP G/L. Each row's headline is the combined decision (posting + ITC); the cards below surface only what's worth your time.`;
     renderCards();renderTagFilter();renderRows();
   }catch(e){
     document.getElementById("subtitle").textContent="Couldn't load that batch (open this file in a browser with internet access, or check the batch id).";
