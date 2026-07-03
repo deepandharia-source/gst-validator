@@ -166,6 +166,14 @@
   .tg-warning{background:var(--amber-bg);color:var(--amber);border-color:var(--amber-line)}
   .tg-info{background:var(--slate-bg);color:var(--slate);border-color:#dde3ee}
   .tg.on{outline:2px solid currentColor;outline-offset:1px}
+  .tg[data-remark]{cursor:help}
+
+  /* remark spelled out behind each tag, in the detail panel */
+  .rcm{border-left:3px solid var(--accent)}
+  .rcm-item{display:flex;gap:12px;align-items:flex-start;padding:9px 0;border-top:1px solid var(--line)}
+  .rcm-item:first-child{border-top:none;padding-top:2px}
+  .rcm-item .chip{flex-shrink:0}
+  .rcm-item p{margin:0;color:var(--ink)}
 
   @media(max-width:980px){aside{display:none}.cards{grid-template-columns:repeat(2,1fr)}
     .det-grid{grid-template-columns:1fr}.hide-sm{display:none}.batchbar input{width:150px}}
@@ -343,9 +351,24 @@ function nextStepsHtml(r){
 function esc(s){return(s==null?"":String(s)).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));}
 function tagChips(r){
   const t=r.tags||[]; if(!t.length)return"";
-  return `<div class="tags">`+t.map(x=>
-    `<span class="tg tg-${x.severity} ${filterTag===x.code?'on':''}" data-tag="${esc(x.code)}" title="${esc(x.label)}">${esc(x.code)}</span>`
-  ).join("")+`</div>`;
+  return `<div class="tags">`+t.map(x=>{
+    const tip=x.remark?`${x.label} — ${x.remark}`:x.label;   // hover shows the remark
+    return `<span class="tg tg-${x.severity} ${filterTag===x.code?'on':''}" data-tag="${esc(x.code)}"`
+      +(x.remark?` data-remark="1"`:``)+` title="${esc(tip)}">${esc(x.code)}</span>`;
+  }).join("")+`</div>`;
+}
+/* Tags that carry a remark (RCM chips do), spelled out as a labelled block in
+   the detail panel — the "behind the tags" explanation. Chip severity colour is
+   reused so the block reads at a glance. */
+function tagRemarksHtml(r){
+  const t=(r.tags||[]).filter(x=>x.remark);
+  if(!t.length) return "";
+  const sevCls={critical:"c-red",warning:"c-amber",info:"c-slate"};
+  return `<div class="block rcm" style="margin-top:14px"><h4>Reverse charge &amp; tag notes</h4>`+
+    t.map(x=>`<div class="rcm-item">
+        <span class="chip ${sevCls[x.severity]||'c-slate'}"><span class="cd"></span>${esc(x.label)}</span>
+        <p>${esc(x.remark)}</p></div>`).join("")+
+    `</div>`;
 }
 function passTag(r){ return !filterTag || (r.tags||[]).some(t=>t.code===filterTag); }
 
@@ -415,6 +438,7 @@ function detailHtml(r){
         <div class="block action"><h4>What to do next</h4>${nextStepsHtml(r)}</div></div>
       <div class="block" style="margin-top:14px"><h4>Input Tax Credit — ${esc(itc.label)}</h4><p>${esc(itcPlain(r))}</p></div>
       ${glBlock}
+      ${tagRemarksHtml(r)}
       <dl class="kv">
         <dt>Final decision</dt><dd>${esc(finalOf(r))}</dd>
         <dt>Invoice no.</dt><dd>${esc(r.invoice_number)}</dd>
