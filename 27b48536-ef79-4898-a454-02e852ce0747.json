@@ -24,7 +24,8 @@
         {
           "code": "S16_PENDING",
           "label": "Section 16 checks pending",
-          "severity": "info"
+          "severity": "info",
+          "remark": null
         }
       ],
       "validated_at": "2026-07-03T05:24:56.542970"
@@ -52,7 +53,8 @@
         {
           "code": "S16_PENDING",
           "label": "Section 16 checks pending",
-          "severity": "info"
+          "severity": "info",
+          "remark": null
         }
       ],
       "validated_at": "2026-07-03T05:24:56.659265"
@@ -80,7 +82,8 @@
         {
           "code": "S16_PENDING",
           "label": "Section 16 checks pending",
-          "severity": "info"
+          "severity": "info",
+          "remark": null
         }
       ],
       "validated_at": "2026-07-03T05:24:56.675993"
@@ -108,7 +111,8 @@
         {
           "code": "S16_PENDING",
           "label": "Section 16 checks pending",
-          "severity": "info"
+          "severity": "info",
+          "remark": null
         }
       ],
       "validated_at": "2026-07-03T05:24:56.686962"
@@ -136,12 +140,14 @@
         {
           "code": "RCM_REVIEW",
           "label": "RCM needs review",
-          "severity": "warning"
+          "severity": "warning",
+          "remark": "Could not resolve supplier nature; a service line may attract RCM (GTA/legal/director/etc.). Routed to review. — needs: supplier_nature"
         },
         {
           "code": "S16_PENDING",
           "label": "Section 16 checks pending",
-          "severity": "info"
+          "severity": "info",
+          "remark": null
         }
       ],
       "validated_at": "2026-07-03T05:24:56.698741"
@@ -169,12 +175,14 @@
         {
           "code": "RCM_REVIEW",
           "label": "RCM needs review",
-          "severity": "warning"
+          "severity": "warning",
+          "remark": "Could not resolve supplier nature; a service line may attract RCM (GTA/legal/director/etc.). Routed to review. — needs: supplier_nature"
         },
         {
           "code": "S16_PENDING",
           "label": "Section 16 checks pending",
-          "severity": "info"
+          "severity": "info",
+          "remark": null
         }
       ],
       "validated_at": "2026-07-03T05:24:56.710548"
@@ -202,12 +210,14 @@
         {
           "code": "RCM_REVIEW",
           "label": "RCM needs review",
-          "severity": "warning"
+          "severity": "warning",
+          "remark": "Could not resolve supplier nature; a service line may attract RCM (GTA/legal/director/etc.). Routed to review. — needs: supplier_nature"
         },
         {
           "code": "S16_PENDING",
           "label": "Section 16 checks pending",
-          "severity": "info"
+          "severity": "info",
+          "remark": null
         }
       ],
       "validated_at": "2026-07-03T05:24:56.722130"
@@ -235,12 +245,14 @@
         {
           "code": "RCM_REVIEW",
           "label": "RCM needs review",
-          "severity": "warning"
+          "severity": "warning",
+          "remark": "Could not resolve supplier nature; a service line may attract RCM (GTA/legal/director/etc.). Routed to review. — needs: supplier_nature"
         },
         {
           "code": "S16_PENDING",
           "label": "Section 16 checks pending",
-          "severity": "info"
+          "severity": "info",
+          "remark": null
         }
       ],
       "validated_at": "2026-07-03T05:24:56.736847"
@@ -268,12 +280,14 @@
         {
           "code": "RCM_REVIEW",
           "label": "RCM needs review",
-          "severity": "warning"
+          "severity": "warning",
+          "remark": "Could not resolve supplier nature; a service line may attract RCM (GTA/legal/director/etc.). Routed to review. — needs: supplier_nature"
         },
         {
           "code": "S16_PENDING",
           "label": "Section 16 checks pending",
-          "severity": "info"
+          "severity": "info",
+          "remark": null
         }
       ],
       "validated_at": "2026-07-03T05:24:56.748542"
@@ -302,12 +316,14 @@
         {
           "code": "ITC_REVIEW",
           "label": "ITC needs review",
-          "severity": "warning"
+          "severity": "warning",
+          "remark": null
         },
         {
           "code": "RCM_REVIEW",
           "label": "RCM needs review",
-          "severity": "warning"
+          "severity": "warning",
+          "remark": "Could not resolve supplier nature; a service line may attract RCM (GTA/legal/director/etc.). Routed to review. — needs: supplier_nature"
         }
       ],
       "validated_at": "2026-07-03T05:24:56.760187"
@@ -335,12 +351,14 @@
         {
           "code": "RCM_REVIEW",
           "label": "RCM needs review",
-          "severity": "warning"
+          "severity": "warning",
+          "remark": "Could not resolve supplier nature; a service line may attract RCM (GTA/legal/director/etc.). Routed to review. — needs: supplier_nature"
         },
         {
           "code": "S16_PENDING",
           "label": "Section 16 checks pending",
-          "severity": "info"
+          "severity": "info",
+          "remark": null
         }
       ],
       "validated_at": "2026-07-03T05:26:53.977418"
@@ -368,12 +386,14 @@
         {
           "code": "RCM_REVIEW",
           "label": "RCM needs review",
-          "severity": "warning"
+          "severity": "warning",
+          "remark": "Could not resolve supplier nature; a service line may attract RCM (GTA/legal/director/etc.). Routed to review. — needs: supplier_nature"
         },
         {
           "code": "S16_PENDING",
           "label": "Section 16 checks pending",
-          "severity": "info"
+          "severity": "info",
+          "remark": null
         }
       ],
       "validated_at": "2026-07-03T05:27:34.454719"
@@ -401,7 +421,8 @@
         {
           "code": "S16_PENDING",
           "label": "Section 16 checks pending",
-          "severity": "info"
+          "severity": "info",
+          "remark": null
         }
       ],
       "validated_at": "2026-07-03T05:27:34.469752"
@@ -429,7 +450,8 @@
         {
           "code": "S16_PENDING",
           "label": "Section 16 checks pending",
-          "severity": "info"
+          "severity": "info",
+          "remark": null
         }
       ],
       "validated_at": "2026-07-03T05:27:34.484142"
@@ -457,7 +479,8 @@
         {
           "code": "S16_PENDING",
           "label": "Section 16 checks pending",
-          "severity": "info"
+          "severity": "info",
+          "remark": null
         }
       ],
       "validated_at": "2026-07-03T05:27:34.496694"
