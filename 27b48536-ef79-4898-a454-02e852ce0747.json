@@ -1,0 +1,473 @@
+{
+  "count": 15,
+  "results": [
+    {
+      "invoice_number": "RCM/5001",
+      "supplier_gstin": "24AAACR0000A1Z5",
+      "irn": "d6dc6ed918f1890c32b992bd3c4104194a755c7f68586d5b9ff600e89d1cea2f",
+      "sap_document_number": "4200000001",
+      "sap_fiscal_year": 2025,
+      "verdict": "pass",
+      "reason": null,
+      "overall_itc_eligibility": "eligible_pending_16",
+      "overall_itc_remark": "All lines clear Section 17(5) (not a blocked credit). ITC is NOT yet confirmed — Section 16 conditions are unverified: GSTR-2B match, supplier's tax actually paid, payment to the supplier within 180 days, and the Section 16(4) time limit.",
+      "value_unreliable": false,
+      "gl_fit_verdict": "pass",
+      "final_decision": "pass",
+      "gl_fit_reason": null,
+      "gl_fit_reason_plain": null,
+      "overall_itc_remark_plain": "Nothing on this bill is a blocked credit (Section 17(5) is clear). It still has to pass the Section 16 checks before you actually claim: it shows in GSTR-2B, the supplier has paid the tax, you pay the supplier within 180 days, and you're inside the time limit.",
+      "overall_itc_next_steps": [
+        "Before you claim, confirm the Section 16 conditions: it shows in GSTR-2B, the supplier has paid the tax, you pay within 180 days, and you're inside the time limit."
+      ],
+      "tags": [
+        {
+          "code": "S16_PENDING",
+          "label": "Section 16 checks pending",
+          "severity": "info"
+        }
+      ],
+      "validated_at": "2026-07-03T05:24:56.542970"
+    },
+    {
+      "invoice_number": "RCM/5002",
+      "supplier_gstin": "24AAACR0000A1Z5",
+      "irn": "1f440bb6b0d02692eb072a6ed24e2ff1dac2c106ba4f283a17bfea548bd68fcf",
+      "sap_document_number": "4200000002",
+      "sap_fiscal_year": 2025,
+      "verdict": "pass",
+      "reason": null,
+      "overall_itc_eligibility": "eligible_pending_16",
+      "overall_itc_remark": "All lines clear Section 17(5) (not a blocked credit). ITC is NOT yet confirmed — Section 16 conditions are unverified: GSTR-2B match, supplier's tax actually paid, payment to the supplier within 180 days, and the Section 16(4) time limit.",
+      "value_unreliable": false,
+      "gl_fit_verdict": "pass",
+      "final_decision": "pass",
+      "gl_fit_reason": null,
+      "gl_fit_reason_plain": null,
+      "overall_itc_remark_plain": "Nothing on this bill is a blocked credit (Section 17(5) is clear). It still has to pass the Section 16 checks before you actually claim: it shows in GSTR-2B, the supplier has paid the tax, you pay the supplier within 180 days, and you're inside the time limit.",
+      "overall_itc_next_steps": [
+        "Before you claim, confirm the Section 16 conditions: it shows in GSTR-2B, the supplier has paid the tax, you pay within 180 days, and you're inside the time limit."
+      ],
+      "tags": [
+        {
+          "code": "S16_PENDING",
+          "label": "Section 16 checks pending",
+          "severity": "info"
+        }
+      ],
+      "validated_at": "2026-07-03T05:24:56.659265"
+    },
+    {
+      "invoice_number": "RCM/5003",
+      "supplier_gstin": "24AAACR0000A1Z5",
+      "irn": "9eabf3dc731c2652ee5e7f514d2faf64f9773031c173ec2a2f021e9829116462",
+      "sap_document_number": "4200000003",
+      "sap_fiscal_year": 2025,
+      "verdict": "pass",
+      "reason": null,
+      "overall_itc_eligibility": "eligible_pending_16",
+      "overall_itc_remark": "All lines clear Section 17(5) (not a blocked credit). ITC is NOT yet confirmed — Section 16 conditions are unverified: GSTR-2B match, supplier's tax actually paid, payment to the supplier within 180 days, and the Section 16(4) time limit.",
+      "value_unreliable": false,
+      "gl_fit_verdict": "pass",
+      "final_decision": "pass",
+      "gl_fit_reason": null,
+      "gl_fit_reason_plain": null,
+      "overall_itc_remark_plain": "Nothing on this bill is a blocked credit (Section 17(5) is clear). It still has to pass the Section 16 checks before you actually claim: it shows in GSTR-2B, the supplier has paid the tax, you pay the supplier within 180 days, and you're inside the time limit.",
+      "overall_itc_next_steps": [
+        "Before you claim, confirm the Section 16 conditions: it shows in GSTR-2B, the supplier has paid the tax, you pay within 180 days, and you're inside the time limit."
+      ],
+      "tags": [
+        {
+          "code": "S16_PENDING",
+          "label": "Section 16 checks pending",
+          "severity": "info"
+        }
+      ],
+      "validated_at": "2026-07-03T05:24:56.675993"
+    },
+    {
+      "invoice_number": "RCM/5004",
+      "supplier_gstin": "24AAACR0000A1Z5",
+      "irn": "e169a7bab76cd2d332c39b3e24c6f9c01f1c59e10e4d0e496c79e985d507d21c",
+      "sap_document_number": "4200000004",
+      "sap_fiscal_year": 2025,
+      "verdict": "pass",
+      "reason": null,
+      "overall_itc_eligibility": "eligible_pending_16",
+      "overall_itc_remark": "All lines clear Section 17(5) (not a blocked credit). ITC is NOT yet confirmed — Section 16 conditions are unverified: GSTR-2B match, supplier's tax actually paid, payment to the supplier within 180 days, and the Section 16(4) time limit.",
+      "value_unreliable": false,
+      "gl_fit_verdict": "pass",
+      "final_decision": "pass",
+      "gl_fit_reason": null,
+      "gl_fit_reason_plain": null,
+      "overall_itc_remark_plain": "Nothing on this bill is a blocked credit (Section 17(5) is clear). It still has to pass the Section 16 checks before you actually claim: it shows in GSTR-2B, the supplier has paid the tax, you pay the supplier within 180 days, and you're inside the time limit.",
+      "overall_itc_next_steps": [
+        "Before you claim, confirm the Section 16 conditions: it shows in GSTR-2B, the supplier has paid the tax, you pay within 180 days, and you're inside the time limit."
+      ],
+      "tags": [
+        {
+          "code": "S16_PENDING",
+          "label": "Section 16 checks pending",
+          "severity": "info"
+        }
+      ],
+      "validated_at": "2026-07-03T05:24:56.686962"
+    },
+    {
+      "invoice_number": "RCM/5005",
+      "supplier_gstin": "275A7C7KGTA_1Z5",
+      "irn": "c97e03b0aa86d5aba28e0bc8dfa23ce9eefd56088cd828eb48bc9dc979141da4",
+      "sap_document_number": "4200000005",
+      "sap_fiscal_year": 2025,
+      "verdict": "pass",
+      "reason": null,
+      "overall_itc_eligibility": "eligible_pending_16",
+      "overall_itc_remark": "All lines clear Section 17(5) (not a blocked credit). ITC is NOT yet confirmed — Section 16 conditions are unverified: GSTR-2B match, supplier's tax actually paid, payment to the supplier within 180 days, and the Section 16(4) time limit.",
+      "value_unreliable": false,
+      "gl_fit_verdict": "pass",
+      "final_decision": "pass",
+      "gl_fit_reason": null,
+      "gl_fit_reason_plain": null,
+      "overall_itc_remark_plain": "Nothing on this bill is a blocked credit (Section 17(5) is clear). It still has to pass the Section 16 checks before you actually claim: it shows in GSTR-2B, the supplier has paid the tax, you pay the supplier within 180 days, and you're inside the time limit.",
+      "overall_itc_next_steps": [
+        "Before you claim, confirm the Section 16 conditions: it shows in GSTR-2B, the supplier has paid the tax, you pay within 180 days, and you're inside the time limit."
+      ],
+      "tags": [
+        {
+          "code": "RCM_REVIEW",
+          "label": "RCM needs review",
+          "severity": "warning"
+        },
+        {
+          "code": "S16_PENDING",
+          "label": "Section 16 checks pending",
+          "severity": "info"
+        }
+      ],
+      "validated_at": "2026-07-03T05:24:56.698741"
+    },
+    {
+      "invoice_number": "RCM/5006",
+      "supplier_gstin": "274A83DKLEGA1Z5",
+      "irn": "13950c6ecd73fce6a4adf79b38aefebc229f8002232855b6e0b97b64633c113a",
+      "sap_document_number": "4200000006",
+      "sap_fiscal_year": 2025,
+      "verdict": "pass",
+      "reason": null,
+      "overall_itc_eligibility": "eligible_pending_16",
+      "overall_itc_remark": "All lines clear Section 17(5) (not a blocked credit). ITC is NOT yet confirmed — Section 16 conditions are unverified: GSTR-2B match, supplier's tax actually paid, payment to the supplier within 180 days, and the Section 16(4) time limit.",
+      "value_unreliable": false,
+      "gl_fit_verdict": "pass",
+      "final_decision": "pass",
+      "gl_fit_reason": null,
+      "gl_fit_reason_plain": null,
+      "overall_itc_remark_plain": "Nothing on this bill is a blocked credit (Section 17(5) is clear). It still has to pass the Section 16 checks before you actually claim: it shows in GSTR-2B, the supplier has paid the tax, you pay the supplier within 180 days, and you're inside the time limit.",
+      "overall_itc_next_steps": [
+        "Before you claim, confirm the Section 16 conditions: it shows in GSTR-2B, the supplier has paid the tax, you pay within 180 days, and you're inside the time limit."
+      ],
+      "tags": [
+        {
+          "code": "RCM_REVIEW",
+          "label": "RCM needs review",
+          "severity": "warning"
+        },
+        {
+          "code": "S16_PENDING",
+          "label": "Section 16 checks pending",
+          "severity": "info"
+        }
+      ],
+      "validated_at": "2026-07-03T05:24:56.710548"
+    },
+    {
+      "invoice_number": "RCM/5007",
+      "supplier_gstin": "27267BDKDIRE1Z5",
+      "irn": "ac11fd0e29b1af4f409dcb68a5f5a1bbba1c94e7cf9fe6695744a2a1f3c72b68",
+      "sap_document_number": "4200000007",
+      "sap_fiscal_year": 2025,
+      "verdict": "pass",
+      "reason": null,
+      "overall_itc_eligibility": "eligible_pending_16",
+      "overall_itc_remark": "All lines clear Section 17(5) (not a blocked credit). ITC is NOT yet confirmed — Section 16 conditions are unverified: GSTR-2B match, supplier's tax actually paid, payment to the supplier within 180 days, and the Section 16(4) time limit.",
+      "value_unreliable": false,
+      "gl_fit_verdict": "pass",
+      "final_decision": "pass",
+      "gl_fit_reason": null,
+      "gl_fit_reason_plain": null,
+      "overall_itc_remark_plain": "Nothing on this bill is a blocked credit (Section 17(5) is clear). It still has to pass the Section 16 checks before you actually claim: it shows in GSTR-2B, the supplier has paid the tax, you pay the supplier within 180 days, and you're inside the time limit.",
+      "overall_itc_next_steps": [
+        "Before you claim, confirm the Section 16 conditions: it shows in GSTR-2B, the supplier has paid the tax, you pay within 180 days, and you're inside the time limit."
+      ],
+      "tags": [
+        {
+          "code": "RCM_REVIEW",
+          "label": "RCM needs review",
+          "severity": "warning"
+        },
+        {
+          "code": "S16_PENDING",
+          "label": "Section 16 checks pending",
+          "severity": "info"
+        }
+      ],
+      "validated_at": "2026-07-03T05:24:56.722130"
+    },
+    {
+      "invoice_number": "RCM/5008",
+      "supplier_gstin": "2742D05KSECU1Z5",
+      "irn": "d059d6b3d8f4e18604df31f33e8b8f363cf1c618c470d4e2481c6bb4dae4f6e5",
+      "sap_document_number": "4200000008",
+      "sap_fiscal_year": 2025,
+      "verdict": "pass",
+      "reason": null,
+      "overall_itc_eligibility": "eligible_pending_16",
+      "overall_itc_remark": "All lines clear Section 17(5) (not a blocked credit). ITC is NOT yet confirmed — Section 16 conditions are unverified: GSTR-2B match, supplier's tax actually paid, payment to the supplier within 180 days, and the Section 16(4) time limit.",
+      "value_unreliable": false,
+      "gl_fit_verdict": "pass",
+      "final_decision": "pass",
+      "gl_fit_reason": null,
+      "gl_fit_reason_plain": null,
+      "overall_itc_remark_plain": "Nothing on this bill is a blocked credit (Section 17(5) is clear). It still has to pass the Section 16 checks before you actually claim: it shows in GSTR-2B, the supplier has paid the tax, you pay the supplier within 180 days, and you're inside the time limit.",
+      "overall_itc_next_steps": [
+        "Before you claim, confirm the Section 16 conditions: it shows in GSTR-2B, the supplier has paid the tax, you pay within 180 days, and you're inside the time limit."
+      ],
+      "tags": [
+        {
+          "code": "RCM_REVIEW",
+          "label": "RCM needs review",
+          "severity": "warning"
+        },
+        {
+          "code": "S16_PENDING",
+          "label": "Section 16 checks pending",
+          "severity": "info"
+        }
+      ],
+      "validated_at": "2026-07-03T05:24:56.736847"
+    },
+    {
+      "invoice_number": "RCM/5009",
+      "supplier_gstin": "27B0E6BKSPON1Z5",
+      "irn": "5076e7f043ae5de657f2fd7f6786fba98c75bf8d6b041dc1b460cff7d85f366c",
+      "sap_document_number": "4200000009",
+      "sap_fiscal_year": 2025,
+      "verdict": "pass",
+      "reason": null,
+      "overall_itc_eligibility": "eligible_pending_16",
+      "overall_itc_remark": "All lines clear Section 17(5) (not a blocked credit). ITC is NOT yet confirmed — Section 16 conditions are unverified: GSTR-2B match, supplier's tax actually paid, payment to the supplier within 180 days, and the Section 16(4) time limit.",
+      "value_unreliable": false,
+      "gl_fit_verdict": "pass",
+      "final_decision": "pass",
+      "gl_fit_reason": null,
+      "gl_fit_reason_plain": null,
+      "overall_itc_remark_plain": "Nothing on this bill is a blocked credit (Section 17(5) is clear). It still has to pass the Section 16 checks before you actually claim: it shows in GSTR-2B, the supplier has paid the tax, you pay the supplier within 180 days, and you're inside the time limit.",
+      "overall_itc_next_steps": [
+        "Before you claim, confirm the Section 16 conditions: it shows in GSTR-2B, the supplier has paid the tax, you pay within 180 days, and you're inside the time limit."
+      ],
+      "tags": [
+        {
+          "code": "RCM_REVIEW",
+          "label": "RCM needs review",
+          "severity": "warning"
+        },
+        {
+          "code": "S16_PENDING",
+          "label": "Section 16 checks pending",
+          "severity": "info"
+        }
+      ],
+      "validated_at": "2026-07-03T05:24:56.748542"
+    },
+    {
+      "invoice_number": "RCM/5010",
+      "supplier_gstin": "27ECE88KINSU1Z5",
+      "irn": "8d39ee1beeb4e570f8137d7a9ccc8ec720b28140828195ad245936d90530f77a",
+      "sap_document_number": "4200000010",
+      "sap_fiscal_year": 2025,
+      "verdict": "pass",
+      "reason": null,
+      "overall_itc_eligibility": "review",
+      "overall_itc_remark": "1 of 1 line(s) need attention. Line 1 (Insurance agent commission) — Needs review: “Insurance agent commission” may fall under the food/club/employee-benefit rule (§17(5)(b)(i)); confirm the use before claiming.",
+      "value_unreliable": false,
+      "gl_fit_verdict": "pass",
+      "final_decision": "flag",
+      "gl_fit_reason": null,
+      "gl_fit_reason_plain": null,
+      "overall_itc_remark_plain": "Needs review — 0 of 1 line(s) are fine; 1 need a closer look. On the line(s) below the bill doesn't show how the item was used, and the use is what decides whether the credit is allowed. Blocked for food, beverages, club or fitness membership and similar staff benefits, unless the law makes providing them compulsory (§17(5)(b)). Line 1 (Insurance agent commission, ₹60,000): Use not stated on the bill.",
+      "overall_itc_next_steps": [
+        "If the item is a normal business input, the credit is allowed — tag the line eligible.",
+        "If it was used for food/welfare/insurance use, the credit is blocked (§17(5)(b)(i)) — tag the line ineligible."
+      ],
+      "tags": [
+        {
+          "code": "ITC_REVIEW",
+          "label": "ITC needs review",
+          "severity": "warning"
+        },
+        {
+          "code": "RCM_REVIEW",
+          "label": "RCM needs review",
+          "severity": "warning"
+        }
+      ],
+      "validated_at": "2026-07-03T05:24:56.760187"
+    },
+    {
+      "invoice_number": "RCM/5011",
+      "supplier_gstin": "27F6479KRECO1Z5",
+      "irn": "842282095bcf87ad447b93df6eda399383f5ede06865ea58632f77ac5b0d9a04",
+      "sap_document_number": "4200000011",
+      "sap_fiscal_year": 2025,
+      "verdict": "pass",
+      "reason": null,
+      "overall_itc_eligibility": "eligible_pending_16",
+      "overall_itc_remark": "All lines clear Section 17(5) (not a blocked credit). ITC is NOT yet confirmed — Section 16 conditions are unverified: GSTR-2B match, supplier's tax actually paid, payment to the supplier within 180 days, and the Section 16(4) time limit.",
+      "value_unreliable": false,
+      "gl_fit_verdict": "pass",
+      "final_decision": "pass",
+      "gl_fit_reason": null,
+      "gl_fit_reason_plain": null,
+      "overall_itc_remark_plain": "Nothing on this bill is a blocked credit (Section 17(5) is clear). It still has to pass the Section 16 checks before you actually claim: it shows in GSTR-2B, the supplier has paid the tax, you pay the supplier within 180 days, and you're inside the time limit.",
+      "overall_itc_next_steps": [
+        "Before you claim, confirm the Section 16 conditions: it shows in GSTR-2B, the supplier has paid the tax, you pay within 180 days, and you're inside the time limit."
+      ],
+      "tags": [
+        {
+          "code": "RCM_REVIEW",
+          "label": "RCM needs review",
+          "severity": "warning"
+        },
+        {
+          "code": "S16_PENDING",
+          "label": "Section 16 checks pending",
+          "severity": "info"
+        }
+      ],
+      "validated_at": "2026-07-03T05:26:53.977418"
+    },
+    {
+      "invoice_number": "RCM/5012",
+      "supplier_gstin": "276BE4CKCOPY1Z5",
+      "irn": "d4ac33d01d5768a86fed4690de2f2cfbdc4081e333ec2222f2d738fb46881dc4",
+      "sap_document_number": "4200000012",
+      "sap_fiscal_year": 2025,
+      "verdict": "pass",
+      "reason": null,
+      "overall_itc_eligibility": "eligible_pending_16",
+      "overall_itc_remark": "All lines clear Section 17(5) (not a blocked credit). ITC is NOT yet confirmed — Section 16 conditions are unverified: GSTR-2B match, supplier's tax actually paid, payment to the supplier within 180 days, and the Section 16(4) time limit.",
+      "value_unreliable": false,
+      "gl_fit_verdict": "pass",
+      "final_decision": "pass",
+      "gl_fit_reason": null,
+      "gl_fit_reason_plain": null,
+      "overall_itc_remark_plain": "Nothing on this bill is a blocked credit (Section 17(5) is clear). It still has to pass the Section 16 checks before you actually claim: it shows in GSTR-2B, the supplier has paid the tax, you pay the supplier within 180 days, and you're inside the time limit.",
+      "overall_itc_next_steps": [
+        "Before you claim, confirm the Section 16 conditions: it shows in GSTR-2B, the supplier has paid the tax, you pay within 180 days, and you're inside the time limit."
+      ],
+      "tags": [
+        {
+          "code": "RCM_REVIEW",
+          "label": "RCM needs review",
+          "severity": "warning"
+        },
+        {
+          "code": "S16_PENDING",
+          "label": "Section 16 checks pending",
+          "severity": "info"
+        }
+      ],
+      "validated_at": "2026-07-03T05:27:34.454719"
+    },
+    {
+      "invoice_number": "RCM/5013",
+      "supplier_gstin": "2747FC6KCLEA1Z5",
+      "irn": "9e5ab32cb261932c4159bd00739043c752dfe56b832f7e8b4c5cefcff4f39dbc",
+      "sap_document_number": "4200000013",
+      "sap_fiscal_year": 2025,
+      "verdict": "pass",
+      "reason": null,
+      "overall_itc_eligibility": "eligible_pending_16",
+      "overall_itc_remark": "All lines clear Section 17(5) (not a blocked credit). ITC is NOT yet confirmed — Section 16 conditions are unverified: GSTR-2B match, supplier's tax actually paid, payment to the supplier within 180 days, and the Section 16(4) time limit.",
+      "value_unreliable": false,
+      "gl_fit_verdict": "pass",
+      "final_decision": "pass",
+      "gl_fit_reason": null,
+      "gl_fit_reason_plain": null,
+      "overall_itc_remark_plain": "Nothing on this bill is a blocked credit (Section 17(5) is clear). It still has to pass the Section 16 checks before you actually claim: it shows in GSTR-2B, the supplier has paid the tax, you pay the supplier within 180 days, and you're inside the time limit.",
+      "overall_itc_next_steps": [
+        "Before you claim, confirm the Section 16 conditions: it shows in GSTR-2B, the supplier has paid the tax, you pay within 180 days, and you're inside the time limit."
+      ],
+      "tags": [
+        {
+          "code": "S16_PENDING",
+          "label": "Section 16 checks pending",
+          "severity": "info"
+        }
+      ],
+      "validated_at": "2026-07-03T05:27:34.469752"
+    },
+    {
+      "invoice_number": "RCM/5014",
+      "supplier_gstin": "27DC5FBKSCRA1Z5",
+      "irn": "9b1cf3d5def526114f1d37c7953bf233d3ae4ebf1234d87c644f50dcd88879ad",
+      "sap_document_number": "4200000014",
+      "sap_fiscal_year": 2025,
+      "verdict": "pass",
+      "reason": null,
+      "overall_itc_eligibility": "eligible_pending_16",
+      "overall_itc_remark": "All lines clear Section 17(5) (not a blocked credit). ITC is NOT yet confirmed — Section 16 conditions are unverified: GSTR-2B match, supplier's tax actually paid, payment to the supplier within 180 days, and the Section 16(4) time limit.",
+      "value_unreliable": false,
+      "gl_fit_verdict": "pass",
+      "final_decision": "pass",
+      "gl_fit_reason": null,
+      "gl_fit_reason_plain": null,
+      "overall_itc_remark_plain": "Nothing on this bill is a blocked credit (Section 17(5) is clear). It still has to pass the Section 16 checks before you actually claim: it shows in GSTR-2B, the supplier has paid the tax, you pay the supplier within 180 days, and you're inside the time limit.",
+      "overall_itc_next_steps": [
+        "Before you claim, confirm the Section 16 conditions: it shows in GSTR-2B, the supplier has paid the tax, you pay within 180 days, and you're inside the time limit."
+      ],
+      "tags": [
+        {
+          "code": "S16_PENDING",
+          "label": "Section 16 checks pending",
+          "severity": "info"
+        }
+      ],
+      "validated_at": "2026-07-03T05:27:34.484142"
+    },
+    {
+      "invoice_number": "RCM/5015",
+      "supplier_gstin": "27F314DKUNEX1Z5",
+      "irn": "10c04fbf41a9821106975c2337cd498b4f1b42c85333ae80b9150be2b9eb710c",
+      "sap_document_number": "4200000015",
+      "sap_fiscal_year": 2025,
+      "verdict": "pass",
+      "reason": null,
+      "overall_itc_eligibility": "eligible_pending_16",
+      "overall_itc_remark": "All lines clear Section 17(5) (not a blocked credit). ITC is NOT yet confirmed — Section 16 conditions are unverified: GSTR-2B match, supplier's tax actually paid, payment to the supplier within 180 days, and the Section 16(4) time limit.",
+      "value_unreliable": false,
+      "gl_fit_verdict": "pass",
+      "final_decision": "pass",
+      "gl_fit_reason": null,
+      "gl_fit_reason_plain": null,
+      "overall_itc_remark_plain": "Nothing on this bill is a blocked credit (Section 17(5) is clear). It still has to pass the Section 16 checks before you actually claim: it shows in GSTR-2B, the supplier has paid the tax, you pay the supplier within 180 days, and you're inside the time limit.",
+      "overall_itc_next_steps": [
+        "Before you claim, confirm the Section 16 conditions: it shows in GSTR-2B, the supplier has paid the tax, you pay within 180 days, and you're inside the time limit."
+      ],
+      "tags": [
+        {
+          "code": "S16_PENDING",
+          "label": "Section 16 checks pending",
+          "severity": "info"
+        }
+      ],
+      "validated_at": "2026-07-03T05:27:34.496694"
+    }
+  ],
+  "filter": {
+    "batch_job_id": "27b48536-ef79-4898-a454-02e852ce0747",
+    "date_from": null,
+    "date_to": null,
+    "verdict": null,
+    "final_decision": null
+  }
+}
