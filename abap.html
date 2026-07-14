@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SAP ABAP Interview Prep · 225 Questions</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;450;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#eaeef2;
+  --surface:#ffffff;
+  --surface-2:#f5f8fb;
+  --ink:#132430;
+  --ink-soft:#33475a;
+  --muted:#657787;
+  --line:#dbe3ea;
+  --line-soft:#eaeff4;
+  --brand:#1f6feb;        /* interactive / reveal */
+  --brand-deep:#0b4bb3;
+  --brand-tint:#e7f0fe;
+  --done:#0e9a63;         /* completion */
+  --done-tint:#e2f5ec;
+  --gutter:#0f2233;
+  --shadow:0 1px 2px rgba(17,40,60,.05), 0 10px 30px -18px rgba(17,40,60,.22);
+  --radius:14px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation:none!important;transition:none!important}}
+body{
+  margin:0;background:var(--bg);color:var(--ink);
+  font-family:"Inter",system-ui,sans-serif;font-size:15px;line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:inherit}
+
+/* ---------- Header ---------- */
+.top{
+  position:sticky;top:0;z-index:50;background:rgba(234,238,242,.86);
+  backdrop-filter:blur(10px);border-bottom:1px solid var(--line);
+}
+.top-inner{max-width:1080px;margin:0 auto;padding:16px 22px 12px}
+.masthead{display:flex;align-items:flex-start;gap:20px;justify-content:space-between;flex-wrap:wrap}
+.brandblock .eyebrow{
+  font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.22em;
+  text-transform:uppercase;color:var(--brand-deep);font-weight:600;margin:0 0 4px
+}
+.brandblock h1{
+  font-family:"Space Grotesk",sans-serif;font-weight:700;font-size:26px;
+  line-height:1.1;margin:0;letter-spacing:-.01em
+}
+.brandblock p{margin:5px 0 0;color:var(--muted);font-size:13.5px;max-width:48ch}
+
+/* progress ring */
+.ring-wrap{display:flex;align-items:center;gap:14px}
+.ring{position:relative;width:66px;height:66px;flex:none}
+.ring svg{transform:rotate(-90deg)}
+.ring .track{stroke:var(--line);}
+.ring .fill{stroke:var(--done);stroke-linecap:round;transition:stroke-dashoffset .5s ease}
+.ring .pct{
+  position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+  font-family:"JetBrains Mono",monospace;font-weight:600;font-size:15px;color:var(--ink)
+}
+.ring-meta{font-size:12.5px;color:var(--muted);line-height:1.35}
+.ring-meta b{font-family:"JetBrains Mono",monospace;color:var(--ink);font-size:14px;display:block;font-weight:600}
+
+/* segmented track */
+.segtrack{display:flex;gap:3px;margin:14px 0 2px;height:7px;border-radius:6px;overflow:hidden}
+.segtrack .seg{flex:1;background:var(--line);position:relative;border-radius:2px;overflow:hidden}
+.segtrack .seg i{position:absolute;inset:0;transform-origin:left;background:var(--done);transition:transform .45s ease}
+.seglabel{display:flex;justify-content:space-between;font-family:"JetBrains Mono",monospace;font-size:10px;color:var(--muted);margin-top:5px}
+
+/* controls */
+.controls{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:14px}
+.search{position:relative;flex:1;min-width:190px}
+.search input{
+  width:100%;padding:10px 12px 10px 34px;border:1px solid var(--line);border-radius:10px;
+  background:var(--surface);font:inherit;font-size:14px;color:var(--ink)
+}
+.search input:focus{outline:none;border-color:var(--brand);box-shadow:0 0 0 3px var(--brand-tint)}
+.search svg{position:absolute;left:11px;top:50%;transform:translateY(-50%);color:var(--muted)}
+.seg-toggle{display:inline-flex;border:1px solid var(--line);border-radius:10px;overflow:hidden;background:var(--surface)}
+.seg-toggle button{
+  border:0;background:transparent;padding:9px 13px;font:inherit;font-size:13px;font-weight:500;
+  color:var(--muted);cursor:pointer;border-right:1px solid var(--line)
+}
+.seg-toggle button:last-child{border-right:0}
+.seg-toggle button[aria-pressed="true"]{background:var(--brand);color:#fff}
+.btn{
+  border:1px solid var(--line);background:var(--surface);color:var(--ink-soft);
+  padding:9px 13px;border-radius:10px;font:inherit;font-size:13px;font-weight:500;cursor:pointer;
+  display:inline-flex;align-items:center;gap:6px
+}
+.btn:hover{border-color:var(--brand);color:var(--brand-deep)}
+.btn:focus-visible,.seg-toggle button:focus-visible{outline:2px solid var(--brand);outline-offset:2px}
+
+/* chip rail */
+.rail{max-width:1080px;margin:10px auto 0;padding:0 22px}
+.rail-scroll{display:flex;gap:8px;overflow-x:auto;padding-bottom:12px;scrollbar-width:thin}
+.chip{
+  flex:none;border:1px solid var(--line);background:var(--surface);border-radius:999px;
+  padding:6px 12px;font-size:12.5px;color:var(--ink-soft);cursor:pointer;white-space:nowrap;
+  display:inline-flex;align-items:center;gap:7px;text-decoration:none
+}
+.chip:hover{border-color:var(--brand)}
+.chip .c{font-family:"JetBrains Mono",monospace;font-size:11px;color:var(--muted)}
+.chip.complete{border-color:var(--done);background:var(--done-tint)}
+.chip.complete .c{color:var(--done)}
+
+/* ---------- Main ---------- */
+main{max-width:1080px;margin:0 auto;padding:8px 22px 90px}
+.section{margin-top:34px;scroll-margin-top:150px}
+.section-head{display:flex;align-items:baseline;gap:12px;padding-bottom:10px;border-bottom:2px solid var(--ink);margin-bottom:16px}
+.section-head .idx{font-family:"JetBrains Mono",monospace;font-size:13px;color:var(--brand-deep);font-weight:600}
+.section-head h2{font-family:"Space Grotesk",sans-serif;font-size:20px;font-weight:600;margin:0;letter-spacing:-.01em}
+.section-head .n{margin-left:auto;font-family:"JetBrains Mono",monospace;font-size:12px;color:var(--muted)}
+
+.card{
+  background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);
+  box-shadow:var(--shadow);margin-bottom:12px;overflow:hidden;display:flex
+}
+.card .num{
+  flex:none;width:52px;background:var(--surface-2);border-right:1px solid var(--line-soft);
+  font-family:"JetBrains Mono",monospace;font-size:13px;color:var(--muted);font-weight:500;
+  display:flex;align-items:flex-start;justify-content:center;padding-top:18px;letter-spacing:-.02em
+}
+.card .body{flex:1;min-width:0;padding:15px 17px 15px 16px}
+.qrow{display:flex;align-items:flex-start;gap:12px}
+.q{font-family:"Space Grotesk",sans-serif;font-weight:500;font-size:15.5px;line-height:1.4;color:var(--ink);flex:1}
+.card-actions{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}
+.reveal{
+  border:1px solid var(--brand);color:var(--brand-deep);background:var(--brand-tint);
+  padding:7px 13px;border-radius:9px;font:inherit;font-size:13px;font-weight:600;cursor:pointer;
+  display:inline-flex;align-items:center;gap:7px
+}
+.reveal:hover{background:var(--brand);color:#fff}
+.reveal .chev{transition:transform .25s ease}
+.card.open .reveal .chev{transform:rotate(180deg)}
+.donebtn{
+  border:1px solid var(--line);background:var(--surface);color:var(--muted);
+  padding:7px 13px;border-radius:9px;font:inherit;font-size:13px;font-weight:500;cursor:pointer;
+  display:inline-flex;align-items:center;gap:7px
+}
+.donebtn:hover{border-color:var(--done);color:var(--done)}
+.reveal:focus-visible,.donebtn:focus-visible{outline:2px solid var(--brand);outline-offset:2px}
+.check{width:15px;height:15px;border:1.6px solid currentColor;border-radius:5px;display:inline-flex;align-items:center;justify-content:center}
+.check svg{opacity:0}
+
+/* answer */
+.answer{max-height:0;opacity:0;overflow:hidden;transition:max-height .35s ease,opacity .3s ease}
+.card.open .answer{max-height:2600px;opacity:1;margin-top:14px}
+.answer-inner{border-top:1px dashed var(--line);padding-top:13px;color:var(--ink-soft);font-size:14.5px}
+.answer-inner p{margin:0 0 9px}
+.answer-inner p:last-child{margin-bottom:0}
+.answer-inner code{
+  font-family:"JetBrains Mono",monospace;font-size:12.5px;background:var(--surface-2);
+  border:1px solid var(--line-soft);border-radius:5px;padding:1px 5px;color:var(--brand-deep)
+}
+.answer-inner b{color:var(--ink);font-weight:600}
+.answer-inner pre.code{
+  font-family:"JetBrains Mono",monospace;font-size:12.5px;line-height:1.6;
+  background:var(--gutter);color:#e8eef4;border-radius:10px;padding:13px 15px;overflow-x:auto;
+  margin:4px 0 10px;white-space:pre;tab-size:2
+}
+
+/* done state */
+.card.done{border-color:var(--done);background:linear-gradient(0deg,var(--done-tint),var(--done-tint)) padding-box, var(--surface)}
+.card.done .num{background:var(--done-tint);color:var(--done)}
+.card.done .q{color:var(--ink-soft)}
+.card.done .donebtn{border-color:var(--done);color:#fff;background:var(--done)}
+.card.done .donebtn .check{border-color:#fff}
+.card.done .donebtn .check svg{opacity:1}
+
+.empty{text-align:center;color:var(--muted);padding:60px 20px;font-size:14px;display:none}
+.hidden{display:none!important}
+
+footer{max-width:1080px;margin:0 auto;padding:0 22px 40px;color:var(--muted);font-size:12px;text-align:center}
+footer .note{margin-top:8px}
+
+@media (max-width:600px){
+  .brandblock h1{font-size:22px}
+  .card .num{width:40px;font-size:11px;padding-top:16px}
+  .ring{width:56px;height:56px}
+  main{padding:8px 14px 80px}
+  .top-inner{padding:14px 14px 10px}
+  .rail{padding:0 14px}
+}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="top-inner">
+    <div class="masthead">
+      <div class="brandblock">
+        <p class="eyebrow">S/4HANA · RAP · CDS · OData</p>
+        <h1>SAP ABAP Interview Prep</h1>
+        <p>225 questions for a 6-year developer. Reveal each answer when you're ready, then mark it done to track your progress.</p>
+      </div>
+      <div class="ring-wrap">
+        <div class="ring">
+          <svg width="66" height="66" viewBox="0 0 66 66">
+            <circle class="track" cx="33" cy="33" r="28" fill="none" stroke-width="6"/>
+            <circle id="ringFill" class="fill" cx="33" cy="33" r="28" fill="none" stroke-width="6"
+                    stroke-dasharray="175.9" stroke-dashoffset="175.9"/>
+          </svg>
+          <div class="pct" id="ringPct">0%</div>
+        </div>
+        <div class="ring-meta"><b id="doneCount">0 / 225</b>marked done</div>
+      </div>
+    </div>
+
+    <div class="segtrack" id="segtrack"></div>
+    <div class="seglabel"><span>completion by topic</span><span id="segHint">tap a chip to jump</span></div>
+
+    <div class="controls">
+      <div class="search">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+        <input id="search" type="search" placeholder="Search questions and answers…" autocomplete="off">
+      </div>
+      <div class="seg-toggle" id="filterToggle" role="group" aria-label="Filter questions">
+        <button data-filter="all" aria-pressed="true">All</button>
+        <button data-filter="todo" aria-pressed="false">To do</button>
+        <button data-filter="done" aria-pressed="false">Done</button>
+      </div>
+      <button class="btn" id="expandAll">Show all answers</button>
+      <button class="btn" id="resetBtn" title="Clear all progress">Reset progress</button>
+    </div>
+  </div>
+  <div class="rail"><div class="rail-scroll" id="rail"></div></div>
+</header>
+
+<main id="main"></main>
+<div class="empty" id="empty">No questions match your search or filter.</div>
+
+<footer>
+  <div>SAP ABAP · OData · CDS · RAP — self-study question bank</div>
+  <div class="note" id="persistNote"></div>
+</footer>
+
+<script>
+const DATA = [{"title": "ABAP Core — Basic to Intermediate", "tag": "ABAP Basics", "items": [{"n": 1, "q": "Difference between INCLUDE and TYPE INCLUDE?", "a": "<p>An <b>INCLUDE program</b> is a source-code modularisation unit: its code is physically injected into the including program at generation time. It carries no interface and shares the caller's data.</p><p>A <b>structure include</b> (the <code>.INCLUDE</code> in DDIC / <code>INCLUDE TYPE</code> in ABAP) embeds all components of another structure/type into the current one, so you reuse a type definition rather than a block of executable code. In short: INCLUDE reuses <i>code</i>, INCLUDE TYPE reuses a <i>type's components</i>. In modern ABAP both are largely replaced by classes and type definitions.</p>"}, {"n": 2, "q": "Difference between DATA and TYPES?", "a": "<p><code>TYPES</code> only declares a <b>type</b> — a template that reserves no memory. <code>DATA</code> declares a <b>variable / work area</b> that actually allocates memory based on a type. You typically define a TYPE once and then declare many DATA objects from it.</p>"}, {"n": 3, "q": "What are Field Symbols? When do you use them?", "a": "<p>A field symbol is a symbolic name that <b>points to an existing memory area</b> and is dereferenced automatically (you use <code>&lt;fs&gt;</code> directly). Assigned via <code>ASSIGN</code> or <code>LOOP ... ASSIGNING</code>.</p><p>Use them to modify internal-table rows <b>in place</b> without copying to a work area, for dynamic/generic access (<code>ASSIGN COMPONENT</code>), and for performance in large loops.</p>"}, {"n": 4, "q": "Difference between Field Symbols and Data References?", "a": "<p>A <b>field symbol</b> is only an alias to memory that already exists; it can't be stored in a table or attribute and dereferences implicitly.</p><p>A <b>data reference</b> (<code>REF TO data</code>) is a real variable that can point to a heap object created with <code>CREATE DATA</code>, can be stored/passed around, and is dereferenced explicitly with <code>-&gt;*</code>. Field symbols are lighter for iteration; data references give you dynamically allocated, persistable objects.</p>"}, {"n": 5, "q": "Explain Internal Tables.", "a": "<p>Internal tables are runtime, in-memory tables of rows sharing one line type, used to process record sets. They come in three kinds (standard, sorted, hashed) differing in access method and key handling, and support index and/or key access.</p>"}, {"n": 6, "q": "Difference between Standard, Sorted and Hashed Tables?", "a": "<p><b>Standard</b>: unordered, index access, sequential or binary search, non-unique keys — cheap to fill.</p><p><b>Sorted</b>: automatically kept in key order, binary search, unique or non-unique key, index + key access — good for ranges.</p><p><b>Hashed</b>: no index, access only by full unique key via hash algorithm, near constant-time single reads — best for large lookup tables.</p>"}, {"n": 7, "q": "Which table is best for READ operation?", "a": "<p>For a single row by the <b>full unique key</b>, a <b>hashed</b> table is best (constant time). For key ranges / partial keys, a <b>sorted</b> table with binary search. A standard table needs an explicit <code>SORT</code> + <code>READ ... BINARY SEARCH</code> or a secondary key.</p>"}, {"n": 8, "q": "Difference between APPEND, INSERT, MODIFY and COLLECT?", "a": "<p><b>APPEND</b> adds a row at the end (standard tables). <b>INSERT</b> adds at a given index or by sort position. <b>MODIFY</b> changes existing rows by key or index. <b>COLLECT</b> aggregates: if a row with the same non-numeric key exists it sums the numeric fields, otherwise it inserts — used for summarisation.</p>"}, {"n": 9, "q": "Explain Secondary Keys.", "a": "<p>A secondary key is an additional named key (sorted or hashed) defined on an internal table to speed up access paths other than the primary key. You address it with <code>READ/LOOP ... USING KEY key_name</code>. The trade-off is extra memory and maintenance cost on changes.</p>"}, {"n": 10, "q": "What are Inline Declarations?", "a": "<p>Declaring a variable at its first use with type inference: <code>DATA(x) = ...</code>, <code>SELECT ... INTO TABLE @DATA(itab)</code>, or <code>ASSIGNING FIELD-SYMBOL(&lt;fs&gt;)</code>. The compiler infers the type from context, reducing boilerplate and keeping declarations close to usage.</p>"}]}, {"title": "Object Oriented ABAP", "tag": "OO ABAP", "items": [{"n": 11, "q": "Difference between Abstract Class and Interface?", "a": "<p>An <b>abstract class</b> can mix implemented and abstract methods, hold attributes/state, and be inherited (single inheritance). An <b>interface</b> is a pure contract — only signatures and constants, no implementation — and a class can implement <b>many</b> interfaces.</p><p>Use an interface for decoupling and multiple-capability composition; use an abstract class to share common implementation among related subclasses.</p>"}, {"n": 12, "q": "Explain Inheritance with example.", "a": "<p>A subclass declared with <code>INHERITING FROM</code> reuses, extends and can <code>REDEFINE</code> superclass methods.</p><p>e.g. <code>ZCL_ANIMAL</code> has <code>make_sound()</code>; <code>ZCL_DOG INHERITING FROM ZCL_ANIMAL</code> redefines it to bark. The subclass constructor must call <code>super-&gt;constructor</code> first.</p>"}, {"n": 13, "q": "Difference between Constructor and Class Constructor?", "a": "<p>The instance <b>CONSTRUCTOR</b> runs once per object at <code>CREATE OBJECT</code> / <code>NEW</code> and initialises instance state. The static <b>CLASS_CONSTRUCTOR</b> runs exactly once, when the class is first accessed, and initialises static attributes. The class constructor cannot have parameters.</p>"}, {"n": 14, "q": "Explain Polymorphism.", "a": "<p>The same method call resolves to different implementations depending on the object's dynamic type. A reference typed as the superclass/interface pointing to a subclass instance executes the redefined method — enabling generic code that works across concrete types.</p>"}, {"n": 15, "q": "What is Casting?", "a": "<p>Adjusting a reference's static type. <b>Up-cast (narrowing)</b> assigns a subclass reference to a super/interface reference — always safe, uses <code>=</code>. <b>Down-cast (widening)</b> uses <code>?=</code> and is checked at runtime, raising <code>CX_SY_MOVE_CAST_ERROR</code> if the object isn't of the target type.</p>"}, {"n": 16, "q": "Explain FRIENDS in ABAP.", "a": "<p><code>FRIENDS</code> grants another class access to a class's private and protected components. It's declared on the class, is one-directional, and is inherited by subclasses of the friend. Common uses are factory classes and unit tests needing internal access.</p>"}, {"n": 17, "q": "Difference between Static and Instance Methods.", "a": "<p><b>Static methods</b> (<code>CLASS-METHODS</code>) belong to the class, need no instance, and can only touch static attributes. <b>Instance methods</b> require an object and can access both instance and static state.</p>"}, {"n": 18, "q": "What are Events in ABAP Objects?", "a": "<p>An event lets a class publish an occurrence with <code>RAISE EVENT</code>; other classes register handlers with <code>SET HANDLER</code> and react. This gives loose, publish-subscribe coupling. Events can be static or instance and may pass exporting parameters.</p>"}, {"n": 19, "q": "Explain Singleton Design Pattern.", "a": "<p>Guarantees a single instance of a class. Implemented with a <b>private constructor</b> plus a static <code>get_instance()</code> that creates the object on first call and returns the same reference thereafter. Typical for buffers, config, or connection holders.</p>"}, {"n": 20, "q": "Explain Factory Design Pattern.", "a": "<p>Encapsulates object creation behind a factory method that returns an interface/superclass reference, deciding the concrete class at runtime. Callers depend on the abstraction, not the implementation — improving flexibility and testability (you can inject mocks).</p>"}]}, {"title": "ABAP Performance", "tag": "Performance", "items": [{"n": 21, "q": "Difference between JOIN and FOR ALL ENTRIES?", "a": "<p>A <b>JOIN</b> is executed once on the database and is best when tables are related and you want set-based access. <b>FOR ALL ENTRIES</b> fires selects driven by an application-side table, then deduplicates results — used when the driver data comes from ABAP, not the DB. FAE cannot express a true join and may perform worse for large drivers.</p>"}, {"n": 22, "q": "Common mistakes in FOR ALL ENTRIES?", "a": "<p>Not checking the driver table is non-empty (empty driver returns <b>all</b> rows), not removing duplicates from the driver, omitting the full key in the WHERE (leading to missing/duplicate rows), and passing very large driver tables that generate huge SQL blocks.</p>"}, {"n": 23, "q": "How do you optimize nested loops?", "a": "<p>Replace the inner <code>LOOP ... WHERE</code> (O(n²)) with a lookup on a <b>sorted/hashed secondary table</b> (<code>READ ... WITH KEY</code> / <code>USING KEY</code>), or use the <b>parallel cursor</b> technique after sorting both tables.</p>"}, {"n": 24, "q": "Explain SQL Trace (ST05).", "a": "<p>ST05 records database, RFC, enqueue and buffer accesses with execution times, and highlights identical/redundant selects and full table scans. It's the primary tool to find expensive statements and missing indexes.</p>"}, {"n": 25, "q": "Explain SAT.", "a": "<p>SAT (Runtime Analysis, successor of SE30) measures ABAP runtime per statement, method and event, showing gross/net times and a hit list so you can pinpoint CPU hotspots in the ABAP layer.</p>"}, {"n": 26, "q": "How do you identify performance bottlenecks?", "a": "<p>Combine tools: ST05 for DB, SAT for ABAP, ST12 for a single combined trace, STAD/transaction statistics, and DBACOCKPIT for DB health. Look for selects in loops, identical selects, table scans, missing indexes and high loop counts.</p>"}, {"n": 27, "q": "Explain buffering.", "a": "<p>DDIC table buffering caches table data on the application server (single-record, generic or full buffering), avoiding DB round-trips. Use it for small, rarely-changed master/config tables — never for large, frequently-updated transactional tables.</p>"}, {"n": 28, "q": "What is Code Inspector?", "a": "<p>SCI is a static analysis tool that runs configurable <b>check variants</b> (performance, security, syntax, naming) against objects or whole packages, reporting priority-ranked findings.</p>"}, {"n": 29, "q": "What is ATC?", "a": "<p>The ABAP Test Cockpit is the strategic quality framework that wraps Code Inspector plus unit tests. It supports mass and remote checks, S/4HANA custom-code readiness (SICF/simplification checks), quality gates and exemption management.</p>"}, {"n": 30, "q": "Explain Parallel Cursor technique.", "a": "<p>To avoid a full inner scan: sort both tables by the join key, keep an index into the inner table, and for each outer row do <code>READ ... BINARY SEARCH</code> to find the start, then <code>LOOP FROM</code> that index and <code>EXIT</code> when the key changes. This turns O(n²) into roughly O(n).</p>"}]}, {"title": "ABAP Database", "tag": "Database", "items": [{"n": 31, "q": "Difference between Open SQL and Native SQL?", "a": "<p><b>Open SQL / ABAP SQL</b> is database-independent, integrates with ABAP types, uses the table buffer, and is portable across DBs. <b>Native SQL</b> (<code>EXEC SQL</code> / ADBC) sends DB-specific statements, bypasses the buffer, and is used for features not covered by ABAP SQL.</p>"}, {"n": 32, "q": "Explain New Open SQL features.", "a": "<p>Mandatory <code>@</code>-escaping of host variables, comma-separated field lists, inline <code>@DATA</code>, expressions (<code>CASE</code>, arithmetic, string functions), aggregate and window functions, common table expressions (<code>WITH</code>), <code>UNION</code>, and path expressions over CDS associations — all enabling code pushdown.</p>"}, {"n": 33, "q": "Difference between INNER JOIN and LEFT OUTER JOIN?", "a": "<p><b>INNER JOIN</b> returns only rows that match in both tables. <b>LEFT OUTER JOIN</b> returns all rows from the left table, filling right-side columns with NULL where there is no match.</p>"}, {"n": 34, "q": "Explain UNION in Open SQL.", "a": "<p><code>UNION</code> combines two result sets that have the same number of columns with compatible types. <code>UNION</code> removes duplicate rows; <code>UNION ALL</code> keeps them (and is cheaper).</p>"}, {"n": 35, "q": "Explain GROUP BY and HAVING.", "a": "<p><code>GROUP BY</code> collapses rows into groups so aggregates can be computed per group. <code>WHERE</code> filters rows before grouping; <code>HAVING</code> filters on the aggregated results after grouping.</p>"}, {"n": 36, "q": "Explain Aggregate Functions.", "a": "<p>Functions computing a single value over a group: <code>COUNT</code>, <code>SUM</code>, <code>MIN</code>, <code>MAX</code>, <code>AVG</code>. Used with <code>GROUP BY</code> to push summarisation to the database.</p>"}, {"n": 37, "q": "Explain Database LUW.", "a": "<p>A database LUW is one physical DB transaction — a set of changes between two DB commits that is committed or rolled back atomically by the database.</p>"}, {"n": 38, "q": "Explain SAP LUW.", "a": "<p>A SAP LUW is a <b>logical</b> unit that may span several dialog steps and work processes. Changes are bundled (typically via update task / <code>CALL FUNCTION IN UPDATE TASK</code>) and made permanent by a single <code>COMMIT WORK</code>, giving all-or-nothing consistency across the business transaction.</p>"}, {"n": 39, "q": "Difference between COMMIT WORK and COMMIT ENTITIES?", "a": "<p><code>COMMIT WORK</code> finalises the classic SAP LUW. <code>COMMIT ENTITIES</code> is the RAP/EML statement that triggers the RAP <b>save sequence</b> (finalize → check-before-save → save) for business objects and can return <code>FAILED</code>/<code>REPORTED</code>.</p>"}, {"n": 40, "q": "What is Implicit Database Commit?", "a": "<p>A DB commit triggered automatically by the system — at the end of each dialog step, or by certain statements (screen changes, synchronous RFC, <code>WAIT</code>, <code>MESSAGE</code>). If unnoticed it can split a SAP LUW and break consistency.</p>"}]}, {"title": "ABAP Scenario-Based", "tag": "Scenarios", "items": [{"n": 41, "q": "A report takes 30 minutes. How will you optimize it?", "a": "<p>First profile with ST05/SAT to find the real cost. Then: eliminate selects inside loops (use JOIN/FAE), select only needed fields and rows, add or use proper indexes, push aggregation to the DB (<code>GROUP BY</code>), use parallel cursor / hashed lookups, consider package or parallel processing (async RFC), avoid <code>SELECT *</code>, and buffer stable data.</p>"}, {"n": 42, "q": "Large internal table consuming memory. Solution?", "a": "<p>Select only required fields and rows, process in blocks with <code>SELECT ... PACKAGE SIZE</code>, <code>FREE</code> tables when done, avoid unnecessary copies (use field symbols/references), and push logic to the DB / CDS so the full set never materialises in ABAP.</p>"}, {"n": 43, "q": "How do you avoid duplicate records?", "a": "<p>Use <code>SELECT DISTINCT</code> or <code>GROUP BY</code> on the DB, <code>SORT</code> + <code>DELETE ADJACENT DUPLICATES</code> in ABAP, or store rows in a sorted/hashed table with a unique key.</p>"}, {"n": 44, "q": "User exits vs BADI vs Enhancement Spot?", "a": "<p><b>User exits</b> (SMOD/CMOD, function-module based) are the oldest and most limited. <b>BAdIs</b> are object-oriented, support multiple/filtered implementations and are the standard approach. <b>Enhancement spots/framework</b> allow inserting code at implicit/explicit points in standard source. Preference: BAdI → enhancement → user exit.</p>"}, {"n": 45, "q": "How to debug background jobs?", "a": "<p>In SM37 select the running job and choose <b>Debug / Capture</b> the active step, or set an external breakpoint under the job's user before it runs, then attach. For finished jobs, reproduce in dialog with the same variant.</p>"}, {"n": 46, "q": "How to debug update task?", "a": "<p>The update runs in a separate work process, so enable <b>Update Debugging</b> in the debugger settings (Settings → Change Update Debugging) before triggering <code>COMMIT WORK</code>; the debugger then stops inside the update function module.</p>"}, {"n": 47, "q": "Difference between CALL FUNCTION and RFC?", "a": "<p>A plain <code>CALL FUNCTION</code> runs locally in the same session. An RFC (<code>CALL FUNCTION ... DESTINATION</code>) executes the function in another system/session over the RFC protocol; the function must be flagged remote-enabled.</p>"}, {"n": 48, "q": "How to transport dependent objects?", "a": "<p>Capture all dependent objects in the same (or logically linked) transport, respect the activation order, and use object lists / transport of copies for testing. For CDS/RAP transport the whole stack — DDLS, DDLX, BDEF, SRVD, SRVB — together to avoid inactive references in the target system.</p>"}, {"n": 49, "q": "Explain Lock Objects.", "a": "<p>A lock object is a DDIC object that generates <code>ENQUEUE_</code>/<code>DEQUEUE_</code> function modules for <b>logical</b> locking (shared / exclusive / extended) managed by the enqueue server. These are business-level locks, not physical DB locks.</p>"}, {"n": 50, "q": "How to avoid deadlocks?", "a": "<p>Always acquire/access resources in a consistent order, keep locks short-lived, lock at the right granularity, choose the correct lock mode, and avoid holding locks across long-running or nested operations.</p>"}, {"n": 51, "q": "Difference between Synchronous and Asynchronous RFC?", "a": "<p><b>Synchronous</b> RFC blocks until the callee responds. <b>Asynchronous</b> RFC (<code>STARTING NEW TASK</code>) runs in parallel and returns results via a callback. <b>Transactional/queued</b> RFC (tRFC/qRFC) add exactly-once and ordered delivery guarantees.</p>"}, {"n": 52, "q": "How do you handle exceptions in ABAP?", "a": "<p>Use class-based exceptions with <code>TRY / CATCH / CLEANUP</code>, raise with <code>RAISE EXCEPTION TYPE</code>, and design exception classes from <code>CX_STATIC_CHECK</code>, <code>CX_DYNAMIC_CHECK</code> or <code>CX_NO_CHECK</code>. Messages come from T100 or the <code>IF_T100_MESSAGE</code> interface.</p>"}, {"n": 53, "q": "Explain Retry Logic.", "a": "<p>Wrap the operation, catch a transient exception (lock busy, temporary RFC failure), and re-attempt in a loop with a bounded counter and optional back-off delay; log each attempt and fail gracefully once the maximum is reached.</p>"}, {"n": 54, "q": "Explain Shared Memory Objects.", "a": "<p>Area classes (SHMA) store data in shared memory on an application server so it can be read by many sessions. You use a root class and an area handle with read/write locks. Ideal for read-mostly caches shared across users.</p>"}, {"n": 55, "q": "Difference between SELECT SINGLE and UP TO 1 ROWS?", "a": "<p><code>SELECT SINGLE</code> fetches one row, ideally by the full key; with a partial key the returned row is unspecified. <code>SELECT ... UP TO 1 ROWS</code> can be combined with <code>ORDER BY</code> to deterministically return the first row of a sorted set.</p>"}, {"n": 56, "q": "Explain Package Concept.", "a": "<p>A package logically groups development objects and controls encapsulation and dependencies through package interfaces and use accesses, plus a transport-layer assignment. It enforces which objects may use which others.</p>"}, {"n": 57, "q": "Explain Authorization Object.", "a": "<p>An authorization object groups up to ten authorization fields that are checked together with <code>AUTHORITY-CHECK</code>. Roles/profiles supply the allowed field values, enforcing fine-grained, field-level access.</p>"}, {"n": 58, "q": "Explain Memory IDs.", "a": "<p><b>SAP memory</b> (<code>SET/GET PARAMETER ID</code>) is shared across all sessions of a user. <b>ABAP memory</b> (<code>EXPORT/IMPORT ... TO/FROM MEMORY ID</code>) is shared only within the same internal session / call stack.</p>"}, {"n": 59, "q": "Explain SPA/GPA Parameters.", "a": "<p>SET/GET (SPA/GPA) parameters are user parameters stored in SAP memory that pre-populate and pass values across screens and transactions (e.g. defaulting a company code). They are user-session global.</p>"}, {"n": 60, "q": "Explain Shared Objects.", "a": "<p>Shared Objects are the shared-memory framework (transactions SHMA to define areas, SHMM to monitor). They keep object data in server-local shared memory for cross-session, read-mostly caching.</p>"}]}, {"title": "OData — Basics", "tag": "OData Basics", "items": [{"n": 61, "q": "What is OData?", "a": "<p>OData (Open Data Protocol) is a REST-based standard for building and consuming queryable data APIs over HTTP with standardised query options. In SAP, Gateway/RAP expose business data as OData services consumed by Fiori and external clients.</p>"}, {"n": 62, "q": "Difference between OData V2 and V4?", "a": "<p>V4 is the OASIS standard: leaner JSON, richer query (<code>$apply</code>, advanced <code>$filter</code>, containment), native actions/functions, better metadata and delta. V2 is older, more XML-centric and common with SEGW. RAP primarily exposes V4 (V2 also supported).</p>"}, {"n": 63, "q": "Explain Entity Set.", "a": "<p>An entity set is a collection of entities of one type — the addressable resource, analogous to a table's rows, e.g. <code>/Products</code>.</p>"}, {"n": 64, "q": "Explain Entity Type.", "a": "<p>An entity type is the structural definition — properties plus a key — of an entity, analogous to a table definition.</p>"}, {"n": 65, "q": "Explain Navigation Property.", "a": "<p>A navigation property on an entity points to a related entity or set via an association, letting clients traverse relationships (e.g. header → items).</p>"}, {"n": 66, "q": "Explain Association.", "a": "<p>An association defines the relationship and cardinality between two entity types, which enables navigation between them.</p>"}, {"n": 67, "q": "Explain Metadata.", "a": "<p>The <code>$metadata</code> document (EDMX/EDM) describes entity types, sets, associations, function/action imports and annotations — it is the machine-readable contract of the service.</p>"}, {"n": 68, "q": "Explain Service Document.", "a": "<p>The service root document lists the available entity sets/collections that the service exposes.</p>"}, {"n": 69, "q": "Difference between Deep Entity and Navigation?", "a": "<p>A <b>deep entity</b> (deep insert) sends a parent and its nested children in a single payload to create the whole graph. <b>Navigation</b> simply traverses from one entity to a related set at read time.</p>"}, {"n": 70, "q": "Explain $metadata.", "a": "<p><code>$metadata</code> is the URL that returns the EDM schema — entity types, sets, associations, function imports and annotations — describing the whole service to clients.</p>"}]}, {"title": "OData — CRUD", "tag": "OData CRUD", "items": [{"n": 71, "q": "Which methods handle CRUD operations?", "a": "<p>In a SEGW DPC_EXT: <code>GET_ENTITY</code> (read one), <code>GET_ENTITYSET</code> (read list), <code>CREATE_ENTITY</code>, <code>UPDATE_ENTITY</code> and <code>DELETE_ENTITY</code>.</p>"}, {"n": 72, "q": "Difference between PATCH and PUT?", "a": "<p><b>PUT</b> replaces the entire entity — properties you omit are reset to defaults. <b>PATCH</b> performs a partial update, changing only the properties you send.</p>"}, {"n": 73, "q": "Explain MERGE.", "a": "<p>MERGE is the OData V2 partial-update verb (behaves like PATCH): only the supplied properties are changed, the rest are untouched.</p>"}, {"n": 74, "q": "Explain Deep Insert.", "a": "<p>A single POST that creates a parent together with its nested child entities in one atomic transaction (e.g. an order with its items).</p>"}, {"n": 75, "q": "Explain Batch Processing.", "a": "<p>The <code>$batch</code> endpoint bundles multiple requests — and change sets — into one HTTP call, cutting round-trips and allowing grouped, transactional writes.</p>"}, {"n": 76, "q": "Explain Change Set.", "a": "<p>A change set is an atomic group of modifying operations inside a batch: either all of them succeed and commit, or all roll back.</p>"}, {"n": 77, "q": "Explain Function Import.", "a": "<p>A function import exposes a custom, typically side-effect-free operation (usually GET) that isn't one of the standard CRUD verbs.</p>"}, {"n": 78, "q": "Explain Action Import.", "a": "<p>An OData V4 action import is an operation with side effects (POST), e.g. <i>Approve</i> or <i>Post</i>, that changes server state.</p>"}, {"n": 79, "q": "Explain Expand.", "a": "<p><code>$expand</code> returns related entities inline within one response (e.g. a header together with its items), avoiding extra navigation calls.</p>"}, {"n": 80, "q": "Explain Delta Token.", "a": "<p>A delta token lets a client run a delta query so that subsequent requests return only the changes (created/updated/deleted) since the last read.</p>"}]}, {"title": "OData — Advanced", "tag": "OData Advanced", "items": [{"n": 81, "q": "Explain ETag.", "a": "<p>An ETag is a version tag for an entity used for optimistic concurrency. The client returns it in an <code>If-Match</code> header on update; if it no longer matches, the server responds 412 (Precondition Failed).</p>"}, {"n": 82, "q": "Explain Concurrency Handling.", "a": "<p>OData uses ETag / <code>If-Match</code> optimistic locking: before an update the server compares the client's ETag with the current version to prevent lost updates from concurrent edits.</p>"}, {"n": 83, "q": "Explain Soft State.", "a": "<p>Soft state is a Gateway optimisation that keeps a limited-lifetime session context across otherwise stateless calls (e.g. cached model/context), improving performance for expensive operations. It is time-boxed and configurable.</p>"}, {"n": 84, "q": "Explain Gateway Hub Deployment.", "a": "<p>The Gateway component runs on a separate hub system; the OData model lives in the backend and is exposed through the hub. This centralises access and isolates the backend from the presentation layer.</p>"}, {"n": 85, "q": "Explain Embedded Deployment.", "a": "<p>Gateway runs on the same (backend) system as the data — fewer hops and simpler landscape. This is common on S/4HANA.</p>"}, {"n": 86, "q": "Explain MPC and DPC classes.", "a": "<p>SEGW generates a <b>Model Provider Class (MPC)</b> that defines the entity model and a <b>Data Provider Class (DPC)</b> that implements the runtime data operations.</p>"}, {"n": 87, "q": "Explain MPC_EXT.", "a": "<p><code>MPC_EXT</code> is the extension subclass of the MPC where you add or redefine model definitions; it is preserved when the base MPC is regenerated.</p>"}, {"n": 88, "q": "Explain DPC_EXT.", "a": "<p><code>DPC_EXT</code> is the extension subclass of the DPC where you implement the CRUD and query methods; it is regeneration-safe.</p>"}, {"n": 89, "q": "Explain SEGW Project Architecture.", "a": "<p>The Service Builder (SEGW) project holds the data model (entities, associations), the generated MPC/MPC_EXT and DPC/DPC_EXT, and runtime artifacts. The service is then registered and activated in <code>/IWFND/MAINT_SERVICE</code>.</p>"}, {"n": 90, "q": "Explain Gateway Error Handling.", "a": "<p>Raise <code>/IWBEP/CX_MGW_BUSI_EXCEPTION</code> (or tech exception) with a message container, map to proper HTTP status codes, and use the message container to return multiple, translatable messages to the client.</p>"}]}, {"title": "OData — Performance", "tag": "OData Perf", "items": [{"n": 91, "q": "How do you optimize OData?", "a": "<p>Implement server-side paging (<code>$top</code>/<code>$skip</code>, inline count), push <code>$filter</code> to the database, use <code>$select</code> to limit fields, avoid over-<code>$expand</code>, write efficient <code>GET_ENTITYSET</code> SQL, and use delta queries where possible.</p>"}, {"n": 92, "q": "Explain Paging.", "a": "<p>Client-driven paging uses <code>$top</code>/<code>$skip</code>. Server-side paging returns a <code>__next</code>/nextLink for large collections so the full set is never transferred at once.</p>"}, {"n": 93, "q": "Explain Server Side Filtering.", "a": "<p>Translate the incoming <code>$filter</code> into a WHERE clause on the database (via the request context) instead of selecting everything and filtering in ABAP.</p>"}, {"n": 94, "q": "Explain Select Options.", "a": "<p>Convert <code>$filter</code> into RANGE tables using <code>get_filter( )-&gt;get_filter_select_options( )</code>, then apply them directly in the <code>SELECT ... WHERE</code>.</p>"}, {"n": 95, "q": "Explain $select.", "a": "<p><code>$select</code> restricts which properties are returned, reducing payload size and server computation.</p>"}, {"n": 96, "q": "Explain $filter.", "a": "<p><code>$filter</code> restricts which rows are returned based on conditions; for performance it must be pushed down to the database.</p>"}, {"n": 97, "q": "Explain $orderby.", "a": "<p><code>$orderby</code> asks the server to sort the result set by one or more properties.</p>"}, {"n": 98, "q": "Explain $top.", "a": "<p><code>$top</code> limits the number of records returned.</p>"}, {"n": 99, "q": "Explain $skip.", "a": "<p><code>$skip</code> skips the first N records — the offset used together with <code>$top</code> for paging.</p>"}, {"n": 100, "q": "Explain Expand Performance.", "a": "<p><code>$expand</code> can cause N+1 selects. Implement an efficient combined read (single join / <code>GET_EXPANDED_ENTITYSET</code>) and avoid deep or wide expands that pull far more data than the UI needs.</p>"}]}, {"title": "CDS Views — Basics", "tag": "CDS Basics", "items": [{"n": 101, "q": "What are CDS Views?", "a": "<p>Core Data Services are DDIC-based, code-pushdown data models written in DDL. They go beyond classic views with associations, annotations (UI/OData/analytics), input parameters and expressions, and are optimised to run on HANA.</p>"}, {"n": 102, "q": "Difference between SQL View and CDS View?", "a": "<p>A classic SE11 view is a plain database view: no associations, annotations, parameters or pushdown semantics. A CDS view adds all of these. Note the modern <code>DEFINE VIEW ENTITY</code> no longer generates a separate SQL view at all.</p>"}, {"n": 103, "q": "Why CDS instead of SE11 View?", "a": "<p>For associations, rich annotations, input parameters, expressions/aggregations, semantic layering and reuse (VDM), and code pushdown to HANA — none of which classic SE11 views offer.</p>"}, {"n": 104, "q": "Explain DDL Source.", "a": "<p>The DDL Source (DDLS) is the repository object that contains the CDS view definition written in the Data Definition Language.</p>"}, {"n": 105, "q": "Explain CDS Annotations.", "a": "<p>Annotations (<code>@...</code>) attach metadata that controls behaviour and semantics — e.g. <code>@AbapCatalog</code>, <code>@UI</code>, <code>@OData</code>, <code>@Analytics</code>, <code>@AccessControl</code> — and can be framework- or domain-specific.</p>"}, {"n": 106, "q": "Explain Association.", "a": "<p>A CDS association is a reusable, on-demand join. It is resolved only when its fields are actually used through a path expression, and it carries cardinality information.</p>"}, {"n": 107, "q": "Difference between JOIN and Association?", "a": "<p>A JOIN is always executed. An association is a <b>join on demand</b> — defined once, reused via path expressions and resolved only when navigated — and it is cardinality-aware.</p>"}, {"n": 108, "q": "Explain Path Expressions.", "a": "<p>Path expressions navigate associations in field or WHERE lists (e.g. <code>_Customer.Name</code>), which triggers the underlying join only for that access.</p>"}, {"n": 109, "q": "Explain Cardinality.", "a": "<p>Cardinality <code>[min..max]</code> on an association states the expected relationship (e.g. <code>[1..1]</code>, <code>[0..*]</code>), which guides the optimizer and enforces correctness.</p>"}, {"n": 110, "q": "Explain Parameters in CDS.", "a": "<p>Input parameters (<code>with parameters p_date : abap.dats</code>) are supplied at query time and used inside the view logic — e.g. for date-dependent selections. They are referenced as <code>:p_date</code> (or via <code>$parameters</code>).</p>"}]}, {"title": "CDS Views — Advanced", "tag": "CDS Advanced", "items": [{"n": 111, "q": "Explain Virtual Elements.", "a": "<p>Virtual elements are calculated fields that are not stored and are filled by ABAP code at runtime (<code>@ObjectModel.virtualElement</code> plus a calculation exit class). Typically used for UI-only derived values.</p>"}, {"n": 112, "q": "Explain CDS Table Functions.", "a": "<p>A CDS table function is a CDS entity whose data is produced by an AMDP method (native HANA SQLScript) instead of a <code>SELECT</code> — used for logic that can't be expressed declaratively in CDS.</p>"}, {"n": 113, "q": "Explain AMDP.", "a": "<p>An ABAP Managed Database Procedure is a method implemented in SQLScript that executes on HANA, pushing complex logic to the database. The class implements <code>IF_AMDP_MARKER_HDB</code>.</p>"}, {"n": 114, "q": "Explain Consumption View.", "a": "<p>The top VDM layer (<code>@VDM.viewType: #CONSUMPTION</code>) exposed to UI/OData/analytics; it adds UI and query annotations on top of stable interface views.</p>"}, {"n": 115, "q": "Explain Interface View.", "a": "<p>A reusable basic/composite layer (<code>#BASIC</code>/<code>#COMPOSITE</code>) that exposes stable business semantics and associations and is not consumed directly by UIs.</p>"}, {"n": 116, "q": "Explain Projection View.", "a": "<p>A RAP projection (<code>DEFINE ... AS PROJECTION ON</code>) exposes a tailored subset/renamed set of fields of an interface view for one specific service.</p>"}, {"n": 117, "q": "Explain Composite View.", "a": "<p>A VDM composite view combines and enriches several interface views (joins, associations, aggregation) to provide reusable higher-level semantics.</p>"}, {"n": 118, "q": "Explain Basic View.", "a": "<p>The lowest VDM layer that maps directly to database tables and defines core fields, semantics and associations.</p>"}, {"n": 119, "q": "Explain Analytical CDS.", "a": "<p>CDS views annotated for analytics (<code>@Analytics.dataCategory</code>) that are consumed by the analytics/BW engine as cubes and dimensions for reporting.</p>"}, {"n": 120, "q": "Explain Cube View.", "a": "<p>An analytical fact view (<code>@Analytics.dataCategory: #CUBE</code>) that joins dimension views and exposes measures for multidimensional reporting.</p>"}]}, {"title": "CDS Views — Authorization", "tag": "CDS Auth", "items": [{"n": 121, "q": "Explain DCL.", "a": "<p>Data Control Language is the source object that defines row-level authorization (access control) for a CDS entity.</p>"}, {"n": 122, "q": "Explain Access Control.", "a": "<p><code>@AccessControl.authorizationCheck</code> on the view plus a DCL role restrict which rows a user may read, based on their PFCG authorizations.</p>"}, {"n": 123, "q": "Explain Authorization Check.", "a": "<p>When a CDS entity is accessed with authorized SQL, the framework automatically enforces the DCL conditions (PFCG aspect / literal / association based), filtering rows the user isn't entitled to.</p>"}, {"n": 124, "q": "Difference between #CHECK and #NOT_REQUIRED?", "a": "<p><code>@AccessControl.authorizationCheck:#CHECK</code> enforces the DCL role; <code>#NOT_REQUIRED</code> means no check is performed (public/uncritical data); <code>#NOT_ALLOWED</code> forbids exposing the view for authorized access.</p>"}, {"n": 125, "q": "Explain Role-based Authorization.", "a": "<p>The DCL maps CDS fields to PFCG authorization objects (aspect <code>pfcg_auth</code>), so at runtime users only see rows that match the values granted by their roles.</p>"}]}, {"title": "CDS Views — Performance", "tag": "CDS Perf", "items": [{"n": 126, "q": "Explain Pushdown Concept.", "a": "<p>The code-to-data paradigm: execute joins, filtering, aggregation and calculation on the HANA layer via CDS/AMDP instead of pulling raw data into ABAP and processing it there.</p>"}, {"n": 127, "q": "Explain HANA Optimization.", "a": "<p>Exploit the column store, push down logic, avoid unnecessary materialisation, respect join order and correct cardinality, and use aggregations / the analytical engine rather than ABAP loops.</p>"}, {"n": 128, "q": "Explain Explain Plan.", "a": "<p>The DB execution plan shows how HANA runs a query — join types, index usage, estimated row counts — and is the tool for diagnosing slow CDS views.</p>"}, {"n": 129, "q": "Explain CDS Buffering.", "a": "<p>Entity buffering (<code>@AbapCatalog.buffering</code> / view-entity buffer settings) caches CDS results on the application server (single/generic/full) — appropriate only for stable data.</p>"}, {"n": 130, "q": "Explain Filter Pushdown.", "a": "<p>WHERE conditions are pushed to the database and applied as early as possible (before joins/aggregation) to reduce the data volume processed.</p>"}, {"n": 131, "q": "Explain Association Performance.", "a": "<p>Associations are only joined when their path is used, so avoid redundant navigation, set correct cardinality, and don't materialise associations you don't need.</p>"}, {"n": 132, "q": "Explain Calculated Fields.", "a": "<p>Expressions computed inside the view. Keep them simple and pushdown-friendly; move heavy logic into AMDP or table functions rather than complex CASE chains.</p>"}, {"n": 133, "q": "Explain UNION in CDS.", "a": "<p><code>UNION</code>/<code>UNION ALL</code> combine result sets with matching column counts and types; use <code>UNION ALL</code> when duplicates are impossible to avoid the deduplication cost.</p>"}, {"n": 134, "q": "Explain View on View.", "a": "<p>Layering CDS views on other CDS views (the VDM approach) aids reuse, but excessive stacking can confuse the optimizer — avoid unnecessary depth.</p>"}, {"n": 135, "q": "Explain CDS Performance Best Practices.", "a": "<p>Minimise layers, push logic down, use correct cardinality, avoid client-side calculation, restrict fields, analyse dependencies and the explain plan, and don't select from very wide views unnecessarily.</p>"}]}, {"title": "CDS for RAP", "tag": "RAP CDS", "items": [{"n": 136, "q": "Explain Root View Entity.", "a": "<p>The root view entity is the top of a RAP business object composition tree; it defines the root node with its key and is where behavior is anchored.</p>"}, {"n": 137, "q": "Explain Child View Entity.", "a": "<p>A child view entity is a node composed by the root via a composition and holds an association back to its parent.</p>"}, {"n": 138, "q": "Difference between View Entity and CDS View?", "a": "<p><code>DEFINE VIEW ENTITY</code> is the modern successor: it generates no separate SQL view, has stricter syntax and better performance/features. The legacy <code>DEFINE VIEW</code> (with <code>@AbapCatalog.sqlViewName</code>) is deprecated.</p>"}, {"n": 139, "q": "Explain Composition.", "a": "<p>A composition is a parent-child relationship expressing existence dependency — the child cannot exist without its parent — and it defines the RAP business object tree.</p>"}, {"n": 140, "q": "Explain Association to Parent.", "a": "<p>Each composition child declares <code>association to parent</code> pointing back to the root; this back-association is mandatory for composition-based BOs.</p>"}, {"n": 141, "q": "Explain Redirection.", "a": "<p>In projection views you redirect associations/compositions to their projected counterparts (<code>redirected to composition child ...</code> / <code>redirected to parent ...</code>) so navigation stays within the projection layer.</p>"}, {"n": 142, "q": "Explain Projection Behavior.", "a": "<p>The projection behavior definition (<code>use create; use update; use action ...</code>) exposes a chosen subset of the base BO behavior for a specific service.</p>"}, {"n": 143, "q": "Explain Metadata Extension.", "a": "<p>A DDLX (metadata extension) holds <code>@UI</code> annotations separately from the CDS view, layering UI metadata so the view stays clean and annotations can be swapped per scenario.</p>"}, {"n": 144, "q": "Explain UI Annotations.", "a": "<p><code>@UI.*</code> annotations drive Fiori Elements layout — <code>lineItem</code>, <code>identification</code>, <code>selectionField</code>, <code>facet</code> — controlling list columns, object-page sections and filters.</p>"}, {"n": 145, "q": "Explain Search Annotations.", "a": "<p><code>@Search.searchable: true</code> on the entity plus <code>@Search.defaultSearchElement: true</code> on fields enable free-text / fuzzy search in Fiori.</p>"}]}, {"title": "RAP — Basics", "tag": "RAP Basics", "items": [{"n": 146, "q": "What is RAP?", "a": "<p>The RESTful ABAP Programming model is SAP's standard framework for building OData services (Fiori apps and Web APIs) on S/4HANA, using CDS for the data model, a Behavior Definition for logic, and Service Definition/Binding for exposure.</p>"}, {"n": 147, "q": "Difference between RAP and BOPF?", "a": "<p>RAP is the strategic successor of BOPF. RAP is CDS-based, declarative (BDEF), cloud-ready and uses EML; BOPF is older, configuration/class-driven and on-stack only. New developments use RAP.</p>"}, {"n": 148, "q": "Managed vs Unmanaged Scenario?", "a": "<p><b>Managed</b>: the framework provides standard transactional handling and persistence (CRUD, locking, save) — you add validations, determinations and actions. <b>Unmanaged</b>: you implement all interactions and persistence yourself, typically to wrap legacy tables or BAPIs.</p>"}, {"n": 149, "q": "Explain Business Object.", "a": "<p>A RAP business object is the entity tree (root plus child nodes) combining structure (CDS view entities) and behavior (BDEF) to represent a real-world concept such as a Travel or an Invoice.</p>"}, {"n": 150, "q": "Explain Behavior Definition.", "a": "<p>The BDEF declares the implementation type, persistence, locking, CRUD, draft, plus actions, validations, determinations, field controls and mappings for the business object.</p>"}, {"n": 151, "q": "Explain Behavior Implementation.", "a": "<p>The behavior implementation is the ABAP behavior pool (local handler and saver classes) that implements the logic declared in the BDEF.</p>"}, {"n": 152, "q": "Explain Projection.", "a": "<p>A projection tailors the base BO for a specific consumer via a CDS projection view plus a projection BDEF, exposing only the fields and operations that use case needs.</p>"}, {"n": 153, "q": "Explain Service Definition.", "a": "<p>The SRVD lists which entities (and behaviors) are exposed as a service.</p>"}, {"n": 154, "q": "Explain Service Binding.", "a": "<p>The SRVB binds a service definition to a protocol (OData V2/V4, UI or Web API) and, once activated and published, makes the service callable.</p>"}, {"n": 155, "q": "Explain Behavior Pool.", "a": "<p>A behavior pool is the global class <code>FOR BEHAVIOR OF &lt;entity&gt;</code> that contains the local handler classes implementing the behavior.</p>"}]}, {"title": "RAP — Managed Implementation", "tag": "RAP Managed", "items": [{"n": 156, "q": "Which CRUD operations are generated automatically?", "a": "<p>Declaring <code>create; update; delete;</code> in a managed BDEF makes the framework generate create, read, update, delete plus locking and the save sequence automatically.</p>"}, {"n": 157, "q": "How does SAVE sequence work?", "a": "<p>After the interaction phase, the framework runs: <b>Finalize</b> (last determinations) → <b>Check-before-save</b> (save-validations) → <b>Adjust Numbers</b> (late numbering) → <b>Save</b>/<code>save_modified</code> → optional <b>Cleanup</b>. It is triggered by <code>COMMIT ENTITIES</code>.</p>"}, {"n": 158, "q": "Explain Determinations.", "a": "<p>Determinations automatically derive or set field values, triggered <code>on modify</code> or <code>on save</code> for given events (create/update). Examples: fill audit fields, compute a total, default a status.</p>"}, {"n": 159, "q": "Explain Validations.", "a": "<p>Validations check consistency and only report errors — they never change data. They run <code>on save</code> (or on modify) for triggering fields/events and return entries in <code>failed</code>/<code>reported</code>.</p>"}, {"n": 160, "q": "Explain Actions.", "a": "<p>Actions are non-standard operations (instance, static or factory) that change state and can be exposed to the UI — e.g. approve, post, copy. They can return a result and support feature control and draft.</p>"}, {"n": 161, "q": "Explain Features.", "a": "<p>Feature (field/operation) control dynamically enables/disables operations and fields — read-only, mandatory, disabled — at instance or global level, computed in <code>get_..._features</code> based on state.</p>"}, {"n": 162, "q": "Explain Authorization.", "a": "<p>RAP supports <b>global</b> authorization (<code>get_global_authorizations</code>) and <b>instance</b> authorization (<code>get_instance_authorizations</code>) methods in the behavior pool to control who may perform which operations on which instances.</p>"}, {"n": 163, "q": "Explain Side Effects.", "a": "<p>Side effects declare that a change to one field/entity affects others, so the Fiori UI knows to re-fetch the impacted fields/entities after a modification (keeping derived data current).</p>"}, {"n": 164, "q": "Explain Locking.", "a": "<p>Managed pessimistic locking (<code>lock master</code> / <code>lock dependent by _assoc</code>) is handled by the framework, taking an exclusive lock on the instance (and dependents) while it is being edited.</p>"}, {"n": 165, "q": "Explain Numbering.", "a": "<p>Key/document numbers are assigned either <b>early</b> (during create, in a determination/mapping) or <b>late</b> (in <code>adjust_numbers</code> just before save, typically from a number range object).</p>"}]}, {"title": "RAP — Unmanaged Implementation", "tag": "RAP Unmanaged", "items": [{"n": 166, "q": "Which CRUD methods must be implemented manually?", "a": "<p>In unmanaged you implement create, update, delete, read and lock (in the interaction handler) plus the save-sequence methods (<code>save_modified</code>, <code>finalize</code>, <code>check_before_save</code>) — the framework provides no persistence.</p>"}, {"n": 167, "q": "Difference between MODIFY and SAVE?", "a": "<p>During the interaction phase, MODIFY collects changes into the transactional buffer. SAVE (triggered at commit) persists that buffer to the database.</p>"}, {"n": 168, "q": "Explain SAVE_MODIFIED.", "a": "<p>The saver method that receives the created, updated and deleted instances from the transactional buffer and writes them to the database in the save phase.</p>"}, {"n": 169, "q": "Explain READ implementation.", "a": "<p>The <code>for read</code> method fills the <code>RESULT</code> table from the database (or buffer) for the requested keys and fields.</p>"}, {"n": 170, "q": "Explain DELETE implementation.", "a": "<p>The delete part of <code>for modify</code> marks/removes the targeted instances in the transactional buffer; the actual DB delete happens in the save phase.</p>"}, {"n": 171, "q": "Explain CREATE implementation.", "a": "<p>The create part of <code>for modify</code> adds new instances to the transactional buffer, assigns keys, and reports any failures in <code>failed</code>/<code>reported</code>.</p>"}, {"n": 172, "q": "Explain UPDATE implementation.", "a": "<p>The update part of <code>for modify</code> applies the <code>%control</code>-flagged changed fields onto the buffered instances.</p>"}, {"n": 173, "q": "Explain Mapping.", "a": "<p>The BDEF <code>mapping for &lt;dbtable&gt; corresponding { ... }</code> maps external (CDS) field names to internal (DB) names, so you avoid manual field-by-field moves.</p>"}, {"n": 174, "q": "Explain Late Numbering.", "a": "<p>The final key is assigned only during the save phase (<code>adjust_numbers</code>/save) — used when numbers must be gapless/sequential and are unknown during interaction (draft shows a temporary id).</p>"}, {"n": 175, "q": "Explain Early Numbering.", "a": "<p>The key is assigned during create so it is known immediately in the interaction phase — suitable when a number can be drawn up front.</p>"}]}, {"title": "RAP — EML", "tag": "EML", "items": [{"n": 176, "q": "What is EML?", "a": "<p>Entity Manipulation Language is the ABAP syntax for reading, modifying and committing RAP business objects programmatically — the API to interact with BOs from ABAP code.</p>"}, {"n": 177, "q": "Explain READ ENTITIES.", "a": "<p><code>READ ENTITIES OF &lt;bo&gt; ENTITY &lt;e&gt; FIELDS ( ... ) WITH keys</code> reads root or child data into a <code>RESULT</code> table, honouring the transactional buffer.</p>"}, {"n": 178, "q": "Explain MODIFY ENTITIES.", "a": "<p><code>MODIFY ENTITIES OF &lt;bo&gt;</code> creates, updates, deletes or executes actions on a business object by writing into the transactional buffer.</p>"}, {"n": 179, "q": "Explain COMMIT ENTITIES.", "a": "<p><code>COMMIT ENTITIES</code> triggers the save sequence to persist the transactional buffer; it can return <code>FAILED</code> and <code>REPORTED</code> if the save fails.</p>"}, {"n": 180, "q": "Difference between Open SQL and EML?", "a": "<p>Open SQL reads/writes database tables directly, bypassing business logic. EML goes through the business object, so validations, determinations and the transactional buffer all apply — preserving consistency.</p>"}, {"n": 181, "q": "Explain LOCAL MODE.", "a": "<p><code>IN LOCAL MODE</code> skips feature control, authorization and determination-on-modify triggers for an internal call — used inside behavior implementations to avoid re-triggering logic.</p>"}, {"n": 182, "q": "Explain FAILED table.", "a": "<p><code>FAILED</code> returns the keys/instances for which an operation failed (with a cause), signalling failure without carrying user messages.</p>"}, {"n": 183, "q": "Explain REPORTED table.", "a": "<p><code>REPORTED</code> returns messages (info/warning/error) bound to instances/fields, used to display feedback in the UI.</p>"}, {"n": 184, "q": "Explain MAPPED table.", "a": "<p><code>MAPPED</code> returns system-assigned key mappings after create — e.g. mapping your temporary <code>%cid</code> to the generated key.</p>"}, {"n": 185, "q": "Explain RESULT table.", "a": "<p><code>RESULT</code> returns the data read by <code>READ ENTITIES</code> or the output of an action that returns a result.</p>"}]}, {"title": "RAP — Behavior", "tag": "RAP Behavior", "items": [{"n": 186, "q": "Difference between Determination and Validation?", "a": "<p>A determination <b>changes/derives</b> data automatically; a validation only <b>checks</b> data and reports errors, never modifying it.</p>"}, {"n": 187, "q": "Difference between Action and Function?", "a": "<p>An action changes state (has side effects); a function is read-only / side-effect-free (the RAP counterpart to an OData V4 function). Actions map to POST, functions to non-modifying calls.</p>"}, {"n": 188, "q": "Explain PRECHECK.", "a": "<p>A precheck runs <b>before</b> data reaches the transactional buffer (on modify) to reject invalid create/update/delete requests early — improving performance and preventing bad data from entering the buffer.</p>"}, {"n": 189, "q": "Explain Instance Features.", "a": "<p>Instance feature control (<code>get_instance_features</code>) enables/disables actions or fields per row based on that instance's state — e.g. hide <i>Post</i> once an invoice is already posted.</p>"}, {"n": 190, "q": "Explain Global Features.", "a": "<p>Global feature control (<code>get_global_features</code>) enables/disables operations at entity level regardless of instance — e.g. disable create entirely for the current context.</p>"}, {"n": 191, "q": "Explain Draft.", "a": "<p>Draft handling (<code>with draft</code>) persists an interim, not-yet-active state in draft tables, allowing users to save partial work, resume later and lock via the draft — the standard for Fiori transactional apps.</p>"}, {"n": 192, "q": "Explain Active Data.", "a": "<p>Active data is the persisted, committed business data — as opposed to draft data, which is a temporary working copy.</p>"}, {"n": 193, "q": "Explain Draft Tables.", "a": "<p>Generated database tables (draft admin + node tables, typically with a <code>%_D</code> style suffix) that store draft instances alongside draft administrative data.</p>"}, {"n": 194, "q": "Explain Activation Process.", "a": "<p>Activation copies validated draft data into the active persistence (the <i>activate</i> action / prepare + save), running validations before the draft becomes active data.</p>"}, {"n": 195, "q": "Explain Draft Locking.", "a": "<p>A draft holds an exclusive, timeout-based lock so only one user edits a given draft at a time, preventing concurrent modification.</p>"}]}, {"title": "RAP — Scenario-Based", "tag": "RAP Scenarios", "items": [{"n": 196, "q": "Create Sales Order with Items in RAP.", "a": "<p>Model a root entity <code>SalesOrder</code> with a child <code>Item</code> via composition. Create both in one deep EML call using <code>%cid</code>/<code>%cid_ref</code> to link items to the header, add determinations for header totals, validations for consistency, and expose the BO as OData V4.</p>"}, {"n": 197, "q": "Header deleted but Items remain. Solution?", "a": "<p>Ensure the header–item relationship is a proper <b>composition</b> so the framework cascades the delete to children. If orphans still occur, check the composition modeling; in an unmanaged BO implement the cascading child delete explicitly in the delete/save logic.</p>"}, {"n": 198, "q": "How do you validate duplicate Invoice Number?", "a": "<p>Add an <code>on save</code> validation on the invoice-number field that reads existing entries (via EML or a DB select) for the same number; if a match is found, append the instance to <code>FAILED</code> and add an error to <code>REPORTED</code>.</p>"}, {"n": 199, "q": "How do you auto-generate Document Number?", "a": "<p>Use numbering: for a gapless sequential number apply <b>late numbering</b> in <code>adjust_numbers</code>, drawing from a number range object (<code>cl_numberrange_runtime</code>), and assign it to the key just before save.</p>"}, {"n": 200, "q": "How do you restrict Delete after Posting?", "a": "<p>Use instance feature control or a precheck: if the status is <i>posted</i>, disable delete via <code>get_instance_features</code> (returns delete = disabled) and additionally reject it in a precheck/validation as a safeguard.</p>"}, {"n": 201, "q": "How do you implement approval workflow?", "a": "<p>Model approve/reject as actions that change a status field, backed by determinations and side effects, with feature control gating the actions by role and status. For richer routing, integrate SAP Flexible/Business Workflow triggered from the save.</p>"}, {"n": 202, "q": "How do you call an external API in RAP?", "a": "<p>Call the API from a <b>saver</b> or action using the HTTP client (<code>cl_http_destination_provider</code> + <code>if_web_http_client</code>). Do outbound side-effecting calls in the save phase (not in determinations), and prefer asynchronous/qRFC patterns for reliability.</p>"}, {"n": 203, "q": "How do you upload an Excel file in RAP?", "a": "<p>Expose a custom action (or a separate upload service) that receives the file (base64/string), parse it with XCO or <code>cl_fdt_xl_spreadsheet</code>, then create records via <code>MODIFY ENTITIES</code>. The Fiori upload control calls the action import.</p>"}, {"n": 204, "q": "How do you expose RAP as OData V4?", "a": "<p>Create a Service Definition exposing the (projection) entities, then a Service Binding of type OData V4 (UI or Web API), and activate/publish it. Fiori Elements or clients then consume the V4 service.</p>"}, {"n": 205, "q": "How do you migrate a legacy BAPI-based application to RAP?", "a": "<p>Wrap it as an <b>unmanaged</b> RAP BO (or managed with additional save) that calls the existing BAPIs/function modules from the interaction and save handlers, model CDS views on the existing tables, and progressively move logic into determinations/validations/actions.</p>"}]}, {"title": "Real Project-Based (highly asked)", "tag": "Project", "items": [{"n": 206, "q": "Explain your most complex RAP project.", "a": "<p>Structure the answer as: business context → BO model (root + children, compositions) → managed vs unmanaged choice → hardest parts (draft, actions, authorization, external integration) → outcome/impact.</p><p>Example framing: a <i>Vendor GST Compliance</i> RAP app — CDS candidate views sourced from <code>I_SupplierCompany</code> (GSTIN, PAN), a <code>createComplianceCheck</code> action that chains a <code>verifyAll</code> step, criticality-driven status colouring in Fiori Elements, and instance feature control gating re-checks. Emphasise the design decisions, not just the feature list.</p>"}, {"n": 207, "q": "Why did you choose Managed or Unmanaged RAP?", "a": "<p>Managed when it's greenfield on your own custom tables — the framework handles persistence and locking, so you deliver faster. Unmanaged when you must wrap legacy tables, BAPIs or non-standard persistence. Justify by data ownership and how much existing logic you had to reuse.</p>"}, {"n": 208, "q": "How did you improve performance?", "a": "<p>Push logic down via CDS/AMDP, flatten unnecessary view layers, set correct association cardinality, restrict fields and rows, fix ATC-flagged inefficiencies, buffer stable data, and use efficient set-based EML/SQL instead of row-by-row processing.</p>"}, {"n": 209, "q": "What ATC issues did you face?", "a": "<p>Common findings: <code>SELECT *</code> and selects without a WHERE/ORDER BY, missing <code>@</code>-escaping, deprecated statements, FOR ALL ENTRIES without an empty-table check, and security/authorization gaps. Resolve by remediation and, where justified, documented exemptions.</p>"}, {"n": 210, "q": "How did you optimize CDS Views?", "a": "<p>Reduce layering depth, push filters early, prefer associations over eager joins, avoid client-side calculation, set correct cardinality, and use the ADT dependency analyzer and HANA explain plan to find the actual hotspots.</p>"}, {"n": 211, "q": "Explain one production issue you resolved.", "a": "<p>Pick a concrete symptom → root cause → fix → prevention. Example: a runtime dump on create traced to a missing content id — resolved by supplying <code>%cid</code> in the <code>CREATE BY \\_assoc</code> block; or <code>CX_RAP_HANDLER_NOT_IMPLEMENTED</code> fixed by adding <code>get_global_authorizations</code>. Close with the guardrail you added.</p>"}, {"n": 212, "q": "Explain one difficult debugging scenario.", "a": "<p>Describe the tools and reasoning: reproduce, use <code>/h</code> and the RAP behavior debugging, inspect <code>FAILED</code>/<code>REPORTED</code> to see why an EML op didn't persist, check ST22 for dumps, and enable update debugging for save-phase issues. Show how you isolated the phase (interaction vs save) that broke.</p>"}, {"n": 213, "q": "Explain one authorization issue you fixed.", "a": "<p>A common one: a DCL/PFCG mismatch letting users see rows they shouldn't, or a missing instance check. Fix by aligning the DCL aspect with the PFCG authorization object and implementing <code>get_instance_authorizations</code> to enforce operation-level checks.</p>"}, {"n": 214, "q": "Explain your transport strategy.", "a": "<p>Group objects into the right package, transport the full CDS/RAP stack (DDLS, DDLX, BDEF, SRVD, SRVB) in dependency order, run ATC before release, move through DEV → QA → PRD, and use transport of copies for interim testing so nothing lands inactive in the target.</p>"}, {"n": 215, "q": "Explain your deployment strategy.", "a": "<p>Activate and publish the service binding, register the Gateway service if hub-based, and deploy the Fiori app (BSP via the UI5 ABAP repository). Note the fallback of <code>/UI5/UI5_REPOSITORY_LOAD</code> in SE38 when <code>/UI5/ABAP_REPOSITORY_SRV</code> is inactive. On BTP/cloud, use abapGit/CI pipelines.</p>"}]}, {"title": "Hands-on Coding", "tag": "Coding", "items": [{"n": 216, "q": "Write a CDS View with Association and Parameters.", "a": "<p>A view entity with an input parameter and an association to items:</p><pre class=\"code\">define view entity ZI_SalesOrder\n  with parameters p_from_date : abap.dats\n  as select from vbak\n  association [0..*] to ZI_SalesItem as _Item\n    on $projection.Vbeln = _Item.Vbeln\n{\n  key vbak.vbeln as Vbeln,\n      vbak.erdat as CreatedOn,\n      vbak.netwr as NetValue,\n      _Item          // expose association\n}\nwhere vbak.erdat &gt;= $parameters.p_from_date</pre>"}, {"n": 217, "q": "Create a Managed RAP Business Object.", "a": "<p>A managed BDEF with persistence, locking, a determination and a validation:</p><pre class=\"code\">managed implementation in class zbp_i_travel unique;\nstrict ( 2 );\ndefine behavior for ZI_Travel alias Travel\npersistent table ztravel\nlock master\nauthorization master ( instance )\n{\n  create; update; delete;\n  field ( readonly ) TravelId;\n  field ( mandatory ) BeginDate, EndDate;\n\n  determination setTravelId on save { create; }\n  validation validateDates on save { field BeginDate, EndDate; }\n  action ( features : instance ) acceptTravel result [1] $self;\n}</pre>"}, {"n": 218, "q": "Implement an Unmanaged RAP CRUD operation.", "a": "<p>Skeleton of a create handler filling the transactional buffer:</p><pre class=\"code\">METHOD create.\n  LOOP AT entities INTO DATA(entity).\n    &quot; assign key, move fields into buffer\n    APPEND VALUE #( travelid = entity-TravelId\n                    begindate = entity-BeginDate ) TO mt_buffer.\n\n    APPEND VALUE #( %cid = entity-%cid\n                    TravelId = entity-TravelId ) TO mapped-travel.\n  ENDLOOP.\nENDMETHOD.\n&quot; save_modified() then writes mt_buffer to the DB table</pre>"}, {"n": 219, "q": "Build an OData service for a custom table.", "a": "<p>Modern RAP path — three artifacts on top of a CDS view over your table:</p><pre class=\"code\">1) CDS view entity  ZI_Product  (select from ztproduct)\n2) Service Definition ZSD_PRODUCT:\n   define service ZSD_PRODUCT {\n     expose ZI_Product as Product;\n   }\n3) Service Binding ZSB_PRODUCT  -&gt;  type OData V4 (UI)  -&gt;  Activate</pre>"}, {"n": 220, "q": "Write an optimized Open SQL query using JOIN and aggregation.", "a": "<pre class=\"code\">SELECT k~vbeln,\n       SUM( p~netwr ) AS total_value,\n       COUNT(*)       AS item_count\n  FROM vbak AS k\n  INNER JOIN vbap AS p ON p~vbeln = k~vbeln\n  WHERE k~erdat &gt;= @lv_from_date\n  GROUP BY k~vbeln\n  ORDER BY total_value DESCENDING\n  INTO TABLE @DATA(lt_summary).</pre>"}, {"n": 221, "q": "Implement an EML operation to update child entities.", "a": "<pre class=\"code\">MODIFY ENTITIES OF ZI_Travel\n  ENTITY Booking\n    UPDATE FIELDS ( BookingStatus )\n    WITH VALUE #( ( TravelId       = &#x27;0001&#x27;\n                    BookingId      = &#x27;0010&#x27;\n                    BookingStatus  = &#x27;C&#x27;\n                    %control-BookingStatus = if_abap_behv=&gt;mk-on ) )\n  FAILED   DATA(failed)\n  REPORTED DATA(reported).\n\nCOMMIT ENTITIES RESPONSE OF ZI_Travel\n  FAILED DATA(commit_failed).</pre>"}, {"n": 222, "q": "Create a custom RAP Action that posts a document.", "a": "<p>Declare the action in the BDEF, then implement it in the behavior pool:</p><pre class=\"code\">&quot; BDEF\naction ( features : instance ) postInvoice result [1] $self;\n\n&quot; Behavior pool\nMETHOD postInvoice.\n  READ ENTITIES OF zi_invoice IN LOCAL MODE\n    ENTITY Invoice FIELDS ( Status ) WITH CORRESPONDING #( keys )\n    RESULT DATA(lt).\n  MODIFY ENTITIES OF zi_invoice IN LOCAL MODE\n    ENTITY Invoice UPDATE FIELDS ( Status )\n    WITH VALUE #( FOR l IN lt ( %tky = l-%tky Status = &#x27;P&#x27;\n                 %control-Status = if_abap_behv=&gt;mk-on ) ).\n  &quot; fill result / reported\nENDMETHOD.</pre>"}, {"n": 223, "q": "Write a Validation to prevent duplicate records.", "a": "<pre class=\"code\">&quot; BDEF\nvalidation checkDuplicate on save { create; field InvoiceNo; }\n\n&quot; Behavior pool\nMETHOD checkDuplicate.\n  READ ENTITIES OF zi_invoice IN LOCAL MODE\n    ENTITY Invoice FIELDS ( InvoiceNo ) WITH CORRESPONDING #( keys )\n    RESULT DATA(lt).\n  LOOP AT lt INTO DATA(ls).\n    SELECT SINGLE @abap_true FROM ztinvoice\n      WHERE invoice_no = @ls-InvoiceNo INTO @DATA(exists).\n    IF exists = abap_true.\n      APPEND VALUE #( %tky = ls-%tky ) TO failed-invoice.\n      APPEND VALUE #( %tky = ls-%tky\n        %msg = new_message_with_text( severity = if_abap_behv_message=&gt;severity-error\n                                      text = &#x27;Duplicate invoice number&#x27; )\n        ) TO reported-invoice.\n    ENDIF.\n  ENDLOOP.\nENDMETHOD.</pre>"}, {"n": 224, "q": "Implement a Determination to auto-fill audit fields.", "a": "<pre class=\"code\">&quot; BDEF\ndetermination fillAdmin on modify { create; }\n\n&quot; Behavior pool\nMETHOD fillAdmin.\n  MODIFY ENTITIES OF zi_invoice IN LOCAL MODE\n    ENTITY Invoice UPDATE FIELDS ( CreatedBy CreatedAt )\n    WITH VALUE #( FOR k IN keys (\n        %tky      = k-%tky\n        CreatedBy = cl_abap_context_info=&gt;get_user_technical_name( )\n        CreatedAt = utclong_current( )\n        %control-CreatedBy = if_abap_behv=&gt;mk-on\n        %control-CreatedAt = if_abap_behv=&gt;mk-on ) )\n    REPORTED DATA(reported_upd).\nENDMETHOD.</pre>"}, {"n": 225, "q": "Optimize a slow report using modern ABAP syntax and database pushdown.", "a": "<p>Replace a select-inside-loop with a single set-based, pushed-down statement and modern expressions:</p><pre class=\"code\">&quot; BEFORE: SELECT inside LOOP (N+1 round-trips)\n&quot; AFTER: one aggregated, pushed-down SELECT + in-memory expression\nSELECT bukrs,\n       SUM( dmbtr ) AS total\n  FROM bseg\n  WHERE gjahr = @lv_year\n  GROUP BY bukrs\n  INTO TABLE @DATA(lt_totals).\n\nDATA(grand_total) =\n  REDUCE dmbtr( INIT s = 0\n                FOR wa IN lt_totals\n                NEXT s = s + wa-total ).</pre>"}]}];
+const STORE_KEY = "sap225_done_v1";
+const RING_CIRC = 2 * Math.PI * 28;
+
+/* ---- storage (degrades gracefully in sandboxed previews) ---- */
+let doneSet = new Set();
+let storageOK = true;
+function loadDone(){
+  try{
+    const raw = localStorage.getItem(STORE_KEY);
+    if(raw) doneSet = new Set(JSON.parse(raw));
+  }catch(e){ storageOK = false; }
+}
+function saveDone(){
+  try{ localStorage.setItem(STORE_KEY, JSON.stringify([...doneSet])); }
+  catch(e){ storageOK = false; }
+}
+
+const TOTAL = DATA.reduce((a,s)=>a+s.items.length,0);
+let filterMode = "all";
+let searchTerm = "";
+
+const main = document.getElementById("main");
+const rail = document.getElementById("rail");
+const segtrack = document.getElementById("segtrack");
+
+/* ---- build sections ---- */
+function romanIdx(i){ return String(i+1).padStart(2,"0"); }
+
+DATA.forEach((sec, si)=>{
+  sec._id = "sec-"+si;
+
+  // chip
+  const chip = document.createElement("a");
+  chip.className = "chip";
+  chip.href = "#"+sec._id;
+  chip.dataset.si = si;
+  chip.innerHTML = `${sec.tag} <span class="c" data-count>0/${sec.items.length}</span>`;
+  rail.appendChild(chip);
+
+  // seg
+  const seg = document.createElement("div");
+  seg.className = "seg";
+  seg.title = sec.tag;
+  seg.innerHTML = `<i data-seg style="transform:scaleX(0)"></i>`;
+  seg.style.flex = sec.items.length;
+  seg.addEventListener("click", ()=>document.getElementById(sec._id).scrollIntoView());
+  segtrack.appendChild(seg);
+
+  // section block
+  const section = document.createElement("section");
+  section.className = "section";
+  section.id = sec._id;
+  section.innerHTML = `
+    <div class="section-head">
+      <span class="idx">${romanIdx(si)}</span>
+      <h2>${sec.title}</h2>
+      <span class="n"><span data-secdone>0</span>/${sec.items.length}</span>
+    </div>`;
+
+  sec.items.forEach(it=>{
+    const card = document.createElement("article");
+    card.className = "card";
+    card.dataset.n = it.n;
+    card.dataset.text = (it.q + " " + it.a).toLowerCase().replace(/<[^>]+>/g," ");
+    card.innerHTML = `
+      <div class="num">${String(it.n).padStart(3,"0")}</div>
+      <div class="body">
+        <div class="qrow"><div class="q">${it.q}</div></div>
+        <div class="card-actions">
+          <button class="reveal" type="button" aria-expanded="false">
+            <span class="reveal-label">Show answer</span>
+            <svg class="chev" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="m6 9 6 6 6-6"/></svg>
+          </button>
+          <button class="donebtn" type="button" aria-pressed="false">
+            <span class="check"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5"><path d="M20 6 9 17l-5-5"/></svg></span>
+            <span class="done-label">Mark done</span>
+          </button>
+        </div>
+        <div class="answer"><div class="answer-inner">${it.a}</div></div>
+      </div>`;
+
+    const reveal = card.querySelector(".reveal");
+    const revealLabel = card.querySelector(".reveal-label");
+    reveal.addEventListener("click", ()=>{
+      const open = card.classList.toggle("open");
+      reveal.setAttribute("aria-expanded", open);
+      revealLabel.textContent = open ? "Hide answer" : "Show answer";
+    });
+
+    const donebtn = card.querySelector(".donebtn");
+    donebtn.addEventListener("click", ()=>{
+      if(doneSet.has(it.n)) doneSet.delete(it.n); else doneSet.add(it.n);
+      saveDone(); syncCard(card, it.n); updateProgress(); applyFilter();
+    });
+
+    if(doneSet.has(it.n)) syncCard(card, it.n);
+    section.appendChild(card);
+  });
+
+  main.appendChild(section);
+});
+
+function syncCard(card, n){
+  const on = doneSet.has(n);
+  card.classList.toggle("done", on);
+  const db = card.querySelector(".donebtn");
+  db.setAttribute("aria-pressed", on);
+  db.querySelector(".done-label").textContent = on ? "Done" : "Mark done";
+}
+
+/* ---- progress ---- */
+function updateProgress(){
+  const done = doneSet.size;
+  const pct = TOTAL ? Math.round(done/TOTAL*100) : 0;
+  document.getElementById("ringPct").textContent = pct+"%";
+  document.getElementById("doneCount").textContent = done+" / "+TOTAL;
+  document.getElementById("ringFill").style.strokeDashoffset = RING_CIRC*(1-done/TOTAL);
+
+  DATA.forEach((sec, si)=>{
+    const d = sec.items.filter(it=>doneSet.has(it.n)).length;
+    const t = sec.items.length;
+    const chip = rail.children[si];
+    chip.querySelector("[data-count]").textContent = d+"/"+t;
+    chip.classList.toggle("complete", d===t && t>0);
+    segtrack.children[si].querySelector("[data-seg]").style.transform = "scaleX("+(t?d/t:0)+")";
+    document.getElementById(sec._id).querySelector("[data-secdone]").textContent = d;
+  });
+}
+
+/* ---- filter + search ---- */
+function applyFilter(){
+  let visible = 0;
+  document.querySelectorAll(".section").forEach((section)=>{
+    let secVisible = 0;
+    section.querySelectorAll(".card").forEach(card=>{
+      const n = +card.dataset.n;
+      const isDone = doneSet.has(n);
+      let show = true;
+      if(filterMode==="todo" && isDone) show=false;
+      if(filterMode==="done" && !isDone) show=false;
+      if(show && searchTerm) show = card.dataset.text.includes(searchTerm);
+      card.classList.toggle("hidden", !show);
+      if(show){ secVisible++; visible++; }
+    });
+    section.classList.toggle("hidden", secVisible===0);
+  });
+  document.getElementById("empty").style.display = visible===0 ? "block" : "none";
+}
+
+document.getElementById("search").addEventListener("input",(e)=>{
+  searchTerm = e.target.value.trim().toLowerCase(); applyFilter();
+});
+document.getElementById("filterToggle").addEventListener("click",(e)=>{
+  const b = e.target.closest("button"); if(!b) return;
+  filterMode = b.dataset.filter;
+  [...e.currentTarget.children].forEach(x=>x.setAttribute("aria-pressed", x===b));
+  applyFilter();
+});
+
+let allOpen=false;
+document.getElementById("expandAll").addEventListener("click",(e)=>{
+  allOpen=!allOpen;
+  document.querySelectorAll(".card").forEach(card=>{
+    card.classList.toggle("open", allOpen);
+    const r=card.querySelector(".reveal");
+    r.setAttribute("aria-expanded",allOpen);
+    r.querySelector(".reveal-label").textContent = allOpen?"Hide answer":"Show answer";
+  });
+  e.target.textContent = allOpen ? "Hide all answers" : "Show all answers";
+});
+
+document.getElementById("resetBtn").addEventListener("click",()=>{
+  if(!confirm("Clear all 'done' marks? This cannot be undone.")) return;
+  doneSet.clear(); saveDone();
+  document.querySelectorAll(".card").forEach(c=>syncCard(c, +c.dataset.n));
+  updateProgress(); applyFilter();
+});
+
+/* ---- init ---- */
+loadDone();
+document.querySelectorAll(".card").forEach(c=>syncCard(c, +c.dataset.n));
+updateProgress();
+applyFilter();
+document.getElementById("persistNote").textContent = storageOK
+  ? "Your progress is saved automatically in this browser."
+  : "Progress isn't being saved here — download this file and open it locally to keep your marks between sessions.";
+</script>
+</body>
+</html>
